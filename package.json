@@ -1,0 +1,49 @@
+{
+  "name": "fec",
+  "version": "1.0.0",
+  "description": "FEC Project - GYSR",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "test",
+    "react-dev": "webpack --mode development --watch",
+    "server-dev": "npx nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rfe2302-team-yellowstone/fec.git"
+  },
+  "keywords": [
+    "fec",
+    "gysr"
+  ],
+  "author": "Jose Umana, Zach Timmerman, Stephen Perkins, Zack Freeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rfe2302-team-yellowstone/fec/issues"
+  },
+  "homepage": "https://github.com/rfe2302-team-yellowstone/fec#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.2",
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "axios": "^1.3.4",
+    "babel-loader": "^9.1.2",
+    "bluebird": "^3.7.2",
+    "bootstrap": "^3.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.2.0",
+    "path": "^0.12.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

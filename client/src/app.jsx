@@ -19,7 +19,7 @@ const App = ({initialProduct}) => {
   }
 
   return (
-    <div className='flex flex-col items-center'>
+    <div>
       <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1>
 
       {/* <Overview cart={cart}/> */}

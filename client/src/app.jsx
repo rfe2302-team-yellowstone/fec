@@ -1,12 +1,17 @@
 import React from "react";
+import { useState } from "react";
 import ReactDOM from "react-dom";
 //import Overview from "./overview/...."
 import Related from "./related/components/related_widget.jsx"
+// import Overview from "./overview/index.jsx"
+//import Related from "./related/...."
 //import Ratings from "./ratings/...."
 //import Questions&Answers from "./q&a/...."
 
 const App = () => {
 // test
+
+  const [cart, setCart] = useState([])
 
   return (
     <div>
@@ -14,6 +19,8 @@ const App = () => {
 
       {/* < Overview /> */}
       < Related />
+      {/* <Overview cart={cart}/>*/ }
+      {/* < Related /> */}
       {/* < Ratings /> */}
       {/* < Questions&Answers /> */}
     </div>

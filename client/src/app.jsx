@@ -17,7 +17,6 @@ const App = () => {
       {/* < Ratings /> */}
       {/* < Questions&Answers /> */}
     </div>
-
   )
 
 };

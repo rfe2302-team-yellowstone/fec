@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 import axios from "axios";
+import Carousel from "./related_carousel.jsx"
+
 
 const Related = () => {
 
-  // const fetchProductInfo = () => {
-  //   axios.get ('')
-  // };
 
   return (
-    <button className='btn'> In Related Component</button>
+  <Carousel />
+
   )
 
 }

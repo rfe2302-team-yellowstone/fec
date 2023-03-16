@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 //import Overview from "./overview/...."
-//import Related from "./related/...."
+import Related from "./related/components/related_widget.jsx"
 //import Ratings from "./ratings/...."
 //import Questions&Answers from "./q&a/...."
 
@@ -13,7 +13,7 @@ const App = () => {
       <h1 className="text-3xl font-bold"> Hello, World!</h1>
 
       {/* < Overview /> */}
-      {/* < Related /> */}
+      < Related />
       {/* < Ratings /> */}
       {/* < Questions&Answers /> */}
     </div>

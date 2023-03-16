@@ -4,8 +4,9 @@ import Logo from './Logo.jsx'
 export default function Header () {
 
   return (
-    <Search />
-    <Logo />
-
+    <div>
+      <Search />
+      <Logo />
+    </div>
   )
 }

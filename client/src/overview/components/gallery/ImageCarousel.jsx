@@ -1,7 +1,7 @@
 
-export default function Gallery () {
+export default function ImageCarousel () {
 
   return (
-
+    <div> array of photos! </div>
   )
 }

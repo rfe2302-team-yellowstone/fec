@@ -8,11 +8,13 @@ import ProductDetails from './components/productDetails/ProductDetails.jsx'
 export default function Overview() {
 
   return (
-    <Header />
-    <Announcements />
-    <Gallery />
-    <ProductInfo />
-    <ProductDetails />
+    <div id="overview">
+      <Header />
+      <Announcements />
+      <Gallery />
+      <ProductInfo />
+      <ProductDetails />
+    </div>
   )
 
 }

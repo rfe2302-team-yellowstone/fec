@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ReactDOM from "react-dom";
+import Comparison from "./comparison_modal.jsx"
 
 
 const RelatedCard = () => {
@@ -54,14 +55,22 @@ const RelatedCard = () => {
         "name": "Slacker's Slacks",
         "description": "I'll tell you how great they are after I nap for a bit."
     }
-]
+];
+
+// const clickHandler = () => {
+//   return (
+//     <a>href=</a>
+//   )
+// }
 
 
     const cards = photo.map((card) =>
 
       <div className="carousel-item rounded-box  w-3/4">
           <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src={card.thumbnail_url}  /></figure>
+
+          <figure className="relative w-full h-full">
+            <img className="w-full h-full" src={card.thumbnail_url}/> <a href="./comparison_modal#my-modal" className = 'absolute top-2 right-0 btn-circle '><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></a>  </figure>
             <div className="card-body">
               <h2 className="card-title">{card.name}</h2>
               <p>{card.description}</p>
@@ -81,19 +90,3 @@ const RelatedCard = () => {
 export default RelatedCard;
 
 
-
-
-
-
-
-
-  // return (
-
-  //   <div className="card w-96 bg-base-100 shadow-xl">
-  //     <figure><img src="https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"  /></figure>
-  //     <div className="card-body">
-  //       <h2 className="card-title">Pants!</h2>
-  //       <p>If your date bails, you still look fresh!</p>
-  //     </div>
-  //   </div>
-  // )

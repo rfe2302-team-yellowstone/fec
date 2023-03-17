@@ -11,23 +11,29 @@ const LOCAL_SERVER = 'http://localhost:3000'
 
 export default function Overview() {
 
-  const [products, updateProducts] = useState([])
+  // // const [products, updateProducts] = useState([])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    // load all products
-    axios.get(`${LOCAL_SERVER}/products/?count=2`)
-      .then((data) => {
-        console.log('data', data)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+  //   // load all products
+  //   axios.get(`${LOCAL_SERVER}/products/?count=2`)
+  //     .then((data) => {
+  //       console.log('data', data)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }, [])
+  const quickLinks = [
+    'Overview',
+    'Related Items',
+    'Ratings',
+    'Q&A'
+  ]
 
   return (
     <div id="overview">
-      <Header />
+      <Header quickLinks={quickLinks}/>
       <Announcements />
       <Gallery />
       <ProductInfo />

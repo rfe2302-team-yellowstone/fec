@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+// import React from "react";
+// import ReactDOM from "react-dom";
 
-const RatingBreakdown = () => {
+// const RatingBreakdown = () => {
 
-  return (
-    <>Rating Breakdown goes here</>
-  )
-}
+//   return (
+//     <>Rating Breakdown goes here</>
+//   )
+// }
 
-export default RatingBreakdown
+// export default RatingBreakdown

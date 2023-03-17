@@ -38,7 +38,7 @@ useEffect(() => {
     return (
       <div>NOTHING</div>
     )
-  }else {
+  } else {
   return (
     <div>
     <ReviewsList products={products}>List of Reviews</ReviewsList>

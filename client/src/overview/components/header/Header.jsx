@@ -1,11 +1,13 @@
+import React from 'react'
 import Search from './Search.jsx'
 import Logo from './Logo.jsx'
 
 export default function Header () {
 
   return (
-    <Search />
-    <Logo />
-
+    <div>
+      <Logo />
+      <Search />
+    </div>
   )
 }

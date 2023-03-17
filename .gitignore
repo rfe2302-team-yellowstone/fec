@@ -4,5 +4,5 @@ node_modules
 client/dist/bundle.js
 config.js
 node_modules/
-bundle.js.map
+client/dist/bundle.js.map
 client/dist/output.css

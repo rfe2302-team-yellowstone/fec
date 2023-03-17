@@ -1,12 +1,17 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import ReactDOM from "react-dom";
-//import Overview from "./overview/...."
-//import Related from "./related/...."
-//import Ratings from "./ratings/...."
-//import Questions&Answers from "./q&a/...."
+import Ratings from "./ratings/Ratings.jsx";
+import axios from 'axios';
 
-const App = () => {
+
+const App = ({product}) => {
 // test
+
+const [product, setProduct] = useState(product)
+
+const updateProduct = () => {
+  // handles clicks on new products
+}
 
   return (
     <div>
@@ -14,7 +19,7 @@ const App = () => {
 
       {/* < Overview /> */}
       {/* < Related /> */}
-      {/* < Ratings /> */}
+      <Ratings product={product}>Ratings</Ratings>
       {/* < Questions&Answers /> */}
     </div>
   )

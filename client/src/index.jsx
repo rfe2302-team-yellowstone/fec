@@ -11,7 +11,7 @@ const root = createRoot(
 
 axios.get('http://localhost:3000/products/37311')
   .then(response => {
-    root.render(<App product={response.data} />);
+    root.render(<App initialProduct={response.data} />);
   })
   .catch(error => {
     console.log(error)

@@ -9,21 +9,28 @@ import ProductDetails from './components/productDetails/ProductDetails.jsx'
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview() {
+export default function Overview({product}) {
 
-  // // const [products, updateProducts] = useState([])
+   //product: 37325 - has sales prices
 
-  // useEffect(() => {
+  const [styles, setStyles] = useState([])
+  const [currentStyle, setCurrentStyle] = useState({})
 
-  //   // load all products
-  //   axios.get(`${LOCAL_SERVER}/products/?count=2`)
-  //     .then((data) => {
-  //       console.log('data', data)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }, [])
+  // Get initial Styles (and size) information
+  useEffect(() => {
+    axios.get(`http://localhost:3000/products/${product.id}/styles`)
+      .then(res => {
+        // console.log('Styles: ', res.data.results)
+        setStyles(res.data.results)
+        setCurrentStyle(res.data.results[0])
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+
+
   const quickLinks = [
     'Overview',
     'Related Items',
@@ -35,8 +42,10 @@ export default function Overview() {
     <div id="overview">
       <Header quickLinks={quickLinks}/>
       <Announcements />
-      <Gallery />
-      <ProductInfo />
+      <div className="flex">
+        <Gallery />
+        <ProductInfo product={product} styles={styles} currentStyle={currentStyle}/>
+      </div>
       <ProductDetails />
     </div>
   )

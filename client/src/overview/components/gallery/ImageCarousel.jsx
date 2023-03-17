@@ -1,7 +1,7 @@
-
-export default function Gallery () {
+import React from 'react'
+export default function ImageCarousel () {
 
   return (
-
+    <div> ImageCarousel! </div>
   )
 }

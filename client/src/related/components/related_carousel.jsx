@@ -6,8 +6,8 @@ const RelatedCarousel = () => {
 
   return (
     <div>
-        <h4>Related Items</h4>
-        <div className="carousel content-center max-w-md p-4 space-x-4 rounded-box ">
+        <h3>Related Items</h3>
+        <div className="carousel carousel-center max-w-screen-smj p-3 space-x-3 rounded-box ">
           <RelatedCard />
         </div>
     </div>

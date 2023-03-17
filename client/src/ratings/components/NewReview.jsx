@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+// import React from "react";
+// import ReactDOM from "react-dom";
 
-const NewReview = () => {
+// const NewReview = () => {
 
-  return (
-    <>New Review goes here</>
-  )
-}
+//   return (
+//     <>New Review goes here</>
+//   )
+// }
 
-export default NewReview
+// export default NewReview

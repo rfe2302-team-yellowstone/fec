@@ -2,9 +2,14 @@
 
 import React, {useState, useEffect} from "react";
 import ReviewTile from "./ReviewTile.jsx"
+import NewReview from "./NewReview.jsx"
 
 const Reviews = ({reviews}) => {
   // will need to style later
+
+  const [sort, setSort] = useState('Relevant')
+  const [order, setOrder] = useState([])
+
   return (
     <div>
     <h2>Product Reviews</h2>

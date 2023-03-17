@@ -3,6 +3,7 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import Reviews from "./components/Reviews.jsx";
+import NewReview from "./components/NewReview.jsx"
 
 
 // require("dotenv").config();
@@ -31,6 +32,7 @@ useEffect(() => {
 return (
   <div>
   <Reviews reviews={reviews}></Reviews>
+  <NewReview setReviews={setReviews}></NewReview>
   </div>
 )
 }

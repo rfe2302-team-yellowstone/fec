@@ -8,6 +8,11 @@ const ReviewTile = ({review}) => {
       {/* {review.reviewer_name}
       {review.body} */}
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm">
+      <div className="relative">
+          <div className="absolute top-0 right-10">
+            <p className="text-xs text-gray-500">{review.reviewer_name} {review.date.split('T')[0]}</p>
+          </div>
+        </div>
       <div className="w-16 h-16 mt-1">
       <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img>
       </div>
@@ -32,10 +37,15 @@ const ReviewTile = ({review}) => {
       </div>
       <div>
         <span className="mt-1 text-gray-600 text-xs">{review.rating} out of 5 stars</span>
+        <h3 className="mt-4 text-black-800">{review.summary}</h3>
         <p className="mt-4 text-sm text-gray-600">{review.body}</p>
-        <h3 className="mt-4 text-lg font-medium text-gray-900">{review.reviewer_name}</h3>
         </div>
       </div>
+      <div className="relative">
+          <div className="absolute bottom-0 left-5">
+            <p className="text-xs text-gray-500">helpful? Yes({review.helpfulness}) Report</p>
+          </div>
+        </div>
     </div>
   )
 }

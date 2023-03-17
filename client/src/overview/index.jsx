@@ -16,7 +16,7 @@ export default function Overview() {
   useEffect(() => {
 
     // load all products
-    axios.get(`${LOCAL_SERVER}/products`, {count: 2})
+    axios.get(`${LOCAL_SERVER}/products/?count=2`)
       .then((data) => {
         console.log('data', data)
       })

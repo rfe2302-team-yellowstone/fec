@@ -9,7 +9,6 @@ const { ConcatenationScope } = require('webpack')
 const HEROKU_API_END_POINT = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe'
 const HEROKU_HEADERS = {
   "Authorization" : `${process.env.API_KEY}`
-
 }
 
 

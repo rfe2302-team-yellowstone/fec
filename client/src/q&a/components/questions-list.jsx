@@ -4,7 +4,7 @@ import Question from './question.jsx';
 const QuestionsList = ({questions}) => {
 
   return (
-    <ul>
+    <ul className='my-2'>
       {questions.map(question => {
         return <Question key={question.question_id} question={question}/>
       })}

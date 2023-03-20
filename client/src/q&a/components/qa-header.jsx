@@ -4,7 +4,7 @@ import QAndASearch from './qa-search.jsx';
 const QAndAHeader = () => {
 
   return (
-    <header>
+    <header className='my-2 w-[60rem]'>
       <h4>QUESTIONS & ANSWERS</h4>
       <QAndASearch />
     </header>

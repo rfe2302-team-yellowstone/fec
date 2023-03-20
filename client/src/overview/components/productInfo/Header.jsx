@@ -14,7 +14,7 @@ export default function Header ({product, currentStyle}) {
 
 
   return (
-    <div>
+    <div className='flex-1'>
       <p className="text-m" > {product.category} </p>
       <p className="text-3xl font-semibold" > {product.name} </p>
       { (!!currentPrice) && // don't render any prices until we calculate a price (don't want to show undefined to user)

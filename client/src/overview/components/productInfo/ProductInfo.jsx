@@ -6,7 +6,7 @@ import StyleSelector from './StyleSelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes}) {
 
   // Test style:
   // style ID: 221064
@@ -20,11 +20,11 @@ export default function ProductInfo ({product, styles, currentStyle}) {
 
 
   return (
-    <div className='flex-1'>
+    <div className='flex-1 flex-col flex' >
       <OverallRatingPlaceholder />
       <Header product={product} currentStyle={currentStyle}/>
       <StyleSelector styles={styles} currentStyle={currentStyle}/>
-      <SizeSelector />
+      <SizeSelector sizes={sizes}/>
       <Actions />
     </div>
   )

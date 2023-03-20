@@ -153,9 +153,184 @@ router.get('/qa/questions/:question_id/answers', (req, res) => {
     })
 })
 
+// =====================================
+//                POST
+// =====================================
 
+// -------------------------------------
+//              REVIEWS
+// -------------------------------------
 
+router.post('/reviews', (req, res) => {
+  if (req.body.product_id === undefined) {
+    res.status(404).send('Must provide a "product_id" parameter')
+  }
 
+  axios.post(`${HEROKU_API_END_POINT}/reviews`, req.body, req.options)
+    .then(response => {
+      res.status(201).send('Successfully posted review to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Reviews API');
+    })
+})
+
+// -------------------------------------
+//              Q&A
+// -------------------------------------
+
+// ----- Questions -----
+router.post('/qa/questions', (req, res) => {
+  if (req.body.product_id === undefined) {
+    res.status(404).send('Must provide a "product_id" parameter')
+  }
+
+  axios.post(`${HEROKU_API_END_POINT}/qa/questions`, req.body, req.options)
+    .then(response => {
+      res.status(201).send('Successfully posted question to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Questions API');
+    })
+})
+// ----- Answers -----
+router.post('/qa/questions/:question_id/answers', (req, res) => {
+  if (req.params.question_id === undefined) {
+    res.status(404).send('Must provide a "question_id" path parameter')
+  }
+
+  axios.post(`${HEROKU_API_END_POINT}/qa/questions/${req.params.question_id}/answers`, req.body, req.options)
+    .then(response => {
+      res.status(201).send('Successfully posted answer to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Questions API');
+    })
+})
+
+// -------------------------------------
+//              INTERACTIONS
+// -------------------------------------
+
+router.post('/interactions', (req, res) => {
+  if (req.body.element === undefined) {
+    res.status(404).send('Must provide an "element" body parameter')
+  }
+  if (req.body.widget === undefined) {
+    res.status(404).send('Must provide a "widget" body parameter')
+  }
+  if (req.body.time === undefined) {
+    res.status(404).send('Must provide a "time" body parameter')
+  }
+
+  axios.post(`${HEROKU_API_END_POINT}/interactions`, req.body, req.options)
+    .then(response => {
+      res.status(201).send('Successfully posted interaction to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Interactions API');
+    })
+})
+
+// =====================================
+//                PUT
+// =====================================
+
+// -------------------------------------
+//              REVIEWS
+// -------------------------------------
+
+// ----- REVIEWS / ID / HELPFUL-----
+router.put('/reviews/:review_id/helpful', (req, res) => {
+  if (req.params.review_id === undefined) {
+    res.status(404).send('Must provide a "review_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/reviews/${req.params.review_id}/helpful`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully marked review as helpful to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Reviews API');
+    })
+})
+// ----- REVIEWS / ID / REPORT-----
+router.put('/reviews/:review_id/report', (req, res) => {
+  if (req.params.review_id === undefined) {
+    res.status(404).send('Must provide a "review_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/reviews/${req.params.review_id}/report`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully reported review to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Reviews API');
+    })
+})
+
+// -------------------------------------
+//              Q&A
+// -------------------------------------
+
+// ----- Mark Question as Helpful -----
+router.put('/qa/questions/:question_id/helpful', (req, res) => {
+  if (req.params.question_id === undefined) {
+    res.status(404).send('Must provide a "question_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/qa/questions/${req.params.question_id}/helpful`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully marked question as helpful to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Questions API');
+    })
+})
+// ----- Report Question -----
+router.put('/qa/questions/:question_id/report', (req, res) => {
+  if (req.params.question_id === undefined) {
+    res.status(404).send('Must provide a "question_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/qa/questions/${req.params.question_id}/report`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully reported question to Atelier API');
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(404).send('Error connecting to Atelier Reviews API');
+    })
+})
+// ----- Mark Answer as Helpful -----
+router.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  if (req.params.answer_id === undefined) {
+    res.status(404).send('Must provide an "answer_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/qa/answers/${req.params.answer_id}/helpful`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully marked answer as helpful to Atelier API');
+    })
+    .catch(err => {
+      res.status(404).send('Error connecting to Atelier Questions API');
+    })
+})
+// ----- Report Answer -----
+router.put('/qa/answers/:answer_id/report', (req, res) => {
+  if (req.params.answer_id === undefined) {
+    res.status(404).send('Must provide an "answer_id" path parameter')
+  }
+
+  axios.put(`${HEROKU_API_END_POINT}/qa/answers/${req.params.answer_id}/report`, {}, req.options)
+    .then(response => {
+      res.status(201).send('Successfully reported answer to Atelier API');
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(404).send('Error connecting to Atelier Reviews API');
+    })
+})
 // // ===== POST ======
 // router.post('/sessions', (req, res) => {
 //   console.log('get route!')

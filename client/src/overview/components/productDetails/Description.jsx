@@ -1,9 +1,10 @@
 import React from 'react'
-export default function Description () {
+export default function Description ({product}) {
 
   return (
-    <div>
-      Description about product...
+    <div className='flex-1'>
+      <p className="text-2xl font-bold">{product.slogan}</p>
+      <p>{product.description}</p>
     </div>
   )
 }

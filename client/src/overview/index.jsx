@@ -9,29 +9,66 @@ import ProductDetails from './components/productDetails/ProductDetails.jsx'
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview() {
+export default function Overview({product}) {
 
-  const [products, updateProducts] = useState([])
+   //product: 37325 - has sales prices
 
+  const [styles, setStyles] = useState([])
+  const [currentStyle, setCurrentStyle] = useState({})
+  const [sizes, setSizes] = useState({})
+
+  // Get initial Styles (and size) information
   useEffect(() => {
-
-    // load all products
-    axios.get(`${LOCAL_SERVER}/products/?count=2`)
-      .then((data) => {
-        console.log('data', data)
+    axios.get(`http://localhost:3000/products/${product.id}/styles`)
+      .then(res => {
+        // console.log('Styles: ', res.data.results)
+        setStyles(res.data.results)
+        setCurrentStyle(res.data.results[0])
+        getSizesFromStyle(res.data.results[0])
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(error => {
+        console.log(error)
       })
   }, [])
 
+  // Function to map style skus into sizes and quantities
+  // Creates an array of tuples (size and quantity). Only stores if available.
+  const getSizesFromStyle = (style) => {
+    let sizes = {}
+    let skus = style.skus;
+    // console.log('SKUS:', skus)
+    Object.keys(skus).forEach((sku) => {
+      if (+skus[sku]['quantity'] > 0) {
+        // console.log(skus[sku]['size'])
+        // console.log(skus[sku]['quantity'])
+        // // console.log('sizes:', sizes[skus[sku]['size']])
+        // console.log('quantity:', skus[sku]['quantity'])
+        let quantity = sizes[skus[sku]['size']] + skus[sku]['quantity'] ||  skus[sku]['quantity']
+
+        sizes[skus[sku]['size']] = quantity
+      }
+    })
+
+    setSizes(sizes)
+  }
+
+
+  const quickLinks = [
+    'Overview',
+    'Related Items',
+    'Ratings',
+    'Q&A'
+  ]
+
   return (
     <div id="overview">
-      <Header />
+      <Header quickLinks={quickLinks}/>
       <Announcements />
-      <Gallery />
-      <ProductInfo />
-      <ProductDetails />
+      <div className="flex">
+        <Gallery />
+        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes}/>
+      </div>
+      <ProductDetails product={product}/>
     </div>
   )
 

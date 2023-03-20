@@ -12,7 +12,7 @@ const Reviews = ({reviews}) => {
 
   return (
     <div>
-    <h2>Product Reviews</h2>
+    <h1 className="font-weight:700">Product Reviews</h1>
     {reviews.map(review => (
      <ul key={review.review_id}>
      <ReviewTile review={review}></ReviewTile>

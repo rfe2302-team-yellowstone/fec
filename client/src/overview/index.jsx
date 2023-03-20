@@ -36,12 +36,12 @@ export default function Overview({product}) {
   const getSizesFromStyle = (style) => {
     let sizes = {}
     let skus = style.skus;
-    console.log('SKUS:', skus)
+    // console.log('SKUS:', skus)
     Object.keys(skus).forEach((sku) => {
       if (+skus[sku]['quantity'] > 0) {
-        console.log(skus[sku]['size'])
-        console.log(skus[sku]['quantity'])
-        // console.log('sizes:', sizes[skus[sku]['size']])
+        // console.log(skus[sku]['size'])
+        // console.log(skus[sku]['quantity'])
+        // // console.log('sizes:', sizes[skus[sku]['size']])
         // console.log('quantity:', skus[sku]['quantity'])
         let quantity = sizes[skus[sku]['size']] + skus[sku]['quantity'] ||  skus[sku]['quantity']
 

@@ -5,9 +5,9 @@ export default function Features ({features}) {
     <div className='flex-1'>
       <ul>
         {
-          features.map((feature) => {
+          features.map((feature, i) => {
             return (
-              <li>
+              <li key={i}>
                 <span className='font-bold '> {feature.feature}</span>
                 <span> {feature.value}</span>
 

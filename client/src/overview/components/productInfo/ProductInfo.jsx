@@ -12,9 +12,9 @@ export default function ProductInfo ({product, styles, currentStyle, sizes}) {
   // style ID: 221064
   // product ID: 37325
 
-  console.log('Product Info: ', product)
-  console.log('Product id: ', product.id)
-  console.log('current style: ', currentStyle)
+  // console.log('Product Info: ', product)
+  // console.log('Product id: ', product.id)
+  // console.log('current style: ', currentStyle)
 
 
 

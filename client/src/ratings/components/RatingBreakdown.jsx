@@ -55,7 +55,7 @@ const RatingBreakdown = ({reviews}) => {
           <h4 className="font-bold text-slate-700">Ratings & Reviews</h4>
           <span className="flex items-center gap-4 text-sm rounded text-slate-500">
             <span
-            className="flex gap-1 text-amber-400"
+            className={`flex gap-1 text-amber-400  ${rating > .5 ? "text-yellow-500" : "text-gray-300"}`}
             role="img"
             aria-label="Rating: 4 out of 5 stars"
             >

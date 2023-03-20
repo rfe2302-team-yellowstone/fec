@@ -4,6 +4,7 @@ import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import Reviews from "./components/Reviews.jsx";
 import NewReview from "./components/NewReview.jsx"
+import RatingBreakdown from "./components/RatingBreakdown.jsx"
 
 
 // require("dotenv").config();
@@ -31,8 +32,13 @@ useEffect(() => {
 
 return (
   <div>
-  <Reviews reviews={reviews}></Reviews>
+  <div className="grid grid-cols-3 gap-4">
+  <RatingBreakdown className="col-span-1" reviews={reviews}></RatingBreakdown>
+  <Reviews className="col-span-2" reviews={reviews}></Reviews>
+  </div>
+  <div>
   <NewReview setReviews={setReviews}></NewReview>
+  </div>
   </div>
 )
 }

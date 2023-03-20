@@ -1,12 +1,13 @@
+import React from 'react'
 import Description from './Description.jsx'
-import Qualities from './Qualities.jsx'
+import Features from './Features.jsx'
 
-export default function ProductInfo () {
+export default function ProductInfo ({product}) {
 
   return (
-    <div>
-      <Description />
-      <Qualities />
+    <div className='flex basis-1/2 border-t-2 border-t-slate-600'>
+      <Description product={product}/>
+      <Features features={product.features}/>
     </div>
   )
 }

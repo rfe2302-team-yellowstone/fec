@@ -1,4 +1,5 @@
-import AddToCartButton from './AddToCartButton'
+import React from 'react'
+import AddToCartButton from './AddToCartButton.jsx'
 
 export default function Actions () {
 

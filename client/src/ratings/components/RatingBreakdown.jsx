@@ -8,6 +8,7 @@ const RatingBreakdown = ({reviews}) => {
   const [three, setThree] = useState(0);
   const [two, setTwo] = useState(0);
   const [one, setOne] = useState(0);
+  const [recommended, setRecommended] = useState(0)
 
   const totalReviews = reviews.length
 
@@ -18,6 +19,7 @@ const RatingBreakdown = ({reviews}) => {
     let threes = 0
     let twos = 0
     let ones = 0
+    let recommending = 0
     for (let i = 0; i < totalReviews; i++) {
       score += reviews[i].rating
       if (reviews[i].rating === 5) {
@@ -31,6 +33,9 @@ const RatingBreakdown = ({reviews}) => {
       } else if (reviews[i].rating === 1) {
         ones += 1
       }
+      if (reviews[i].recommend === true) {
+        recommending += 1
+      }
     }
     score = score/totalReviews
     setRating(score)
@@ -39,6 +44,7 @@ const RatingBreakdown = ({reviews}) => {
     setThree(threes)
     setTwo(twos)
     setOne(one)
+    setRecommended(recommending)
   }, [reviews])
 
   return (
@@ -124,6 +130,9 @@ const RatingBreakdown = ({reviews}) => {
           <span className="text-xs leading-6 text-slate 400">
           based on {reviews.length} user ratings
            </span>
+           <span className="text-xs leading-6 text-slate 400">
+           {recommended/totalReviews * 100}% of reviews recommend this product
+           </span>
            <span className="flex flex-col w-full gap-4 pt-6">
            <span className="flex items-center w-full gap-2">
             <label
@@ -140,6 +149,7 @@ const RatingBreakdown = ({reviews}) => {
             value={five/totalReviews * 100}
             className="block h-3 w-full overflow-hidden rounded bg-slate-100 [&::-webkit-progress-bar]:bg-slate-100 [&::-webkit-progress-value]:bg-amber-400 [&::-moz-progress-bar]:bg-amber-400"
             >
+            75%
             </progress>
             <span className="text-xs font-bold w-9 text-slate-700">{five}</span>
            </span>

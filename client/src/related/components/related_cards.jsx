@@ -1,71 +1,94 @@
 
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
+import Comparison from "./comparison_modal.jsx";
+import axios from "axios"
 
 
-const RelatedCard = () => {
-    // const [products, setProducts] = useState([]);
-
-  // const fetchProductInfo = ( ) => {
-  //   axios.get (https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/37314/styles, {
-  //     params: {}
-  //   })
-  // };
-   let photo =[
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-    "description": "I'll tell you how great they are after I nap for a bit."
-    },
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-        "description": "I'll tell you how great they are after I nap for a bit."
-    },
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1553830591-2f39e38a013c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1553830591-2f39e38a013c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2760&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-        "description": "I'll tell you how great they are after I nap for a bit."
-    },
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1511&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-        "description": "I'll tell you how great they are after I nap for a bit."
-    },
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1526948128573-703ee1aeb6fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-        "description": "I'll tell you how great they are after I nap for a bit."
-    },
-    {
-        "thumbnail_url": "https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
-        "url": "https://images.unsplash.com/photo-1554774853-d50f9c681ae2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80",
-        "default_price": "65.00",
-        "name": "Slacker's Slacks",
-        "description": "I'll tell you how great they are after I nap for a bit."
-    }
-]
+const RelatedCard = ({product}) => {
+    //Hooks
+    const [relatedItems, setRelatedItems] = useState([]);
 
 
-    const cards = photo.map((card) =>
 
-      <div className="carousel-item rounded-box  w-3/4">
+    //General product information
+    let fetchingRelatedProducts = () => axios.get(`http://localhost:3000/products/${product.id}/related`)
+    .then(response => {
+      let relatedIds = response.data;
+      let relatedProducts = [];
+      let getProductInfo = Promise.all(relatedIds.map(id =>
+        axios.get(`http://localhost:3000/products/${id}`)
+        .then(res => res.data)
+        .catch(err => console.log("Inside get req of related items: ", err))
+      ));
+
+    //Product styles, includes photo information
+    let getProductPhotos = Promise.all(relatedIds.map(id =>
+      axios.get(`http://localhost:3000/products/${id}/styles`)
+      .then(res => res.data)
+      .catch(err => console.log("Inside get req of related items: ", err))
+    ));
+    //Making the calls
+    Promise.all(
+        [getProductInfo,
+        getProductPhotos]
+      ).then((res) => {
+        let productInfo = res[0];
+        let productStyle = res[1];
+        console.log(productStyle)
+        let productPhoto = [];
+
+        for(let i = 0; i < productStyle.length; i++) {
+          let photoObj = {};
+          photoObj['id'] = productStyle[i].product_id;
+          let resultObj = productStyle[i].results;
+          for(let j = 0; j < resultObj.length; j ++) {
+            if(resultObj[j]['default?']) {
+              photoObj['thumbnail_url'] = resultObj[j].photos[0].thumbnail_url;
+              photoObj['url'] = resultObj[j].photos[0].url;
+            } else {
+              photoObj['thumbnail_url'] = resultObj[0].photos[0].thumbnail_url;
+              photoObj['url'] = resultObj[0].photos[0].url;
+            }
+          };
+          productPhoto.push(photoObj);
+        };
+
+        productInfo.forEach(product =>{
+          for(let i = 0; i < productPhoto.length; i++) {
+            if(product.id == productPhoto[i].id) {
+              product['thumbnail_url'] = productPhoto[i].thumbnail_url;
+              product['url'] = productPhoto[i].url;
+            }
+          }
+
+        });
+
+        setRelatedItems(productInfo)
+
+
+    })
+
+    })
+    .catch (err => console.log(err));
+
+    useEffect(() => {
+      fetchingRelatedProducts();
+    }, [product])
+
+    console.log(relatedItems)
+    const cards = relatedItems.map((card) =>
+
+      <div key={card.id} className="carousel-item rounded-box  w-1/2">
           <div className="card w-96 bg-base-100 shadow-xl">
-          <figure><img src={card.thumbnail_url}  /></figure>
+
+          <figure className="relative w-full h-3/4">
+            <img className="w-full h-3/4" src={card.url}/>
+            <label htmlFor="my-modal-4" className = 'absolute top-2 right-0 btn-circle '><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></label>  </figure>
             <div className="card-body">
               <h2 className="card-title">{card.name}</h2>
               <p>{card.description}</p>
-              <p>{card.default_price}</p>
+              <p>{'$' + card.default_price}</p>
             </div>
           </div>
       </div>
@@ -74,26 +97,8 @@ const RelatedCard = () => {
     return (
       <>{cards}</>
     )
-
-
 }
 
 export default RelatedCard;
 
 
-
-
-
-
-
-
-  // return (
-
-  //   <div className="card w-96 bg-base-100 shadow-xl">
-  //     <figure><img src="https://images.unsplash.com/photo-1554260570-9140fd3b7614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80"  /></figure>
-  //     <div className="card-body">
-  //       <h2 className="card-title">Pants!</h2>
-  //       <p>If your date bails, you still look fresh!</p>
-  //     </div>
-  //   </div>
-  // )

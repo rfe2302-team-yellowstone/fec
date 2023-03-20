@@ -23,7 +23,7 @@ const App = ({initialProduct}) => {
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
 
       <Overview cart={cart} product={product}/>
-      < Related />
+      < Related product={product}/>
       <Ratings product={product}>Ratings</Ratings>
       <QAndA product={product}/>
     </div>

@@ -1,17 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 import axios from "axios";
-import Carousel from "./related_carousel.jsx"
+import RelatedCarousel from "./related_carousel.jsx"
+import OutfitCarousel from "./outfit_carousel.jsx"
 
 
-const Related = () => {
+const Related = ({product}) => {
 
 
   return (
-  <Carousel />
-
+  <div className = 'content-end'>
+    <RelatedCarousel product = {product}/>
+    <OutfitCarousel product = {product}/>
+  </div>
   )
 
-}
+};
 
 export default Related;

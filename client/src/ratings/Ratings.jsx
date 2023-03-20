@@ -1,50 +1,40 @@
+/* eslint-disable react/prop-types */
 
 import React, {useState, useEffect} from "react";
-import ReactDOM from "react-dom";
 import axios from 'axios';
-import ReviewsList from "./components/ReviewsList.jsx";
+import Reviews from "./components/Reviews.jsx";
+import NewReview from "./components/NewReview.jsx"
 
 
 // require("dotenv").config();
 
-const Ratings = () => {
-  const API_KEY = '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'
+const Ratings = ({product}) => {
 
-  const [loading, setLoading] = useState(false)
-  const [products, setProducts] = useState([])
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  // const [loading, setLoading] = useState(false)
+  const [reviews, setReviews] = useState([])
+  // const [selectedProduct, setSelectedProduct] = useState(null)
+
+  console.log(product)
 
 useEffect(() => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/', {
-    headers: {
-      Authorization: API_KEY
-    }
-  })
+  axios.get('/reviews?product_id=37311')
   .then(response => {
-    setProducts(response.data)
+    console.log(response.data.results)
+    setReviews(response.data.results)
   })
   .catch(error => {
     console.log(error)
   })
 }, [])
 
-useEffect(() => {
-  console.log(products)
-}, [products])
-
   // console.log(products)
 
-  if (products.length < 1) {
-    return (
-      <div>NOTHING</div>
-    )
-  } else {
-  return (
-    <div>
-    <ReviewsList products={products}>List of Reviews</ReviewsList>
-    </div>
-  )
-  }
+return (
+  <div>
+  <Reviews reviews={reviews}></Reviews>
+  <NewReview setReviews={setReviews}></NewReview>
+  </div>
+)
 }
 
 export default Ratings

@@ -4,6 +4,8 @@ const NewReview = () => {
 
   const [form, setForm] = useState(false)
 
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+
   const [reviewData, setReviewData] = useState({
     rating: 0,
     recommended: false,
@@ -20,31 +22,59 @@ const NewReview = () => {
     email: ''
   })
 
-  const handleButtonClick = (e) => {
-    e.preventDefault()
-    setForm(!form)
-  }
+  const [formErrors, setFormErrors] = useState({
+    rating: false,
+    recommended: false,
+    body: false,
+    reviewer_name: false,
+    email: false
+  })
 
   const handleFormSubmit = (e) => {
     console.log('submitted')
     e.preventDefault()
+    // const requiredFields =["rating", "recommended", "body", "reviewer_name", "email"]
+    // const hasErrors = requiredFields.some((field) => {
+    //   return reviewData[field] === "" || reviewData[field] === 0
+    // })
+    // console.log(hasErrors, 'has errors')
+    // if (hasErrors) {
+    //   console.log('HERE THERE BE ERRORS')
+    //   alert('FILL IN ALL MANDATORY FIELDS')
+    //   return
+    // }
     console.log(reviewData)
     setForm(false)
     // axios post request (reset form fields too)
   }
 
+  const disabledButtonChecker = () => {
+    if (reviewData.name !== '' && reviewData.reviewer_name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body !== 0) {
+      setIsSubmitDisabled(false)
+    } else {
+      console.log('SHOULD ALERT')
+      // alert('Fill our all mandatory fields')
+      setIsSubmitDisabled(true)
+    }
+  }
+
   const changeHandler = (e) => {
+    disabledButtonChecker()
     const {name, value} = e.target;
     setReviewData((prevState) => ({
       ...prevState,
       [name]: value,
     }))
+    if (formErrors.name) {
+      setFormErrors({[name]: true})
+    }
   }
 
   const photoHandler =(e) => {
     const photoFiles = Array.from(e.target.files).slice(0, 5);
     setReviewData(photoFiles)
   }
+
 
 
   return (
@@ -57,17 +87,17 @@ const NewReview = () => {
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidformerden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-5 sm:p-6 sm:pb-4">
               <h2 className="text-lg leading-6 font-medium text-green-900">Leave a review</h2>
               <form onSubmit={handleFormSubmit}>
                 <label>
                   Overall Rating:
-                  <input type="number" min="1" max="5" name="rating" value={reviewData.rating} onChange={changeHandler} ></input>
+                  <input type="number" min="1" max="5" name="rating" value={reviewData.rating} onChange={changeHandler} required></input>
                 </label>
                 <label>
                 Recommended:
-                <select name="recommended" value={reviewData.recommended} onChange={changeHandler}>
+                <select name="recommended" value={reviewData.recommended} onChange={changeHandler} required>
                   <option value="">Select an option</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -147,10 +177,10 @@ const NewReview = () => {
                 </div>
                 <label>
                   Summary (60 characters or less)
-                  <input type="text" name="summary" maxLength="60" value={reviewData.summary} onChange={changeHandler}/>
+                  {/* <input type="text" name="summary" maxLength="60" value={reviewData.summary} onChange={changeHandler}/>
                   <p className="text-gray-600 mb-4">
                   Please enter a brief summary
-                </p>
+                </p> */}
                 <textarea rows="4" maxLength="60" name="summary" value={reviewData.summary} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here...">
                 </textarea>
                 </label>
@@ -160,7 +190,7 @@ const NewReview = () => {
                 <p className="text-gray-600 mb-4">
                   Please enter a detailed description here that is between 50 and 1000 characters
                 </p>
-                <textarea rows="4" minLength="50" maxLength="1000" name="body" value={reviewData.body} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here...">
+                <textarea rows="4" minLength="50" maxLength="1000" name="body" value={reviewData.body} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here!" required>
                 </textarea>
                 <input
                 type="file"
@@ -179,12 +209,12 @@ const NewReview = () => {
                 <label className="block font-medium text-gray-700 mb-2">
                   Username
                 </label>
-                <input type="text" name="reviewer_name" value={reviewData.reviewer_name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username"></input>
+                <input type="text" name="reviewer_name" value={reviewData.reviewer_name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
                 <label className="block font-medium text-gray-700 mb-2">
                   email
                 </label>
-                <input type="email" name="email" value={reviewData.email} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username"></input>
-                <button type="button"  className="btn btn-active btn-primary" onClick={handleFormSubmit}>Submit</button>
+                <input type="email" name="email" value={reviewData.email} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
+                <button type="button" className="btn btn-active btn-primary" disabled={isSubmitDisabled} onClick={handleFormSubmit}>Submit</button>
               </form>
               </div>
             </div>

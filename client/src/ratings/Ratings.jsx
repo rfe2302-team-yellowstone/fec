@@ -14,23 +14,23 @@ const Ratings = () => {
   const [products, setProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
 
-useEffect(() => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/', {
-    headers: {
-      Authorization: API_KEY
-    }
-  })
-  .then(response => {
-    setProducts(response.data)
-  })
-  .catch(error => {
-    console.log(error)
-  })
-}, [])
+// useEffect(() => {
+//   axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/products/', {
+//     headers: {
+//       Authorization: API_KEY
+//     }
+//   })
+//   .then(response => {
+//     setProducts(response.data)
+//   })
+//   .catch(error => {
+//     console.log(error)
+//   })
+// }, [])
 
-useEffect(() => {
-  console.log(products)
-}, [products])
+// useEffect(() => {
+//   console.log(products)
+// }, [products])
 
   // console.log(products)
 

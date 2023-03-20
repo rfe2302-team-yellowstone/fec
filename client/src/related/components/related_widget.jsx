@@ -5,13 +5,13 @@ import RelatedCarousel from "./related_carousel.jsx"
 import OutfitCarousel from "./outfit_carousel.jsx"
 
 
-const Related = () => {
+const Related = ({product}) => {
 
 
   return (
-  <div>
-    <RelatedCarousel />
-    <OutfitCarousel />
+  <div className = 'content-end'>
+    <RelatedCarousel product = {product}/>
+    <OutfitCarousel product = {product}/>
   </div>
   )
 

@@ -114,6 +114,20 @@ router.get('/reviews', (req, res) => {
     })
 })
 
+router.get('/reviews/meta', (req, res) => {
+  if (req.options.params.product_id === undefined) {
+    res.status(404).send('Must provide a "product_id" parameter')
+  }
+
+  axios.get(`${HEROKU_API_END_POINT}/reviews/meta`, req.options)
+  .then ((result) => {
+    res.send(result.data)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
 
 
 // -------------------------------------
@@ -171,6 +185,7 @@ router.post('/reviews', (req, res) => {
       res.status(201).send('Successfully posted review to Atelier API');
     })
     .catch(err => {
+      console.log(err)
       res.status(404).send('Error connecting to Atelier Reviews API');
     })
 })

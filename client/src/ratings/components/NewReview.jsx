@@ -133,7 +133,6 @@ const NewReview = ({product, reviews}) => {
                 <label> */}
 
                 <div>
-
                     <label className="block font-medium text-gray-700 mb-2">
                     Overall Rating
                     </label>
@@ -146,7 +145,7 @@ const NewReview = ({product, reviews}) => {
                     </div>
                     </div>
                 Recommend:
-                <select name="recommend" value={reviewData.recommend} onChange={changeHandler} required>
+                <select name="recommend" value={Boolean(reviewData.recommend)} onChange={changeHandler} required>
                   <option value="">Select an option</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -245,13 +244,13 @@ const NewReview = ({product, reviews}) => {
                 <p className="text-red-600 mb-4 text-xs">{reviewData.body.length} characters</p>
                 <textarea rows="4" minLength="50" maxLength="1000" name="body" value={reviewData.body} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here!" required>
                 </textarea>
-                <input
+                {/* <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={photoHandler}
                 className="mt-4 mb-4"
-                ></input>
+                ></input> */}
                 <div className="flex flex-wrap -mx-2">
                   {/* {reviewData.photos.map((photo, index) => (
                     <div key={index} className="w-1/5 px-2 mb-4">

@@ -28,7 +28,7 @@ useEffect(() => {
     axios.get(`/reviews/meta?product_id=${product.id}`)
   })
   .then((results) =>{
-    console.log(results)
+    // console.log(results)
     setMetaData(results)
   })
   .catch(error => {

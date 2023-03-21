@@ -52,7 +52,6 @@ const NewReview = () => {
     if (reviewData.name !== '' && reviewData.reviewer_name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body !== 0) {
       setIsSubmitDisabled(false)
     } else {
-      console.log('SHOULD ALERT')
       // alert('Fill our all mandatory fields')
       setIsSubmitDisabled(true)
     }

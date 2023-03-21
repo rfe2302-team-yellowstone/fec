@@ -14,7 +14,7 @@ axios.get('http://localhost:3000/products/37311')
   .then(response => {
     root.render(
       <Provider store={store}>
-        <App initialProduct={response.data} />
+        <App initialProduct={response.data} onClick={e => console.log('test')}/>
       </Provider>
     );
   })

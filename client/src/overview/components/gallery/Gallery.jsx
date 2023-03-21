@@ -1,10 +1,9 @@
 import React from 'react'
 import ImageCarousel from './ImageCarousel.jsx'
 
-export default function Gallery ({styles}) {
+export default function Gallery ({currentStyle}) {
 
   return (
-    <ImageCarousel styles={styles}/>
-
+    <ImageCarousel currentStyle={currentStyle}/>
   )
 }

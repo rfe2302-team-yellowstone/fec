@@ -37,7 +37,7 @@ const NewReview = ({product, reviews}) => {
   })
 
   const handleFormSubmit = (e) => {
-    console.log('submitted')
+    // console.log('submitted')
     e.preventDefault()
     console.log(characteristics, '---------CHARACTERISTICS---------')
     setReviewData((prevState) => ({
@@ -45,7 +45,7 @@ const NewReview = ({product, reviews}) => {
       characteristics: characteristics
     }))
     // axios post request (reset form fields too)
-    console.log(reviewData, '-------REVIEWDATA--------')
+    // console.log(reviewData, '-------REVIEWDATA--------')
     axios.post('/reviews', reviewData)
     .then(() => {
       setForm(false)
@@ -224,7 +224,8 @@ const NewReview = ({product, reviews}) => {
                  </div>
                 </div>
                 <label>
-                  Summary (60 characters or fewer) {reviewData.summary.length} characters
+                  Summary (60 characters or fewer)
+                  {/* {reviewData.summary.length} characters */}
                 <textarea rows="4" maxLength="60" name="summary" value={reviewData.summary} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here...">
                 </textarea>
                 </label>

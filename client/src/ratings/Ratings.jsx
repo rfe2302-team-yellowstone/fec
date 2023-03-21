@@ -23,6 +23,7 @@ useEffect(() => {
   axios.get('/reviews?product_id=37311')
   .then(response => {
     setReviews(response.data.results)
+    console.log(response.data.results)
   })
   .then(() => {
     axios.get(`/reviews/meta?product_id=${product.id}`)
@@ -48,9 +49,9 @@ return (
   <ProductBreakdown className ="pt-16" reviews={reviews}></ProductBreakdown>
   </div>
   <div className="col-span-2 pt-4">
-  <Reviews  reviews={product, reviews}></Reviews>
+  <Reviews  product={product} reviews={reviews} setReviews={setReviews}></Reviews>
   <div className="pt-4">
-  <NewReview product={product} setReviews={setReviews}></NewReview>
+  {/* <NewReview product={product} setReviews={setReviews}></NewReview> */}
   </div>
   </div>
   </div>

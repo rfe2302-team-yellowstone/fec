@@ -102,7 +102,7 @@ const OutfitCard = ({product}) => {
   );
 
 
-console.log(outfitItems)
+//console.log(outfitItems)
 
   return (
     <>{cards.length === 0 ? addItemToOutfit : cards}</>

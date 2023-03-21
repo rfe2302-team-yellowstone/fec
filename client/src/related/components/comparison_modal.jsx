@@ -7,7 +7,7 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
     console.log('Click! inside modal component');
     setOpenModal(!openModal)
   }
-  console.log(comparedProduct)
+  //console.log(comparedProduct)
 
 
   return (

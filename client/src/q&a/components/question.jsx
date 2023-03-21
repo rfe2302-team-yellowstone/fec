@@ -23,7 +23,7 @@ const Question = ({question}) => {
       }
     })
       .then(response => {
-        console.log('successfully retrieved answers from Atelier Answers API:', response.data.results)
+        // console.log('successfully retrieved answers from Atelier Answers API:', response.data.results)
         setAnswers(response.data.results)
       })
   }, []);

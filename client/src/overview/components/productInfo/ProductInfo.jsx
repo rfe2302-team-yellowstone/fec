@@ -7,7 +7,7 @@ import QuantitySelector from './QuantitySelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle}) {
 
   // Test style:
   // style ID: 221064
@@ -45,7 +45,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes}) {
     <div className='flex-1 flex-col flex' >
       <OverallRatingPlaceholder />
       <Header product={product} currentStyle={currentStyle}/>
-      <StyleSelector styles={styles} currentStyle={currentStyle} />
+      <StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />
       <div className='flex justify-around items-center'>
         <SizeSelector sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} handleSizeChange={handleSizeChange}/>
         <QuantitySelector sizes={sizes} currentQuantity={currentQuantity} handleQuantityChange={handleQuantityChange} quantityMax={quantityMax}/>

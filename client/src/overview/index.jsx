@@ -31,6 +31,8 @@ export default function Overview({product, handleSearch}) {
       })
   }, [product])
 
+
+
   // Function to map style skus into sizes and quantities
   // Creates an array of tuples (size and quantity). Only stores if available.
   const getSizesFromStyle = (style) => {
@@ -77,9 +79,9 @@ export default function Overview({product, handleSearch}) {
       <Announcements />
       <div className="flex">
         <Gallery currentStyle={currentStyle}/>
-        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes}/>
+        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes} setCurrentStyle={setCurrentStyle}/>
       </div>
-      <ProductDetails product={product}/>
+      <ProductDetails product={product} />
     </div>
   )
 

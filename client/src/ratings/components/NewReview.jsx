@@ -1,25 +1,31 @@
 import React, {useState, useEffect} from "react";
+import axios from "axios";
 
-const NewReview = () => {
+const NewReview = ({product, reviews}) => {
+
+  // console.log(product, '-------PRODUCT--------')
 
   const [form, setForm] = useState(false)
 
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
 
+  const [characteristics, setCharacteristics] = useState({
+    125031: 3,  //fit
+    125032: 3, //length
+    125033: 3, // comfort
+    125034: 3 // quality
+  })
+
   const [reviewData, setReviewData] = useState({
-    rating: 0,
+    product_id: product.id,
+    rating: 3,
+    summary: 'THIS IS A TEST',
+    body: 'THIS IS ALSO A TEST',
     recommended: false,
-    size: 3,
-    width: 3,
-    comfort: 3,
-    quality: 3,
-    length: 3,
-    fit: 3,
-    summary: '',
-    body: '',
+    name: 'TEST123',
+    email: 'TESTER123@TESTER.TEST',
     photos: [],
-    reviewer_name: '',
-    email: ''
+    characteristics: characteristics
   })
 
   const [formErrors, setFormErrors] = useState({
@@ -33,23 +39,26 @@ const NewReview = () => {
   const handleFormSubmit = (e) => {
     console.log('submitted')
     e.preventDefault()
-    // const requiredFields =["rating", "recommended", "body", "reviewer_name", "email"]
-    // const hasErrors = requiredFields.some((field) => {
-    //   return reviewData[field] === "" || reviewData[field] === 0
-    // })
-    // console.log(hasErrors, 'has errors')
-    // if (hasErrors) {
-    //   console.log('HERE THERE BE ERRORS')
-    //   alert('FILL IN ALL MANDATORY FIELDS')
-    //   return
-    // }
-    console.log(reviewData)
-    setForm(false)
+    console.log(characteristics, '---------CHARACTERISTICS---------')
+    setReviewData((prevState) => ({
+      ...prevState,
+      characteristics: characteristics
+    }))
     // axios post request (reset form fields too)
+    console.log(reviewData, '-------REVIEWDATA--------')
+    axios.post('/reviews', reviewData)
+    .then(() => {
+      setForm(false)
+    })
+    .catch((err) =>{
+      console.log(err)
+      setForm(false)
+    })
   }
 
   const disabledButtonChecker = () => {
-    if (reviewData.name !== '' && reviewData.reviewer_name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body !== 0) {
+    if (reviewData.name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body !== '')
+    {
       setIsSubmitDisabled(false)
     } else {
       // alert('Fill our all mandatory fields')
@@ -67,6 +76,27 @@ const NewReview = () => {
     if (formErrors.name) {
       setFormErrors({[name]: true})
     }
+  }
+
+  const characteristicsChangeHandler = (e) => {
+    disabledButtonChecker()
+    const {name, value} = e.target;
+    let id;
+    if (name === 'fit') {
+      id = 125031
+    } else if (name === 'length') {
+      id = 125032
+    } else if (name === 'comfort') {
+      id = 125033
+    } else if (name === 'quality') {
+      id = 125034
+    }
+    setCharacteristics((prevState) => ({
+      ...prevState,
+      [id]: {
+        value: value
+      }
+    }))
   }
 
   const photoHandler =(e) => {
@@ -91,10 +121,24 @@ const NewReview = () => {
               <h2 className="text-lg leading-6 font-medium text-green-900">Leave a review</h2>
               <form onSubmit={handleFormSubmit}>
                 <label>
-                  Overall Rating:
-                  <input type="number" min="1" max="5" name="rating" value={reviewData.rating} onChange={changeHandler} required></input>
+                  {/* Overall Rating:
+                  <input type="number" min="1" max="5" name="rating" value={Number(reviewData.rating)} onChange={changeHandler} required></input>
                 </label>
-                <label>
+                <label> */}
+
+                <div>
+
+                    <label className="block font-medium text-gray-700 mb-2">
+                    Overall Rating
+                    </label>
+                    <input type="range" min="1" max="5" step="1" name="rating" value={reviewData.rating} onChange={changeHandler} className="w-full">
+                    </input>
+                    <div className="flex justify-between text-sm text-gray-600">
+                    <span>Terrible</span>
+                    <span>So-so</span>
+                    <span>Great!</span>
+                    </div>
+                    </div>
                 Recommended:
                 <select name="recommended" value={reviewData.recommended} onChange={changeHandler} required>
                   <option value="">Select an option</option>
@@ -102,11 +146,14 @@ const NewReview = () => {
                   <option value="false">No</option>
                 </select>
                 </label>
-              <div>
+
+              {/* <div>
                 <label className="block font-medium text-gray-700 mb-2">
                 Size score (1 if too small, 3 if perfect, 5 if too large)
                 </label>
-                <input type="range" min="1" max="5" step="1" name="size" value={reviewData.size} onChange={changeHandler} className="w-full">
+
+                ---SIZE
+                <input type="range" min="1" max="5" step="1" name="size" value={reviewData.size} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Too Small</span>
@@ -116,21 +163,23 @@ const NewReview = () => {
                 </div>
                 <div>
                 <label className="block font-medium text-gray-700 mb-2">
-               Width
+
+               -----Width-------
                 </label>
-                <input type="range" min="1" max="5" step="1" name="width" value={reviewData.width} onChange={changeHandler} className="w-full">
+                <input type="range" min="1" max="5" step="1" name="width" value={reviewData.width} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Too Small</span>
                 <span>Perfect</span>
                 <span>Too Large</span>
                  </div>
-                </div>
+                </div> */}
                 <div>
+
                 <label className="block font-medium text-gray-700 mb-2">
-               Width
+               Comfort
                 </label>
-                <input type="range" min="1" max="5" step="1" name="comfort" value={reviewData.comfort} onChange={changeHandler} className="w-full">
+                <input type="range" min="1" max="5" step="1" name="comfort" value={reviewData.comfort} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Terrible</span>
@@ -140,9 +189,9 @@ const NewReview = () => {
                 </div>
                 <div>
                 <label className="block font-medium text-gray-700 mb-2">
-               Width
+               Quality
                 </label>
-                <input type="range" min="1" max="5" step="1" name="quality" value={reviewData.quality} onChange={changeHandler} className="w-full">
+                <input type="range" min="1" max="5" step="1" name="quality" value={reviewData.quality} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Poor</span>
@@ -152,9 +201,9 @@ const NewReview = () => {
                 </div>
                 <div>
                 <label className="block font-medium text-gray-700 mb-2">
-               Width
+               Length
                 </label>
-                <input type="range" min="1" max="5" step="1" name="length" value={reviewData.length} onChange={changeHandler} className="w-full">
+                <input type="range" min="1" max="5" step="1" name="length" value={reviewData.length} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Runs short</span>
@@ -164,9 +213,9 @@ const NewReview = () => {
                 </div>
                 <div>
                 <label className="block font-medium text-gray-700 mb-2">
-               Width
+               Fit
                 </label>
-                <input type="range" min="1" max="5" step="1" name="fit" value={reviewData.fit} onChange={changeHandler} className="w-full">
+                <input type="range" min="1" max="5" step="1" name="fit" value={reviewData.fit} onChange={characteristicsChangeHandler} className="w-full">
                 </input>
                 <div className="flex justify-between text-sm text-gray-600">
                 <span>Runs tight</span>
@@ -175,11 +224,7 @@ const NewReview = () => {
                  </div>
                 </div>
                 <label>
-                  Summary (60 characters or less)
-                  {/* <input type="text" name="summary" maxLength="60" value={reviewData.summary} onChange={changeHandler}/>
-                  <p className="text-gray-600 mb-4">
-                  Please enter a brief summary
-                </p> */}
+                  Summary (60 characters or fewer) {reviewData.summary.length} characters
                 <textarea rows="4" maxLength="60" name="summary" value={reviewData.summary} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here...">
                 </textarea>
                 </label>
@@ -208,7 +253,7 @@ const NewReview = () => {
                 <label className="block font-medium text-gray-700 mb-2">
                   Username
                 </label>
-                <input type="text" name="reviewer_name" value={reviewData.reviewer_name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
+                <input type="text" name="name" value={reviewData.name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
                 <label className="block font-medium text-gray-700 mb-2">
                   email
                 </label>

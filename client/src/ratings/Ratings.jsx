@@ -14,15 +14,22 @@ const Ratings = ({product}) => {
 
   // const [loading, setLoading] = useState(false)
   const [reviews, setReviews] = useState([])
+  const [metaData, setMetaData] = useState({})
   // const [selectedProduct, setSelectedProduct] = useState(null)
 
-  console.log(product)
+  // console.log(product)
 
 useEffect(() => {
   axios.get('/reviews?product_id=37311')
   .then(response => {
-    console.log(response.data.results)
     setReviews(response.data.results)
+  })
+  .then(() => {
+    axios.get(`/reviews/meta?product_id=${product.id}`)
+  })
+  .then((results) =>{
+    console.log(results)
+    setMetaData(results)
   })
   .catch(error => {
     console.log(error)
@@ -41,9 +48,9 @@ return (
   <ProductBreakdown className ="pt-16" reviews={reviews}></ProductBreakdown>
   </div>
   <div className="col-span-2 pt-4">
-  <Reviews  reviews={reviews}></Reviews>
+  <Reviews  reviews={product, reviews}></Reviews>
   <div className="pt-4">
-  <NewReview setReviews={setReviews}></NewReview>
+  <NewReview product={product} setReviews={setReviews}></NewReview>
   </div>
   </div>
   </div>

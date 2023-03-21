@@ -65,7 +65,7 @@ export default function Overview({product}) {
       <Header quickLinks={quickLinks}/>
       <Announcements />
       <div className="flex">
-        <Gallery />
+        <Gallery styles={styles}/>
         <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes}/>
       </div>
       <ProductDetails product={product}/>

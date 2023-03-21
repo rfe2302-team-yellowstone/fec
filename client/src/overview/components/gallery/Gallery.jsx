@@ -1,10 +1,10 @@
 import React from 'react'
 import ImageCarousel from './ImageCarousel.jsx'
 
-export default function Gallery () {
+export default function Gallery ({styles}) {
 
   return (
-    <ImageCarousel />
+    <ImageCarousel styles={styles}/>
 
   )
 }

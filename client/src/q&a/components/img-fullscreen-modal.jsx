@@ -3,7 +3,6 @@ import {useState} from 'react';
 
 const ImgFullscreenModal = ({isModalOpen, setIsModalOpen, fullscreenImageURL}) => {
   const handleExit = (e) => {
-    console.log('click!')
     setIsModalOpen(!isModalOpen);
   }
 
@@ -12,7 +11,7 @@ const ImgFullscreenModal = ({isModalOpen, setIsModalOpen, fullscreenImageURL}) =
       <div className='modal-box'>
         <img src={fullscreenImageURL}/>
         <div className="modal-action">
-          <label className="btn btn-primary" onClick={handleExit}>X</label>
+          <label className="btn btn-sm btn-circle absolute right-2 top-2" onClick={handleExit}>X</label>
         </div>
       </div>
     </div>

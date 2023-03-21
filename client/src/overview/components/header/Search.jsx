@@ -1,10 +1,10 @@
 import React from 'react'
-export default function Search () {
+export default function Search ({handleSearch}) {
 
   return (
     <div className="flex gap-2">
       <div className="flex-1 justify-self-end form-control">
-        <input type="text" placeholder="Search" className="input input-bordered" />
+        <input type="text" placeholder="Search" className="input input-bordered" onKeyDown={handleSearch}/>
       </div>
       <div className="dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

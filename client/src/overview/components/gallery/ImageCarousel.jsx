@@ -10,6 +10,7 @@ export default function ImageCarousel ({currentStyle}) {
 
     <div className="carousel w-full" >
       {
+
         currentStyle.photos.map((photo, i) => {
           return (
             <ImageCarouselItem key={i} i={i} photos={currentStyle.photos}/>

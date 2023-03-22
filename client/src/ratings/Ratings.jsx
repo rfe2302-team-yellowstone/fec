@@ -38,6 +38,22 @@ useEffect(() => {
 
   // console.log(products)
 
+  const relevanceSorter = () => {
+    const weightFactor = 0.05
+    const orderedReviews = reviews.sort((a, b) => {
+      const aDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const bDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const aScore = a.helpfulness * weightFactor + aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
+      const bScore = b.helpfulness * weightFactor + bDays
+      console.log(a.reviewer_name, aScore, b.reviewer_name, bScore)
+      return aScore - bScore;
+    })
+    console.log(orderedReviews)
+    return orderedReviews.reverse()
+  }
+
+  const orderedReviews = relevanceSorter()
+
 return (
   <div>
   <div className="grid grid-cols-3 gap-4">
@@ -48,7 +64,7 @@ return (
   <ProductBreakdown className ="pt-16" reviews={reviews}></ProductBreakdown>
   </div>
   <div className="col-span-2 pt-4">
-  <Reviews product={product} reviews={reviews}></Reviews>
+  <Reviews product={product} reviews={reviews} orderedReviews={orderedReviews}></Reviews>
   <div className="pt-4">
   </div>
   </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import Question from './question.jsx';
+import PropTypes from 'prop-types';
 
-const QuestionsList = ({questions}) => {
+export default function QuestionsList ({questions}) {
 
   return (
     <ul className='my-2'>
@@ -12,4 +13,6 @@ const QuestionsList = ({questions}) => {
   )
 }
 
-export default QuestionsList;
+QuestionsList.propTypes = {
+  questions: PropTypes.array.isRequired
+}

@@ -2,8 +2,9 @@ import React from 'react';
 import {useState} from 'react';
 import Answer from './answer.jsx';
 import ImgFullscreenModal from './img-fullscreen-modal.jsx';
+import PropTypes from 'prop-types';
 
-const AnswersList = ({answers}) => {
+export default function AnswersList ({answers}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [fullscreenImageURL, setFullscreenImgURL] = useState('')
 
@@ -17,4 +18,6 @@ const AnswersList = ({answers}) => {
   )
 }
 
-export default AnswersList;
+AnswersList.propTypes = {
+  answers: PropTypes.array.isRequired
+}

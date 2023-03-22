@@ -2,8 +2,9 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import AnswersList from './answers-list.jsx';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-const Question = ({question}) => {
+export default function Question ({question}) {
   const [answers, setAnswers] = useState([]);
 
   // return (
@@ -49,4 +50,6 @@ const Question = ({question}) => {
   )
 }
 
-export default Question;
+Question.propTypes = {
+  question: PropTypes.object.isRequired
+}

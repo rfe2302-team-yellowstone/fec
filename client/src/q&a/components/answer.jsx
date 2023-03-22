@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Answer = ({answer, setIsModalOpen, isModalOpen, setFullscreenImgURL}) => {
+export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscreenImgURL}) {
   const handleImageClick = (e) => {
-    console.log(e.target.getAttribute('src'))
     setIsModalOpen(!isModalOpen);
     setFullscreenImgURL(e.target.getAttribute('src'));
   }
@@ -25,4 +25,9 @@ const Answer = ({answer, setIsModalOpen, isModalOpen, setFullscreenImgURL}) => {
   )
 }
 
-export default Answer;
+Answer.propTypes = {
+  answer: PropTypes.object.isRequired,
+  setIsModalOpen: PropTypes.func.isRequired,
+  isModalOpen: PropTypes.bool.isRequired,
+  setFullscreenImgURL: PropTypes.func.isRequired
+}

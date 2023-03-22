@@ -1,13 +1,38 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 
 
+
 const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, comparedProduct}) =>{
+  let initialProductFeatures = product.features;
+
+  initialProductFeatures.forEach(feature => {
+    feature.productName = product.name;
+  });
+
+  const [features, setFeatures] = useState(initialProductFeatures)
+
   const modalHandler = () => {
-    console.log('Click! inside modal component');
     setOpenModal(!openModal)
-  }
-  //console.log(comparedProduct)
+  };
+
+  useEffect (() => {
+    let combiningFeatures = initialProductFeatures;
+
+    if(comparedProduct === '') {
+      setFeatures(combiningFeatures);
+    } else {
+      let cpFeatures = comparedProduct.features;
+      cpFeatures.forEach(feature => {
+        feature.productName = comparedProduct.name;
+      });
+      combiningFeatures= combiningFeatures.concat(cpFeatures);
+
+      setFeatures(combiningFeatures);
+    }
+
+  },[comparedProduct]);
+
 
 
   return (
@@ -27,26 +52,15 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>True</th>
-                <th>Are they wearable?</th>
-                <th>True</th>
-              </tr>
-              <tr>
-                <th>True</th>
-                <th>Military grade camo</th>
-                <th>False</th>
-              </tr>
-              <tr>
-                <th>False</th>
-                <th>UV Protection</th>
-                <th>True</th>
-              </tr>
-              <tr>
-                <th>True</th>
-                <th>Will they have you looking fresh?</th>
-                <th>True</th>
-              </tr>
+               {features.filter(feature => feature.value !==null).map((feature, index) => {
+                return (
+                <tr key={index}>
+                  <th>{feature.productName === product.name ? <input type="checkbox" checked="checked" className="checkbox" /> : null}</th>
+                  <th>{feature.feature + ':' + feature.value}</th>
+                  <th>{feature.productName === comparedProduct.name ? <input type="checkbox" checked="checked" className="checkbox" />:null}</th>
+                </tr>
+                )
+              })}
             </tbody>
           </table>
           </div>
@@ -54,7 +68,7 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
       </div>
 
   )
-}
+};
 
 export default ComparisonModal;
 

@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 export default function Question ({question}) {
   const [answers, setAnswers] = useState([]);
+  const [helpfulCount, setHelpfulCount] = useState(question.question_helpfulness)
 
   // return (
   //   <li className='grid grid-cols-10 grid-rows-3 w-[60rem]'>
@@ -29,6 +30,15 @@ export default function Question ({question}) {
       })
   }, []);
 
+  const handleHelpfulClick = e => {
+    axios.put(`http://localhost:3000/qa/questions/${question.question_id}/helpful`)
+      .then(response => {
+        setHelpfulCount(helpfulCount + 1);
+      })
+      .catch(err => {
+        console.log('unable to mark Question as helpful, error:', err);
+      })
+  }
 
   return (
     <li className='w-[60rem]'>
@@ -36,8 +46,8 @@ export default function Question ({question}) {
         <span className=''>Q: {question.question_body}</span>
         <span className='ml-64'>
           <span>Helpful? </span>
-          <button className='btn btn-xs btn-ghost'>Yes</button>
-          <span>({question.question_helpfulness}) | </span>
+          <button className='btn btn-xs btn-ghost underline' onClick={handleHelpfulClick}>Yes</button>
+          <span>({helpfulCount}) | </span>
           <button className='btn btn-xs btn-ghost'>Add Answer</button>
         </span>
       </div>

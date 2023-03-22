@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function StyleSelectorItem ({style, setCurrentStyle}) {
 
-  console.log('styleselectitem', style)
-  console.log('styleselectitemid', style.style_id)
+  // console.log('styleselectitem', style)
+  // console.log('styleselectitemid', style.style_id)
   return (
     <div className="avatar cursor-pointer" onClick={() => setCurrentStyle(style)} name={style.id}>
       <div className="w-32 rounded">

@@ -3,8 +3,8 @@ import StyleSelectorItem from './StyleSelectorItem.jsx'
 
 export default function StyleSelector ({styles, currentStyle, setCurrentStyle}) {
 
-  console.log('styleselect', styles)
-  console.log('styleselect', currentStyle)
+  // console.log('styleselect', styles)
+  // console.log('styleselect', currentStyle)
 
   return (
     <div>

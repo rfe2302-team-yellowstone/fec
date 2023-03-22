@@ -1,7 +1,7 @@
 import React from 'react'
-import ImageCarouselItem from './ImageCarouselItem.jsx'
+import ImageViewerItem from './ImageViewerItem.jsx'
 
-export default function ImageCarousel ({currentStyle}) {
+export default function ImageViewer ({currentStyle}) {
 
 
   return (
@@ -12,7 +12,7 @@ export default function ImageCarousel ({currentStyle}) {
       {
         currentStyle.photos.map((photo, i) => {
           return (
-            <ImageCarouselItem key={i} i={i} photos={currentStyle.photos}/>
+            <ImageViewerItem key={i} i={i} photos={currentStyle.photos}/>
           )
         })
       }

@@ -77,7 +77,7 @@ export default function Overview({product, handleSearch}) {
     <div id="overview">
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
-      <div className="flex">
+      <div className="flex ">
         <Gallery currentStyle={currentStyle}/>
         <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes} setCurrentStyle={setCurrentStyle}/>
       </div>

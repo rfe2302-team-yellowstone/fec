@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscreenImgURL}) {
+  const [helpfulCount, setHelpfulCount] = useState(answer.helpfulness)
+
   const handleImageClick = (e) => {
     setIsModalOpen(!isModalOpen);
     setFullscreenImgURL(e.target.getAttribute('src'));
+  }
+
+  const handleHelpfulClick = e => {
+    axios.put(`http://localhost:3000/qa/answers/${answer.answer_id}/helpful`)
+      .then(response => {
+        setHelpfulCount(helpfulCount + 1);
+      })
+      .catch(err => {
+        console.log('unable to mark Answer as helpful, error:', err);
+      })
+  }
+
+  const handleReportClick = e => {
+    axios.put(`http://localhost:3000/qa/answers/${answer.answer_id}/report`)
+      .catch(err => {
+        console.log('unable to report answer, error:', err);
+      })
   }
 
   return (
@@ -17,9 +37,9 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
       </div>
       <div>
         <span>by {answer.answerer_name} | Helpful? </span>
-        <button className='btn btn-xs btn-ghost'>Yes</button>
-        <span>({answer.helpfulness}) | </span>
-        <button className='btn btn-xs btn-ghost'>Report</button>
+        <button className='btn btn-xs btn-ghost' onClick={handleHelpfulClick}>Yes</button>
+        <span>({helpfulCount}) | </span>
+        <button className='btn btn-xs btn-ghost' onClick={handleReportClick}>Report</button>
       </div>
     </li>
   )

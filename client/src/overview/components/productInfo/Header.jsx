@@ -21,15 +21,16 @@ export default function Header ({product, currentStyle}) {
         <p >
         {
           (!!currentStyle.sale_price) &&
-          <span className="text-s  italic text-red-800 line-through">
+          <span className="text-m  italic text-red-800 line-through">
           {`$${currentStyle.original_price}`}
           </span>
         }
-        <span>
+        <span className="text-m">
          {`  $${currentPrice}`}
         </span>
-      </p>
-}
+        </p>
+      }
+
     </div>
 
   )

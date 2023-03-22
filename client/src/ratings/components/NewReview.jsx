@@ -6,8 +6,8 @@ const NewReview = ({product, reviews}) => {
   // console.log(product, '-------PRODUCT--------')
 
   const [form, setForm] = useState(false)
-
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
+  const [imageUrls, setImageUrls] = useState(['http://res.cloudinary.com/dmmzqckuu/image/upload/v1667506778/mwsvroray4fie6rakkqj.jpg'])
 
   const [characteristics, setCharacteristics] = useState({
     125031: 3,  //fit
@@ -19,18 +19,18 @@ const NewReview = ({product, reviews}) => {
   const [reviewData, setReviewData] = useState({
     product_id: product.id,
     rating: 3,
-    summary: 'THIS IS A TEST',
-    body: 'THIS IS ALSO A TEST',
-    recommended: false,
-    name: 'TEST123',
-    email: 'TESTER123@TESTER.TEST',
-    photos: [],
+    summary: '',
+    body: '',
+    recommend: false,
+    name: '',
+    email: '',
+    photos: imageUrls,
     characteristics: characteristics
   })
 
   const [formErrors, setFormErrors] = useState({
     rating: false,
-    recommended: false,
+    recommend: false,
     body: false,
     reviewer_name: false,
     email: false
@@ -42,7 +42,8 @@ const NewReview = ({product, reviews}) => {
     console.log(characteristics, '---------CHARACTERISTICS---------')
     setReviewData((prevState) => ({
       ...prevState,
-      characteristics: characteristics
+      characteristics: characteristics,
+      photos: imageUrls
     }))
     // axios post request (reset form fields too)
     // console.log(reviewData, '-------REVIEWDATA--------')
@@ -57,7 +58,7 @@ const NewReview = ({product, reviews}) => {
   }
 
   const disabledButtonChecker = () => {
-    if (reviewData.name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body !== '')
+    if (reviewData.name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body.length >= 50 && reviewData.body.length < 1000 && reviewData.summary.length < 60)
     {
       setIsSubmitDisabled(false)
     } else {
@@ -98,6 +99,11 @@ const NewReview = ({product, reviews}) => {
       }
     }))
   }
+  const imagesChangeHandler = (e) => {
+    e.preventDefault()
+    const selectedUrls = e.target.value.split('\n')
+    setImageUrls(selectedUrls)
+  }
 
   const photoHandler =(e) => {
     const photoFiles = Array.from(e.target.files).slice(0, 5);
@@ -127,7 +133,6 @@ const NewReview = ({product, reviews}) => {
                 <label> */}
 
                 <div>
-
                     <label className="block font-medium text-gray-700 mb-2">
                     Overall Rating
                     </label>
@@ -139,8 +144,8 @@ const NewReview = ({product, reviews}) => {
                     <span>Great!</span>
                     </div>
                     </div>
-                Recommended:
-                <select name="recommended" value={reviewData.recommended} onChange={changeHandler} required>
+                Recommend:
+                <select name="recommend" value={Boolean(reviewData.recommend)} onChange={changeHandler} required>
                   <option value="">Select an option</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -226,6 +231,7 @@ const NewReview = ({product, reviews}) => {
                 <label>
                   Summary (60 characters or fewer)
                   {/* {reviewData.summary.length} characters */}
+                  <p className="text-red-600 mb-4 text-xs">{reviewData.summary.length} characters</p>
                 <textarea rows="4" maxLength="60" name="summary" value={reviewData.summary} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here...">
                 </textarea>
                 </label>
@@ -235,21 +241,29 @@ const NewReview = ({product, reviews}) => {
                 <p className="text-gray-600 mb-4">
                   Please enter a detailed description here that is between 50 and 1000 characters
                 </p>
+                <p className="text-red-600 mb-4 text-xs">{reviewData.body.length} characters</p>
                 <textarea rows="4" minLength="50" maxLength="1000" name="body" value={reviewData.body} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here!" required>
                 </textarea>
-                <input
+                {/* <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={photoHandler}
                 className="mt-4 mb-4"
-                ></input>
+                ></input> */}
                 <div className="flex flex-wrap -mx-2">
-                  {reviewData.photos.map((photo, index) => (
+                  {/* {reviewData.photos.map((photo, index) => (
                     <div key={index} className="w-1/5 px-2 mb-4">
                     <img src={URL.createObjectURL(photo)} alt={`Photo ${index + 1}`} className="w-full h-auto rounded-lg"></img>
                     </div>
-                  ))}
+                  ))} */}
+                  <label htmlFor="imageUrls">Add image urls below</label>
+                  <textarea
+                  name="photos"
+                  value={reviewData.photos}
+                  rows="5"
+                  >
+                  </textarea>
                 </div>
                 <label className="block font-medium text-gray-700 mb-2">
                   Username

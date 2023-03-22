@@ -48,9 +48,8 @@ return (
   <ProductBreakdown className ="pt-16" reviews={reviews}></ProductBreakdown>
   </div>
   <div className="col-span-2 pt-4">
-  <Reviews  reviews={product, reviews}></Reviews>
+  <Reviews product={product} reviews={reviews}></Reviews>
   <div className="pt-4">
-  <NewReview product={product} setReviews={setReviews}></NewReview>
   </div>
   </div>
   </div>

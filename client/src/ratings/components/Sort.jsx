@@ -1,24 +1,58 @@
 import React, {useState, useEffect} from "react";
 
-const Sort = ({reviews, setReviews}) => {
+const Sort = ({reviews, setReviews, order, setOrder}) => {
+
+
 
   const [menu, setMenu] = useState(false)
-  const [sortBy, setSortBy] = useState('relevance')
+  const [sortBy, setSortBy] = useState('Relevance')
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
+    e.preventDefault()
     setMenu(!menu)
   }
 
-  const handleSortByRecent = () => {
+  const handleSortByRecent = (e) => {
+    e.preventDefault()
     setMenu(!menu)
-    setSortBy('recent')
+    setSortBy('Recent')
+    const orderedReviews = reviews.slice().sort((a, b) => new Date(b.date) - new Date (a.date))
+    setOrder(orderedReviews)
+  }
+
+  const handleSortByHelpful = (e) => {
+    e.preventDefault()
+    setMenu(!menu)
+    setSortBy('Helpful')
+    const orderedReviews = reviews.slice().sort((a, b) => b.helpfulness - a.helpfulness)
+    console.log(orderedReviews, '------HELPFULNESS------')
+    setOrder(orderedReviews)
+  }
+
+  const handleSortByRelevance = (e) => {
+    e.preventDefault()
+    setMenu(!menu)
+    setSortBy('Relevance')
+    const orderedReviews = reviews.sort((a, b) => {
+      const aDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const bDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const aScore = a.helpfulness - aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
+      const bScore = b.helpfulness - bDays
+      return bScore - aScore;
+    })
+    setOrder(orderedReviews)
   }
 
   useEffect(() => {
-    if (sortBy === 'recent') {
-      setOrder(reviews.slice().sort((a, b) => b.date - a.date))
-    }
-  }, [sortBy])
+    const orderedReviews = reviews.sort((a, b) => {
+      const aDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const bDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const aScore = a.helpfulness - aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
+      const bScore = b.helpfulness - bDays
+      return bScore - aScore;
+    })
+    setOrder(orderedReviews)
+  }, [])
 
   return (
     <div className="inline-flex bg-white border rounded-md">
@@ -26,7 +60,7 @@ const Sort = ({reviews, setReviews}) => {
       href="#"
       className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"
       >
-      Sort Options
+      {sortBy}
       </a>
       <div className="relative">
         <button
@@ -56,21 +90,21 @@ const Sort = ({reviews, setReviews}) => {
             <a
             href="#"
             className="block px-4 py-2 text-sm text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700"
-            onClick={handleSortByRecent}
+            onClick={handleSortByRelevance}
             >
               Relevance (default)
             </a>
             <a
             href="#"
             className="block px-4 py-2 text-sm text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700"
-            onClick={clickHandler}
+            onClick={handleSortByHelpful}
             >
               Helpful
             </a>
             <a
             href="#"
             className="block px-4 py-2 text-sm text-gray-500 rounded-lg hover:bg-gray-50 hover:text-gray-700"
-            onClick={clickHandler}
+            onClick={handleSortByRecent}
             >
               Recent
             </a>

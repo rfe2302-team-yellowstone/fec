@@ -13,10 +13,18 @@ const Reviews = ({product, reviews, setReviews}) => {
   const [order, setOrder] = useState(reviews)
   const [maxReviews, setMaxReviews] = useState(2)
 
+  useEffect(() => {
+    setOrder(reviews)
+  }, [reviews])
+
+  useEffect(() => {
+    console.log(order, '-----ORDER------')
+  }, [order])
+
   return (
     <div className="mb-4">
-    <Sort reviews={reviews} setReviews={setReviews}></Sort>
-    {reviews.slice(0, maxReviews).map(review => (
+    <Sort reviews={reviews} setReviews={setReviews} order={order} setOrder={setOrder}></Sort>
+    {order.slice(0, maxReviews).map(review => (
      <ul key={review.review_id}>
      <ReviewTile review={review}></ReviewTile>
      </ul>

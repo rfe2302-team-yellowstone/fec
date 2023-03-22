@@ -33,25 +33,29 @@ const Sort = ({reviews, setReviews, order, setOrder}) => {
     e.preventDefault()
     setMenu(!menu)
     setSortBy('Relevance')
+    const weightFactor = 0.05
     const orderedReviews = reviews.sort((a, b) => {
-      const aDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
-      const bDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
-      const aScore = a.helpfulness - aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
-      const bScore = b.helpfulness - bDays
-      return bScore - aScore;
+      const aDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const bDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const aScore = a.helpfulness * weightFactor + aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
+      const bScore = b.helpfulness * weightFactor + bDays
+      console.log(a.reviewer_name, aScore, b.reviewer, bScore)
+      return aScore - bScore;
     })
-    setOrder(orderedReviews)
+    setOrder(orderedReviews.reverse())
   }
 
   useEffect(() => {
+    const weightFactor = 0.05
     const orderedReviews = reviews.sort((a, b) => {
-      const aDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
-      const bDays = Math.floor((new Date - new Date(a.date)) / (1000 * 60 * 60 * 24))
-      const aScore = a.helpfulness - aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
-      const bScore = b.helpfulness - bDays
-      return bScore - aScore;
+      const aDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const bDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
+      const aScore = a.helpfulness * weightFactor + aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
+      const bScore = b.helpfulness * weightFactor + bDays
+      console.log(a.reviewer_name, aScore, b.reviewer, bScore)
+      return aScore - bScore;
     })
-    setOrder(orderedReviews)
+    setOrder(orderedReviews.reverse())
   }, [])
 
   return (

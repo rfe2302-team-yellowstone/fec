@@ -9,7 +9,7 @@ import ProductDetails from './components/productDetails/ProductDetails.jsx'
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview({product}) {
+export default function Overview({product, handleSearch}) {
 
    //product: 37325 - has sales prices
 
@@ -29,14 +29,27 @@ export default function Overview({product}) {
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }, [product])
+
+
 
   // Function to map style skus into sizes and quantities
   // Creates an array of tuples (size and quantity). Only stores if available.
   const getSizesFromStyle = (style) => {
+
+
     let sizes = {}
     let skus = style.skus;
-    // console.log('SKUS:', skus)
+
+    // try {
+    //   skus = style.skus;
+    // }
+    // catch {
+    //   console.log('no styles available')
+    //   return;
+    // }
+
+
     Object.keys(skus).forEach((sku) => {
       if (+skus[sku]['quantity'] > 0) {
         // console.log(skus[sku]['size'])
@@ -62,13 +75,13 @@ export default function Overview({product}) {
 
   return (
     <div id="overview">
-      <Header quickLinks={quickLinks}/>
+      <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
-      <div className="flex">
-        <Gallery />
-        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes}/>
+      <div className="flex ">
+        <Gallery currentStyle={currentStyle}/>
+        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes} setCurrentStyle={setCurrentStyle}/>
       </div>
-      <ProductDetails product={product}/>
+      <ProductDetails product={product} />
     </div>
   )
 

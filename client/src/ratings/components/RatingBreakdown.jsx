@@ -38,12 +38,12 @@ const RatingBreakdown = ({reviews, metaData}) => {
   }, [metaData])
   // const totalReviews = reviewCalculator()
 
-  useEffect(() => {
-    // console.log(metaDataRatings)
-    // console.log(reviewCalculator())
-    // console.log(totalReviews)
-    console.log(metaDataRatings[1])
-  }, [metaDataRatings])
+  // useEffect(() => {
+  //   // console.log(metaDataRatings)
+  //   // console.log(reviewCalculator())
+  //   // console.log(totalReviews)
+  //   console.log(metaDataRatings[1])
+  // }, [metaDataRatings])
 
   useEffect(() => {
     let fives = Number(metaDataRatings[5])

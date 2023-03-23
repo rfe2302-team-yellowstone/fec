@@ -6,8 +6,9 @@ import QuestionsList from './components/questions-list.jsx';
 import QAndAFooter from './components/qa-footer.jsx';
 import {useSelector, useDispatch } from 'react-redux';
 import { trackClick } from '../features/click-tracker/clickTrackerSlice';
+import PropTypes from 'prop-types';
 
-const QAndA = ({product}) => {
+export default function QAndA ({product}) {
   const [questions, setQuestions] = useState([]);
   const clicks = useSelector(state => state.clickTracker)
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ const QAndA = ({product}) => {
   return (
     <section className='flex flex-col items-center my-4'>
       <QAndAHeader />
-      <QuestionsList questions={questions}/>
-      <QAndAFooter />
+      <QuestionsList questions={questions} productName={product.name}/>
+      <QAndAFooter productId={product.id} productName={product.name}/>
       {/* <div>
         <button
           aria-label="Increment value"
@@ -52,4 +53,6 @@ const QAndA = ({product}) => {
   )
 }
 
-export default QAndA;
+QAndA.propTypes = {
+  product: PropTypes.object.isRequired
+}

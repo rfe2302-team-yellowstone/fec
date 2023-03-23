@@ -15,8 +15,8 @@ export default function Header ({product, currentStyle}) {
 
   return (
     <div className='flex-1'>
-      <p className="text-l" > {product.category} </p>
-      <p className="text-5xl font-semibold" > {product.name} </p>
+      <p className="text-l lg:text-2xl" > {product.category} </p>
+      <p className="text-5xl xl:text-8xl font-semibold" > {product.name} </p>
       { (!!currentPrice) && // don't render any prices until we calculate a price (don't want to show undefined to user)
         <p >
         {
@@ -25,7 +25,7 @@ export default function Header ({product, currentStyle}) {
           {`$${currentStyle.original_price}`}
           </span>
         }
-        <span className="text-m">
+        <span className="text-m lg:text-xl">
          {`  $${currentPrice}`}
         </span>
         </p>

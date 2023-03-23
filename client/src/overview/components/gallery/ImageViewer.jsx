@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageViewerItem from './ImageViewerItem.jsx'
 
-export default function ImageViewer ({currentStyle}) {
+export default function ImageViewer ({currentStyle, fullScreenMode, setFullScreenMode}) {
 
 
   return (
@@ -12,7 +12,7 @@ export default function ImageViewer ({currentStyle}) {
       {
         currentStyle.photos.map((photo, i) => {
           return (
-            <ImageViewerItem key={i} i={i} photos={currentStyle.photos}/>
+            <ImageViewerItem key={i} i={i} photos={currentStyle.photos} fullScreenMode={fullScreenMode} setFullScreenMode={setFullScreenMode}/>
           )
         })
       }

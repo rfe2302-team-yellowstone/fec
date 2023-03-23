@@ -1,8 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ExpandButton from './ExpandButton.jsx'
 
-export default function ImageViewerItem ({photos, i}) {
+export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScreenMode}) {
 
   // Simple state variable to show or hide expand button when you hover over image
   //    'none' = hide
@@ -10,13 +10,23 @@ export default function ImageViewerItem ({photos, i}) {
 
   const [expandStyle, setExpandStyle] = useState({display: 'none'})
 
+  let prefix;
+  if (fullScreenMode) {
+    prefix = 'fs'
+  } else {
+    prefix = ''
+  }
+
+  // console.log('prefix', prefix)
+
 
   // Function needed to prevent #href from jumping the whole page
   // from here: https://github.com/saadeghi/daisyui/issues/413
 //   const goTo = (event) => {
-//     return
+
 //     event.preventDefault()
 //     const btn = event.target
+//     console.log('button!', btn)
 
 
 //     //Equivalent
@@ -24,15 +34,34 @@ export default function ImageViewerItem ({photos, i}) {
 //     const carousel = document.querySelector('#image-viewer-carousel')
 //     // const carousel = btn.parentElement!.parentElement!.parentElement!
 
-//     const href = btn.getAttribute('href')!
-//     const target = carousel.querySelector<HTMLDivElement>(href)!
+//     console.log('carousel!', carousel);
+
+//     const id = btn.getAttribute('id')
+//     console.log('id!', id);
+
+//     let href = btn.getAttribute('href')
+//     //href = href.slice(1, href.length) // trim off
+//     console.log('href!', href);
+//     // const target = carousel.querySelector<HTMLDivElement>(href)
+
+//     const target = document.querySelector(`div${href}`)
+//     console.log('target!', target);
 //     const left = target.offsetLeft
-//     carousel.scrollTo({left: left})
+//     console.log('offsetLeft', left)
+//     carousel.scrollTo({left: left+100})
+
+//     return true;
 // }
+
+
+  // const handleClick = (event) => {
+  //   console.log('clickclickclick!')
+  //   return false;
+  // }
 
   return (
     <div
-      id={`slide${i}`}
+      id={`${prefix}slide${i}`}
       className="carousel-item relative w-full h-fit grid justify-items-center items-center"
       onMouseEnter={() => setExpandStyle({display:'block'})}
       onMouseLeave={() => setExpandStyle({display:'none'})}
@@ -50,7 +79,7 @@ export default function ImageViewerItem ({photos, i}) {
         }
 
       </div>
-      <ExpandButton expandStyle={expandStyle}/>
+      <ExpandButton expandStyle={expandStyle} fullScreenMode={fullScreenMode} setFullScreenMode={setFullScreenMode}/>
     </div>
   )
 }

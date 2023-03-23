@@ -2,7 +2,7 @@ import React from 'react'
 export default function IconCarouselItem ({photos, i}) {
 
   return (
-    <div id={`slide${i}`} className="carousel-item h-max-s">
+    <div id={`slideicon${i}`} className="carousel-item h-max-s">
 
       <a href={`#slide${i}`} >
         {/* <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" className="rounded-box" /> */}

@@ -7,7 +7,7 @@ export default function StyleSelector ({styles, currentStyle, setCurrentStyle}) 
   // console.log('styleselect', currentStyle)
 
   return (
-    <div>
+    <div className=''>
       <h3 className='text-2xl font-semibold'> Styles </h3>
       <p className='text-m italic'> {currentStyle.name}</p>
       <div id="styleSelector" className='grid grid-cols-4 gap-4'>

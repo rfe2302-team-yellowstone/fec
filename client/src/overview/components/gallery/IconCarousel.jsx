@@ -8,7 +8,7 @@ export default function IconCarousel ({currentStyle}) {
 
     (Object.keys(currentStyle).length > 0) &&
 
-    <div className="carousel carousel-center space-x-0.5 bg-neutral rounded-box border">
+    <div className="carousel carousel-center space-x-0.5 bg-transparent rounded-box border">
       {
         currentStyle.photos.map((photo, i) => {
           return (

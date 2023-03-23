@@ -50,12 +50,12 @@ const App = ({initialProduct}) => {
 
   return (
     <div>
-      {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
+      <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1>
 
-      {/* <Overview cart={cart} product={product} handleSearch={handleSearch}/> */}
-      {/* <Related product={product}/> */}
+      <Overview cart={cart} product={product} handleSearch={handleSearch}/>
+      <Related product={product}/>
       <Ratings product={product}>Ratings</Ratings>
-      {/* <QAndA product={product}/> */}
+      <QAndA product={product}/>
     </div>
   )
 

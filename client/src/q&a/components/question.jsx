@@ -45,10 +45,10 @@ export default function Question ({question, productName}) {
   }
 
   return (
-    <li className='w-[60rem]'>
-      <div>
+    <li className='w-[60rem] border p-2 border-gray-200 rounded-lg shadow-sm'>
+      <div className='flex'>
         <span className='text-lg'>Q: {question.question_body}</span>
-        <span className='ml-72'>
+        <span className='ml-auto'>
           <span>Helpful? </span>
           <button className='btn btn-xs btn-ghost underline' onClick={handleHelpfulClick}>Yes</button>
           <span>({helpfulCount}) | </span>

@@ -13,6 +13,7 @@ export default function AnswersList ({answers}) {
       {answers.map(answer => {
         return <Answer key={answer.answer_id} answer={answer} setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} setFullscreenImgURL={setFullscreenImgURL}/>
       })}
+      {answers.length === 0 && <span>No answers yet, try adding one!</span>}
       <ImgFullscreenModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} fullscreenImageURL={fullscreenImageURL}/>
     </ul>
   )

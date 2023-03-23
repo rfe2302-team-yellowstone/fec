@@ -8,7 +8,7 @@ export default function ImageViewer ({currentStyle}) {
 
     (Object.keys(currentStyle).length > 0) &&
 
-    <div className="carousel w-full" >
+    <div id="image-viewer-carousel" className="carousel w-full lg:w-[660px] items-center" >
       {
         currentStyle.photos.map((photo, i) => {
           return (

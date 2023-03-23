@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 export default function Question ({question, productName}) {
   const [answers, setAnswers] = useState([]);
+  const [allAnswers, setAllAnswers] = useState([]);
   const [helpfulCount, setHelpfulCount] = useState(question.question_helpfulness)
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,12 +23,13 @@ export default function Question ({question, productName}) {
   useEffect(() => {
     axios.get(`http://localhost:3000/qa/questions/${question.question_id}/answers`, {
       params: {
-        'count': 4
+        'count': 100
       }
     })
       .then(response => {
         // console.log('successfully retrieved answers from Atelier Answers API:', response.data.results)
-        setAnswers(response.data.results)
+        setAnswers(response.data.results.slice(0, 2));
+        setAllAnswers(response.data.results);
       })
   }, []);
 
@@ -42,6 +44,9 @@ export default function Question ({question, productName}) {
   }
   const handleAddAnswerClick = e => {
     setIsModalOpen(!isModalOpen);
+  }
+  const handleLoadMoreAnswersClick = e => {
+    setAnswers(allAnswers.slice(0, answers.length + 2));
   }
 
   return (
@@ -59,7 +64,10 @@ export default function Question ({question, productName}) {
         <span className='text-lg'>A: </span>
         <AnswersList answers={answers}/>
       </div>
-      <button className='btn btn-xs btn-ghost'>LOAD MORE ANSWERS</button>
+      {allAnswers.length === answers.length
+        ? <button className='btn btn-xs btn-ghost btn-disabled'>NO MORE ANSWERS</button>
+        : <button className='btn btn-xs btn-ghost' onClick={handleLoadMoreAnswersClick}>LOAD MORE ANSWERS</button>
+      }
       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
     </li>
   )

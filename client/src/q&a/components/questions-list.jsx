@@ -1,15 +1,18 @@
 import React from 'react';
 import Question from './question.jsx';
+import PropTypes from 'prop-types';
 
-const QuestionsList = ({questions}) => {
+export default function QuestionsList ({questions, productName}) {
 
   return (
     <ul className='my-2'>
       {questions.map(question => {
-        return <Question key={question.question_id} question={question}/>
+        return <Question key={question.question_id} question={question} productName={productName}/>
       })}
     </ul>
   )
 }
 
-export default QuestionsList;
+QuestionsList.propTypes = {
+  questions: PropTypes.array.isRequired
+}

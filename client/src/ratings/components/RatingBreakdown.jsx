@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 
-const RatingBreakdown = ({reviews}) => {
+const RatingBreakdown = ({reviews, metaData}) => {
 
+  const [metaDataRatings, setMetaDataRatings] = useState({})
+  const [metaDataRecommended, setMetaDataRecommended] = useState({})
   const [rating, setRating] = useState(0);
   const [five, setFive] = useState(0);
   const [four, setFour] = useState(0);
@@ -10,42 +12,72 @@ const RatingBreakdown = ({reviews}) => {
   const [one, setOne] = useState(0);
   const [recommended, setRecommended] = useState(0)
 
-  const totalReviews = reviews.length
+  const reviewCalculator = () => {
+    let amtOfReviews = 0
+    for (let key in metaDataRatings) {
+      amtOfReviews += Number(metaDataRatings[key])
+    }
+    return amtOfReviews
+  }
+
+  let totalReviews = reviewCalculator()
+
 
   useEffect(() => {
-    let score = 0
-    let fives = 0
-    let fours = 0
-    let threes = 0
-    let twos = 0
-    let ones = 0
-    let recommending = 0
-    for (let i = 0; i < totalReviews; i++) {
-      score += reviews[i].rating
-      if (reviews[i].rating === 5) {
-        fives += 1
-      } else if (reviews[i].rating === 4) {
-       fours += 1
-      } else if (reviews[i].rating === 3) {
-        threes += 1
-      } else if (reviews[i].rating === 2) {
-        twos += 1
-      } else if (reviews[i].rating === 1) {
-        ones += 1
-      }
-      if (reviews[i].recommend === true) {
-        recommending += 1
-      }
+    const ratingsStore = {}
+    for (let key in metaData.ratings) {
+      ratingsStore[key] = metaData.ratings[key]
     }
-    score = score/totalReviews
-    setRating(score)
+    setMetaDataRatings(ratingsStore)
+
+    const recommendedStore = {}
+    for (let key in metaData.recommended) {
+      recommendedStore[key] = metaData.recommended[key]
+    }
+    setMetaDataRecommended(recommendedStore)
+  }, [metaData])
+  // const totalReviews = reviewCalculator()
+
+  useEffect(() => {
+    // console.log(metaDataRatings)
+    // console.log(reviewCalculator())
+    // console.log(totalReviews)
+    console.log(metaDataRatings[1])
+  }, [metaDataRatings])
+
+  useEffect(() => {
+    let fives = Number(metaDataRatings[5])
+    let fours = Number(metaDataRatings[4])
+    let threes = Number(metaDataRatings[3])
+    let twos = Number(metaDataRatings[2])
+    let ones = Number(metaDataRatings[1])
+    let score = (fives * 5 + fours * 4 + threes * 3+ twos * 2 + ones) / (totalReviews)
+    let recommending = metaDataRecommended[true]
+    // for (let i = 0; i < totalReviews; i++) {
+    //   score += reviews[i].rating
+    //   if (reviews[i].rating === 5) {
+    //     fives += 1
+    //   } else if (reviews[i].rating === 4) {
+    //    fours += 1
+    //   } else if (reviews[i].rating === 3) {
+    //     threes += 1
+    //   } else if (reviews[i].rating === 2) {
+    //     twos += 1
+    //   } else if (reviews[i].rating === 1) {
+    //     ones += 1
+    //   }
+    //   if (reviews[i].recommend === true) {
+    //     recommending += 1
+    //   }
+    // }
+    setRating(Math.round(score * 100)/100)
     setFive(fives)
     setFour(fours)
     setThree(threes)
     setTwo(twos)
-    setOne(one)
+    setOne(ones)
     setRecommended(recommending)
-  }, [reviews])
+  }, [metaDataRatings])
 
   return (
     <div>
@@ -129,10 +161,10 @@ const RatingBreakdown = ({reviews}) => {
             <span>{rating} out of 5</span>
           </span>
           <span className="text-xs leading-6 text-slate 400">
-          based on {reviews.length} user ratings
+          based on {totalReviews} user ratings
            </span>
            <span className="text-xs leading-6 text-slate 400">
-           {recommended/totalReviews * 100}% of reviews recommend this product
+           {Math.round(recommended/totalReviews * 100)}% of reviews recommend this product
            </span>
            <span className="flex flex-col w-full gap-4 pt-6">
            <span className="flex items-center w-full gap-2">

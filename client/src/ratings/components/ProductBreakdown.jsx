@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const ProductBreakdown = ({reviews}) => {
+const ProductBreakdown = ({reviews, metaData}) => {
 
   const totalReviews = reviews.length
   const [rating, setRating] = useState(0)
@@ -14,27 +14,32 @@ const ProductBreakdown = ({reviews}) => {
     setRating(score)
   }, [reviews])
 
+  useEffect(() => {
+    console.log(metaData)
+  }, [metaData])
+
   return (
-    <div>
-    <h1>Comfort</h1>
-    <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
-    <div className="w-full flex justify-between text-xs px-2">
-    <span>Too small</span>
-  <span>|</span>
-  <span>Perfect</span>
-  <span>|</span>
-  <span>Too large</span>
-    </div>
-    <h1>Style</h1>
-    <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
-    <div className="w-full flex justify-between text-xs px-2">
-    <span>Too small</span>
-  <span>|</span>
-  <span>Perfect</span>
-  <span>|</span>
-  <span>Too large</span>
-    </div>
-  </div>
+    <div>CHARACTERISTICS GO HERE</div>
+  //   <div>
+  //   <h1>Comfort</h1>
+  //   <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
+  //   <div className="w-full flex justify-between text-xs px-2">
+  //   <span>Too small</span>
+  // <span>|</span>
+  // <span>Perfect</span>
+  // <span>|</span>
+  // <span>Too large</span>
+  //   </div>
+  //   <h1>Style</h1>
+  //   <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
+  //   <div className="w-full flex justify-between text-xs px-2">
+  //   <span>Too small</span>
+  // <span>|</span>
+  // <span>Perfect</span>
+  // <span>|</span>
+  // <span>Too large</span>
+  //   </div>
+  // </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageViewerItem from './ImageViewerItem.jsx'
 
-export default function ImageViewer ({currentStyle, fullScreenMode, setFullScreenMode}) {
+export default function ImageViewer ({currentStyle, fullScreenMode, setFullScreenMode, currentCarouselIndex, setCurrentCarouselIndex}) {
 
 
   return (

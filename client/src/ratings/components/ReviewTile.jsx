@@ -9,8 +9,14 @@ const ReviewTile = ({review}) => {
       {review.body} */}
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm">
       <div className="relative">
-          <div className="absolute top-0 right-10">
-            <p className="text-xs text-gray-500">{review.reviewer_name} {review.date.split('T')[0]}</p>
+          <div className="absolute top-0 right-10 flex items-center">
+           {review.recommend ? (
+              <svg xlmns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500" viewBox="0 0 24 24"
+               fill="currentColor">
+               <path fillRule="nonzero" d="M6.707 14.707a1 1 0 0 1-1.414 0L2 10.414l1.414-1.414L6.707 12.586l8.293-8.293L18.586 5l-10 10z" />
+               </svg>
+            ) : null}
+            <p className="text-xs text-gray-500 ml-1">{review.reviewer_name} {review.date.split('T')[0]}</p>
           </div>
         </div>
       <div className="w-16 h-16 mt-1">

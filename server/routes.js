@@ -118,7 +118,6 @@ router.get('/reviews/meta', (req, res) => {
   if (req.options.params.product_id === undefined) {
     res.status(404).send('Must provide a "product_id" parameter')
   }
-
   axios.get(`${HEROKU_API_END_POINT}/reviews/meta`, req.options)
   .then ((result) => {
     res.send(result.data)

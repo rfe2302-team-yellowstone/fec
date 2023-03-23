@@ -5,12 +5,12 @@ import axios from 'axios';
 
 const OutfitCard = ({product, reviews}) => {
   const [outfitItems, setOutfitItems] = useState([]);
-  const [rating, setRating] = useState(3.5)
+  const [rating, setRating] = useState(0)
 
 
 
   // //General product information
-  let fetchingRelatedProducts = () => axios.get(`http://localhost:3000/products/${product.id}`)
+  let fetchingRelatedProducts = () => axios.get(`/products/${product.id}`)
   .then(response => {
     let tempArr = [];
     tempArr.push(response.data)
@@ -18,6 +18,16 @@ const OutfitCard = ({product, reviews}) => {
 
   })
   .catch(err => console.log(err));
+
+  let getAverageRating = () =>{
+    let totalRating = 0;
+
+    reviews.forEach(review => {
+      totalRating += review.rating;
+    })
+    let averageRating = totalRating/reviews.length;
+    setRating(averageRating);
+  };
 
   const removeItem = () => setOutfitItems([]);
 
@@ -119,7 +129,7 @@ const OutfitCard = ({product, reviews}) => {
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="card-title">Add to Outfit!</h2>
-          <button onClick={fetchingRelatedProducts} className="btn btn-lg">+</button>
+          <button onClick={()=>{getAverageRating(); fetchingRelatedProducts()}} className="btn btn-lg">+</button>
         </div>
       </div>
     </div>

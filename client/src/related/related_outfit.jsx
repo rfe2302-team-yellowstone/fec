@@ -19,8 +19,8 @@ const Related = ({product}) => {
   }, [])
 
   return (
-  <div className = 'flex flex-col items-center'>
-    <RelatedCarousel product = {product} reviews = {reviews}/>
+  <div className = 'flex flex-col items-center w-100'>
+    <RelatedCarousel product = {product}/>
     <OutfitCarousel product = {product} reviews = {reviews}/>
   </div>
   )

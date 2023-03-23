@@ -30,8 +30,8 @@ export default function QAndA ({product}) {
   return (
     <section className='flex flex-col items-center my-4'>
       <QAndAHeader />
-      <QuestionsList questions={questions}/>
-      <QAndAFooter />
+      <QuestionsList questions={questions} productName={product.name}/>
+      <QAndAFooter productId={product.id} productName={product.name}/>
       {/* <div>
         <button
           aria-label="Increment value"

@@ -28,7 +28,7 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
   }
 
   return (
-    <li className='mb-2'>
+    <li className='mb-2 border border-gray-200 rounded-lg shadow-sm p-2'>
       <div className='mb-2'>{answer.body}</div>
       <div className='mb-2'>
         {answer.photos.map(photo => {

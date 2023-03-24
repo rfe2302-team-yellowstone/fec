@@ -4,14 +4,17 @@ import debounce from '../../lib/debounce.js';
 const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setTempQuestions}) => {
   const [query, setQuery] = useState('');
 
-  const search = (searchTerm) => {
-    if (searchTerm.trim().length <= 3 && allQuestions.length > 0) {
-      console.log('current questions:', questions, 'original questions:', tempQuestions)
+  const search = (searchTerm, allQuestions) => {
+    console.log('searchTerm:', searchTerm.trim().length, 'allquestions length', allQuestions.length);
+    if (searchTerm.trim().length < 3 && allQuestions.length > 0) {
+      console.log('am i running?')
       setQuestions(allQuestions.slice(0, 2));
-    } else {
+    }
+    if (searchTerm.trim().length >= 3 && allQuestions.length > 0) {
       let searchResult = allQuestions.filter((question) => {
         return question.question_body.includes(searchTerm);
       })
+      setQuestions(searchResult);
     }
   }
 
@@ -22,7 +25,7 @@ const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setT
   }
 
   useEffect(() => {
-    debouncedSearch(query);
+    debouncedSearch(query, allQuestions);
   }, [query]);
 
   return (

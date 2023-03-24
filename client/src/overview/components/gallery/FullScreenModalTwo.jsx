@@ -10,21 +10,20 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
 
   return (
     <>
-      <button
+      {/* <button
         className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
         onClick={() => setFullScreenMode(true)}
       >
         Open large modal
-      </button>
-
-
+      </button> */}
 
       {/* Actual window of modal */}
       {fullScreenMode ? (
         <>
           <div
-            id='test0' className="justify-center items-center flex max-h-none overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            id='test0'
+            className="justify-center items-center flex max-h-none overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
           >
             {/* White box*/}
             <div id='test1' className="relative max-w-none max-h-none w-[95%] h-[95%] self-center">

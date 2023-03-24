@@ -29,11 +29,16 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
   return (
     <div
       id={`${idPrefix}slide-img-${i}`}
-      className="carousel-item relative w-full h-fit grid justify-items-center items-center"
+      className={`carousel-item relative w-full h-fit grid justify-items-center items-center ${fullScreenMode ? '' : 'cursor-zoom-in'}`}
       onMouseEnter={() => setExpandStyle({display:'block'})}
       onMouseLeave={() => setExpandStyle({display:'none'})}
     >
-      <img src={photos[i].url} id={`${idPrefix}slide-img-img${i}`} className="w-4/6 self-center" />
+      <img
+        id={`${idPrefix}slide-img-img${i}`}
+        src={photos[i].url}
+        className="w-4/6 self-center"
+        onClick={() => setFullScreenMode(true)}
+      />
 
 
       <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2 ">
@@ -48,14 +53,14 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
         }
 
       </div>
-      <ExpandButton
+      {/* <ExpandButton
         expandStyle={expandStyle}
         fullScreenMode={fullScreenMode}
         setFullScreenMode={setFullScreenMode}
         idPrefix={idPrefix}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
-      />
+      /> */}
     </div>
   )
 }

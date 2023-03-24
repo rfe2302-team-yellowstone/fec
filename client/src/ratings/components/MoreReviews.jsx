@@ -10,7 +10,7 @@ const MoreReviews = ({maxReviews, setMaxReviews, reviews}) => {
   }
 
   const buttonDisabler = () => {
-    console.log(maxReviews >= reviews.length, maxReviews, reviews.length)
+    // console.log(maxReviews >= reviews.length, maxReviews, reviews.length)
     maxReviews >= reviews.length - 1 ? setButtonDisabled(true) : setButtonDisabled(false);
   }
 

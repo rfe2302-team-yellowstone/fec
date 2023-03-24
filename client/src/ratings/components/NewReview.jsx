@@ -7,7 +7,9 @@ const NewReview = ({product, reviews}) => {
 
   const [form, setForm] = useState(false)
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true)
-  const [imageUrls, setImageUrls] = useState(['http://res.cloudinary.com/dmmzqckuu/image/upload/v1667506778/mwsvroray4fie6rakkqj.jpg'])
+  const [imageURL, setImageURL] = useState('')
+  const [imageURLs, setImageURLs] = useState([])
+  const [imageLimitReached, setImageLimitReached] = useState(false)
 
   const [characteristics, setCharacteristics] = useState({
     125031: 3,  //fit
@@ -31,16 +33,17 @@ const NewReview = ({product, reviews}) => {
   const handleFormSubmit = (e) => {
     // console.log('submitted')
     e.preventDefault()
-    console.log(characteristics, '---------CHARACTERISTICS---------')
+    console.log(imageURLs, '---------IMAGEURLS---------')
     setReviewData((prevState) => ({
       ...prevState,
       characteristics: characteristics,
-      photos: imageUrls
+      // photos: imageURLs
     }))
     // axios post request (reset form fields too)
     // console.log(reviewData, '-------REVIEWDATA--------')
     axios.post('/reviews', reviewData)
     .then(() => {
+      console.log(reviewData, '-----REVIEWDATA-------')
       setForm(false)
     })
     .catch((err) =>{
@@ -50,11 +53,13 @@ const NewReview = ({product, reviews}) => {
   }
 
   const disabledButtonChecker = () => {
-    if (reviewData.name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body.length >= 50 && reviewData.body.length < 1000 && reviewData.summary.length < 60)
+    if (!new RegExp( /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/).test(reviewData.email)) {
+      setIsSubmitDisabled(true)
+    } else if (reviewData.name !== '' && reviewData.email !== '' && reviewData.rating !== 0 && reviewData.body.length >= 50 && reviewData.body.length < 1000 && reviewData.summary.length < 60)
     {
       setIsSubmitDisabled(false)
-    } else {
       // alert('Fill our all mandatory fields')
+    } else {
       setIsSubmitDisabled(true)
     }
   }
@@ -107,22 +112,21 @@ const NewReview = ({product, reviews}) => {
     }))
   }
 
-  const imagesChangeHandler = (e) => {
-    disabledButtonChecker()
-    const {name, value} = e.target
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      e.target.value += '\n'
-      setReviewData((prevState) => ({
-        ...prevState,
-        [name]: value.split('\n')
-      }))
-    } else {
-      setReviewData((prevState) => ({
-        ...prevState,
-        [name]: value.split('\n')
-      }))
+  const handleAddImageURL = e => {
+    e.preventDefault()
+    if (imageURLs.length === 4) {
+      setImageLimitReached(true)
     }
+    const newPhotos = [...reviewData.photos, imageURL]
+    setReviewData(prevState => ({...prevState, photos: newPhotos}))
+    console.log(imageURLs, imageURL)
+    setImageURL('')
+    console.log(reviewData.photos, '------THERE ARE THE PHOTOS THUS FAR-----')
+  }
+
+  const handleExit = (e) => {
+    e.preventDefault()
+    setForm(!form)
   }
 
   // const photoHandler =(e) => {
@@ -270,8 +274,18 @@ const NewReview = ({product, reviews}) => {
                   <div style={{display: 'flex', flexDirection: 'column'}} >
                   <label htmlFor="imageUrls">Add image urls below Up to 5</label>
                   <div>
-                  <textarea rows="4" minLength="50" maxLength="1000" name="photos" value={reviewData.photos} onChange={imagesChangeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Add up to 5 photo urls here!" required>
-                </textarea>
+                  <div className="input-group">
+                    <input type="text" placeholder="enter image URL" name='imageURL' className="input input-bordered w-full" onChange={e => setImageURL(e.target.value)} value={imageURL}></input>
+                    {!imageLimitReached && <button className="btn btn-square" onClick={handleAddImageURL}>Add</button>}
+                  </div>
+                  <label className="label">
+                    <span className="label-text-alt">Up to 5 images allowed.</span>
+                  </label>
+                  <div className="flex">
+                    {reviewData.photos.map(image => {
+                      return <img key={image} src={image} alt='answer image' className='w-20 border border-solid border-stone-500'></img>
+                    })}
+                  </div>
                   {/* <textarea
                   type="text"
                   onChange={imagesChangeHandler}
@@ -308,11 +322,15 @@ const NewReview = ({product, reviews}) => {
                 <button type="button" className="btn btn-active btn-primary" disabled={isSubmitDisabled} onClick={handleFormSubmit}>Submit</button>
 
               </form>
+              <div>
+          <label className="btn btn-sm btn-circle absolute right-2 top-2 z-10" onClick={handleExit}>X</label>
+        </div>
               </div>
             </div>
           </div>
         </div>
       )}
+
     </div>
   )
 }

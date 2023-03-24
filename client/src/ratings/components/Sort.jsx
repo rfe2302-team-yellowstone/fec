@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 
 const Sort = ({reviews, setReviews, order, setOrder}) => {
 
-
-
   const [menu, setMenu] = useState(false)
   const [sortBy, setSortBy] = useState('Relevance')
 

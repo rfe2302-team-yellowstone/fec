@@ -1,7 +1,35 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, {useState} from "react";
+import axios from "axios";
 
 const ReviewTile = ({review}) => {
+
+  const [helpfulCount, setHelpfulCount] = useState(review.helpfulness)
+  const [showFullReview, setShowFullReview] = useState(false)
+
+  const handleShowMore = () => {
+    setShowFullReview(true)
+  }
+
+  const handleHelpfulClick = e => {
+    axios.put(`http://localhost:3000/reviews/${review.review_id}/helpful`)
+      .then(() => {
+        setHelpfulCount(helpfulCount + 1);
+      })
+      .catch(err => {
+        console.log('unable to mark Answer as helpful, error:', err);
+      })
+  }
+
+  const handleReportClick = e => {
+    axios.put(`http://localhost:3000/reviews/${review.review_id}/report`)
+    .then(() => {
+      console.log('Successfully reported review')
+    })
+      .catch(err => {
+        console.log('unable to report answer, error:', err);
+      })
+  }
+
 
   return (
     <div>
@@ -19,8 +47,20 @@ const ReviewTile = ({review}) => {
             <p className="text-xs text-gray-500 ml-1">{review.reviewer_name} {review.date.split('T')[0]}</p>
           </div>
         </div>
-      <div className="w-16 h-16 mt-1">
-      <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img>
+      <div className="flex flex-row space-x-4 w-16 h-16 mt-1">
+      {review.photos.length === 0 ? (
+        <img src= 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg' alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img>
+      ) : (
+        review.photos.map(photo => (
+          <img
+          key={photo.id}
+          src={photo.url}
+          className="w-full h-full object-cover rounded-full"
+          style={{maxWidth:'200px', maxHeight:'200px'}}
+          ></img>
+        ))
+      )}
+      {/* <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img> */}
       </div>
       <div>
       <div className = "relative top-0 left-0 flex items-center w-4 h-4">
@@ -44,14 +84,25 @@ const ReviewTile = ({review}) => {
       <div>
         <span className="mt-1 text-gray-600 text-xs">{review.rating} out of 5 stars</span>
         <h3 className="mt-4 text-black-800">{review.summary}</h3>
-        <p className="mt-4 text-sm text-gray-600">{review.body}</p>
-        </div>
-      </div>
-      <div className="relative">
-          <div className="absolute bottom-0 left-5">
-            <p className="text-xs text-gray-500">helpful? Yes({review.helpfulness}) Report</p>
+        <p className="mt-4 mb-8 text-sm text-gray-600">
+         {showFullReview ? review.body : review.body.substring(0, 250)}
+         {review.body.length > 250 && !showFullReview && (
+          <button className='btn btn-sm btn-active btn-ghost' onClick={handleShowMore}>
+          Show More...
+          </button>
+         )}
+        </p>
+        <div className="relative mt-4" >
+          <div className="mt-4 absolute bottom-0 left-5">
+          <span>Helpful?</span>
+          <button className='btn btn-xs btn-ghost' onClick={handleHelpfulClick}>Yes</button>{helpfulCount}
+          <button className='btn btn-xs btn-ghost' onClick={handleReportClick}>Report</button>
+
           </div>
         </div>
+        </div>
+      </div>
+
     </div>
   )
 }

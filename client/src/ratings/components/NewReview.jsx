@@ -24,16 +24,8 @@ const NewReview = ({product, reviews}) => {
     recommend: false,
     name: '',
     email: '',
-    photos: imageUrls,
+    photos: [],
     characteristics: characteristics
-  })
-
-  const [formErrors, setFormErrors] = useState({
-    rating: false,
-    recommend: false,
-    body: false,
-    reviewer_name: false,
-    email: false
   })
 
   const handleFormSubmit = (e) => {
@@ -74,9 +66,24 @@ const NewReview = ({product, reviews}) => {
       ...prevState,
       [name]: value,
     }))
-    if (formErrors.name) {
-      setFormErrors({[name]: true})
-    }
+  }
+
+  const ratingHandler = (e) => {
+    disabledButtonChecker()
+    const value = e.target.value
+    setReviewData((prevState) => ({
+      ...prevState,
+      rating: Number(value)
+    }))
+  }
+
+  const recommendChangeHandler = (e) => {
+    disabledButtonChecker()
+    const value = e.target.value
+    setReviewData((prevState) => ({
+      ...prevState,
+      recommend: Boolean(value)
+    }))
   }
 
   const characteristicsChangeHandler = (e) => {
@@ -99,18 +106,29 @@ const NewReview = ({product, reviews}) => {
       }
     }))
   }
+
   const imagesChangeHandler = (e) => {
-    e.preventDefault()
-    const selectedUrls = e.target.value.split('\n')
-    setImageUrls(selectedUrls)
+    disabledButtonChecker()
+    const {name, value} = e.target
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      e.target.value += '\n'
+      setReviewData((prevState) => ({
+        ...prevState,
+        [name]: value.split('\n')
+      }))
+    } else {
+      setReviewData((prevState) => ({
+        ...prevState,
+        [name]: value.split('\n')
+      }))
+    }
   }
 
-  const photoHandler =(e) => {
-    const photoFiles = Array.from(e.target.files).slice(0, 5);
-    setReviewData(photoFiles)
-  }
-
-
+  // const photoHandler =(e) => {
+  //   const photoFiles = Array.from(e.target.files).slice(0, 5);
+  //   setReviewData(photoFiles)
+  // }
 
   return (
     <div>
@@ -127,16 +145,11 @@ const NewReview = ({product, reviews}) => {
               <h2 className="text-lg leading-6 font-medium text-green-900">Leave a review</h2>
               <form onSubmit={handleFormSubmit}>
                 <label>
-                  {/* Overall Rating:
-                  <input type="number" min="1" max="5" name="rating" value={Number(reviewData.rating)} onChange={changeHandler} required></input>
-                </label>
-                <label> */}
-
                 <div>
                     <label className="block font-medium text-gray-700 mb-2">
                     Overall Rating
                     </label>
-                    <input type="range" min="1" max="5" step="1" name="rating" value={reviewData.rating} onChange={changeHandler} className="w-full">
+                    <input type="range" min="1" max="5" step="1" name="rating" value={reviewData.rating} onChange={ratingHandler} className="w-full">
                     </input>
                     <div className="flex justify-between text-sm text-gray-600">
                     <span>Terrible</span>
@@ -145,7 +158,7 @@ const NewReview = ({product, reviews}) => {
                     </div>
                     </div>
                 Recommend:
-                <select name="recommend" value={Boolean(reviewData.recommend)} onChange={changeHandler} required>
+                <select name="recommend" value={Boolean(reviewData.recommend)} onChange={recommendChangeHandler} required>
                   <option value="">Select an option</option>
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -236,11 +249,8 @@ const NewReview = ({product, reviews}) => {
                 </textarea>
                 </label>
                 <label className="block font font-medium text-gray-700 mb-2">
-                  Review Body
+                  Review Body (between 50 and 100 characters required)
                 </label>
-                <p className="text-gray-600 mb-4">
-                  Please enter a detailed description here that is between 50 and 1000 characters
-                </p>
                 <p className="text-red-600 mb-4 text-xs">{reviewData.body.length} characters</p>
                 <textarea rows="4" minLength="50" maxLength="1000" name="body" value={reviewData.body} onChange={changeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Enter your review here!" required>
                 </textarea>
@@ -251,29 +261,52 @@ const NewReview = ({product, reviews}) => {
                 onChange={photoHandler}
                 className="mt-4 mb-4"
                 ></input> */}
-                <div className="flex flex-wrap -mx-2">
+                {/* <div className="flex flex-wrap -mx-2"> */}
                   {/* {reviewData.photos.map((photo, index) => (
                     <div key={index} className="w-1/5 px-2 mb-4">
                     <img src={URL.createObjectURL(photo)} alt={`Photo ${index + 1}`} className="w-full h-auto rounded-lg"></img>
                     </div>
                   ))} */}
-                  <label htmlFor="imageUrls">Add image urls below</label>
-                  <textarea
+                  <div style={{display: 'flex', flexDirection: 'column'}} >
+                  <label htmlFor="imageUrls">Add image urls below Up to 5</label>
+                  <div>
+                  <textarea rows="4" minLength="50" maxLength="1000" name="photos" value={reviewData.photos} onChange={imagesChangeHandler} className="w-full border border-gray-400 rounded lg py-2 px-3 mb-4" placeholder="Add up to 5 photo urls here!" required>
+                </textarea>
+                  {/* <textarea
+                  type="text"
+                  onChange={imagesChangeHandler}
                   name="photos"
                   value={reviewData.photos}
                   rows="5"
+                  style={{width: '100%'}}
+                  placeholder="Post your photos here! Start a new line for each photo"
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      setReviewData({
+                        ...reviewData,
+                        photos: reviewData.photos + '\n'
+                      })
+                    }
+                  }}
                   >
-                  </textarea>
-                </div>
+                  </textarea> */}
+                  </div>
+                  </div>
+                {/* </div> */}
                 <label className="block font-medium text-gray-700 mb-2">
-                  Username
+                  What is your username?
                 </label>
-                <input type="text" name="name" value={reviewData.name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
+                <p className="text-red-600 mb-4 text-xs">required</p>
+                <input type="text" name="name" value={reviewData.name} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="jackson11" required></input>
                 <label className="block font-medium text-gray-700 mb-2">
                   email
                 </label>
-                <input type="email" name="email" value={reviewData.email} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="username" required></input>
+                <p className="text-red-600 mb-4 text-xs">required</p>
+                <input type="email" name="email" value={reviewData.email} onChange={changeHandler} className="w-full border border-gray-400 rounded-lg py-2 px-3 mb-4" placeholder="jackson11@gmail.com" required></input>
+                <p className="text-red-600 mb-4 text-xs">For authentication reasons, you will not be emailed</p>
                 <button type="button" className="btn btn-active btn-primary" disabled={isSubmitDisabled} onClick={handleFormSubmit}>Submit</button>
+
               </form>
               </div>
             </div>

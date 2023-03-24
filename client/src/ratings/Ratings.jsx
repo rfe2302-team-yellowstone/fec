@@ -37,15 +37,8 @@ useEffect(() => {
 }, [])
 
 // useEffect(() => {
-//   console.log(metaData)
-//   console.log(metaData.ratings)
-//   console.log(typeof metaData.ratings)
-//   for (let key in metaData.ratings) {
-//     console.log(key, metaData.ratings[key])
-//   }
-// }, [metaData])
-
-  // console.log(products)
+//   console.log(reviews)
+// }, [reviews])
 
   const relevanceSorter = () => {
     const weightFactor = 0.05

@@ -1,18 +1,40 @@
 import React from 'react'
 import IconCarouselItem from './IconCarouselItem.jsx'
 
-export default function IconCarousel ({currentStyle}) {
+export default function IconCarousel ({currentStyle, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
 
+  const handleIconClick = (event) => {
+
+    event.preventDefault();
+
+    // Get the index of the clicked image
+    const iconID = event.target.id;
+    // const nextImageID = iconID.replace('icon', 'img') // find related full size image
+    const nextIndex = +iconID[iconID.length-1]
+
+    console.log('next index', nextIndex)
+
+    changeImage(nextIndex, idPrefix)
+
+  }
 
   return (
 
     (Object.keys(currentStyle).length > 0) &&
 
-    <div className="carousel carousel-center space-x-0.5 bg-transparent rounded-box border">
+    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box">
       {
         currentStyle.photos.map((photo, i) => {
           return (
-            <IconCarouselItem key={i} i={i} photos={currentStyle.photos}/>
+            <IconCarouselItem
+              key={i}
+              i={i}
+              photos={currentStyle.photos}
+              handleIconClick={handleIconClick}
+              idPrefix={idPrefix}
+
+              />
+
           )
         })
       }

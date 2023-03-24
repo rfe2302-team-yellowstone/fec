@@ -2,11 +2,12 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import ImageViewer from './ImageViewer.jsx'
 import IconCarousel from './IconCarousel.jsx'
-import FullScreenModal from './FullScreenModal.jsx'
+// import FullScreenModal from './FullScreenModal.jsx'
+import FullScreenModalTwo from './FullScreenModalTwo.jsx'
 
-export default function Gallery ({currentStyle}) {
+export default function Gallery ({currentStyle, fullScreenMode, setFullScreenMode}) {
 
-  const [fullScreenMode, setFullScreenMode] = useState(false)
+
   const [currentIndex, setCurrentIndex] = useState(0) // index position of image currently showing
   const [currentFSIndex, setCurrentFSIndex] = useState(0) // index position for Full Screen mode
 
@@ -63,7 +64,7 @@ export default function Gallery ({currentStyle}) {
   return (
     <div className='w-full xl:w-1/2 grid justify-items-center items-center'>
 
-      <FullScreenModal
+      {/* <FullScreenModalTwo
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
         setFullScreenMode={setFullScreenMode}
@@ -73,7 +74,7 @@ export default function Gallery ({currentStyle}) {
         setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
         idPrefix={'fs-'}
-      />
+      /> */}
 
 
       <ImageViewer

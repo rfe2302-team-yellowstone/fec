@@ -6,6 +6,8 @@ import Announcements from './components/announcements/Announcements.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
 import ProductDetails from './components/productDetails/ProductDetails.jsx'
+//import FullScreenModal from './components/gallery/FullScreenModal.jsx';
+import FullScreenModalTwo from './components/gallery/FullScreenModalTwo.jsx';
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
@@ -16,6 +18,7 @@ export default function Overview({product, handleSearch}) {
   const [styles, setStyles] = useState([])
   const [currentStyle, setCurrentStyle] = useState({})
   const [sizes, setSizes] = useState({})
+  const [fullScreenMode, setFullScreenMode] = useState(false)
 
   // Get initial Styles (and size) information
   useEffect(() => {
@@ -77,8 +80,19 @@ export default function Overview({product, handleSearch}) {
     <div id="overview">
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
+      <FullScreenModalTwo
+        currentStyle={currentStyle}
+        fullScreenMode={fullScreenMode}
+        setFullScreenMode={setFullScreenMode}
+        // currentFSIndex={currentFSIndex}
+        // setCurrentFSIndex={setCurrentFSIndex}
+        // currentIndex={currentIndex}
+        // setCurrentIndex={setCurrentIndex}
+        // changeImage={changeImage}
+        idPrefix={'fs-'}
+      />
       <div className="flex ">
-        <Gallery currentStyle={currentStyle}/>
+        <Gallery currentStyle={currentStyle} fullScreenMode={fullScreenMode} setFullScreenMode={setFullScreenMode}/>
         <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes} setCurrentStyle={setCurrentStyle}/>
       </div>
       <ProductDetails product={product} />

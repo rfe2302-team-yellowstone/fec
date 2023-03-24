@@ -37,8 +37,8 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
-  console.log(reviews)
-}, [reviews])
+  console.log(metaData)
+}, [metaData])
 
   const relevanceSorter = () => {
     const weightFactor = 0.05

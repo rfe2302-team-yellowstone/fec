@@ -47,8 +47,20 @@ const ReviewTile = ({review}) => {
             <p className="text-xs text-gray-500 ml-1">{review.reviewer_name} {review.date.split('T')[0]}</p>
           </div>
         </div>
-      <div className="w-16 h-16 mt-1">
-      <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img>
+      <div className="flex flex-row space-x-4 w-16 h-16 mt-1">
+      {review.photos.length === 0 ? (
+        <img src= 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg' alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img>
+      ) : (
+        review.photos.map(photo => (
+          <img
+          key={photo.id}
+          src={photo.url}
+          className="w-full h-full object-cover rounded-full"
+          style={{maxWidth:'200px', maxHeight:'200px'}}
+          ></img>
+        ))
+      )}
+      {/* <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img> */}
       </div>
       <div>
       <div className = "relative top-0 left-0 flex items-center w-4 h-4">
@@ -75,7 +87,7 @@ const ReviewTile = ({review}) => {
         <p className="mt-4 mb-8 text-sm text-gray-600">
          {showFullReview ? review.body : review.body.substring(0, 250)}
          {review.body.length > 250 && !showFullReview && (
-          <button className='btn btn-sm btn-active btn-accent' onClick={handleShowMore}>
+          <button className='btn btn-sm btn-active btn-ghost' onClick={handleShowMore}>
           Show More...
           </button>
          )}

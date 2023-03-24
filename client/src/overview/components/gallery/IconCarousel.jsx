@@ -1,7 +1,7 @@
 import React from 'react'
 import IconCarouselItem from './IconCarouselItem.jsx'
 
-export default function IconCarousel ({currentStyle, currentIndex, setCurrentIndex, changeImage}) {
+export default function IconCarousel ({currentStyle, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
 
   const handleIconClick = (event) => {
 
@@ -9,10 +9,12 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
 
     // Get the index of the clicked image
     const iconID = event.target.id;
-    const nextImageID = iconID.replace('icon', 'img') // find related full size image
+    // const nextImageID = iconID.replace('icon', 'img') // find related full size image
     const nextIndex = +iconID[iconID.length-1]
 
-    changeImage(nextIndex)
+    console.log('next index', nextIndex)
+
+    changeImage(nextIndex, idPrefix)
 
   }
 
@@ -24,7 +26,15 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
       {
         currentStyle.photos.map((photo, i) => {
           return (
-            <IconCarouselItem key={i} i={i} photos={currentStyle.photos} handleIconClick={handleIconClick}/>
+            <IconCarouselItem
+              key={i}
+              i={i}
+              photos={currentStyle.photos}
+              handleIconClick={handleIconClick}
+              idPrefix={idPrefix}
+
+              />
+
           )
         })
       }

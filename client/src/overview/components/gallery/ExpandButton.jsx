@@ -1,19 +1,28 @@
 import React from 'react'
 
-export default function ExpandButton ({expandStyle, fullScreenMode, setFullScreenMode}) {
+export default function ExpandButton ({expandStyle, fullScreenMode, setFullScreenMode, idPrefix, currentIndex, setCurrentIndex}) {
 
 
   const handleClick = (event) => {
     console.log('expand click!')
+
     event.preventDefault()
-    setFullScreenMode(!fullScreenMode)
+    let parentNode = event.target.parentNode.parentNode
+
+    const imageID = parentNode.getAttribute('id');
+    const index = imageID[imageID.length - 1]
+    console.log('index from expand click: ',index)
+
+    // setFullScreenMode(!fullScreenMode)
+    setCurrentIndex(index, idPrefix)
     return true;
   }
   return (
     // <label for="my-modal-4" class="btn modal-button">
     //   open modal
     // </label>
-    <label htmlFor="full-screen-modal" className='absolute top-0 right-0 btn-circle modal-button cursor-pointer' style={expandStyle}>
+    <label htmlFor="full-screen-modal" className='absolute top-0 right-0 btn-circle modal-button cursor-pointer' id={`${idPrefix}expand-button`} style={expandStyle}>
+
 
       {!fullScreenMode && <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 9L21 3M21 3H15M21 3V9M9 9L3 3M3 3L3 9M3 3L9 3M9 15L3 21M3 21H9M3 21L3 15M15 15L21 21M21 21V15M21 21H15" />

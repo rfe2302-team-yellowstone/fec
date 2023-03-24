@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ImageViewer from './ImageViewer.jsx'
 import IconCarousel from './IconCarousel.jsx'
 import FullScreenModal from './FullScreenModal.jsx'
@@ -8,12 +8,21 @@ export default function Gallery ({currentStyle}) {
 
   const [fullScreenMode, setFullScreenMode] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0) // index position of image currently showing
+  const [currentFSIndex, setCurrentFSIndex] = useState(0) // index position for Full Screen mode
+
+  const prefix='n-'
 
   // Given an index position, calculate image to show in carousel
-  const changeImage = (index) => {
+  const changeImage = (index, prefix) => {
+
+    prefix = prefix || ''
+
+    console.log('change image: ', index)
 
     // Set the ID of the clicked image
-    const imageID = `slide-img-${index}`
+    const imageID = `${prefix}slide-img-${index}`
+
+    console.log(imageID)
 
     // Just return if same image
     if(index === currentIndex) {
@@ -22,7 +31,7 @@ export default function Gallery ({currentStyle}) {
 
     // Get elements from DOM
     const imageElement = document.getElementById(imageID);
-    const containerElement = document.getElementById("image-viewer-carousel");
+    const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
 
     // Get the position of the clicked image relative to the viewport
     const containerRect = containerElement.getBoundingClientRect();
@@ -45,14 +54,32 @@ export default function Gallery ({currentStyle}) {
     containerElement.scrollLeft = scrollLeft;
 
     // Finally set the new index
-    setCurrentIndex(index)
+    if (prefix === 'fs-') {
+      console.log('----setting fullscreen index')
+      setCurrentFSIndex(index)
+    } else {
+      console.log('----setting regular index')
+      setCurrentIndex(index)
+
+    }
+
   }
 
 
   return (
     <div className='w-full xl:w-1/2 grid justify-items-center items-center'>
 
-      {/* <FullScreenModal currentStyle={currentStyle} fullScreenMode={fullScreenMode} setFullScreenMode={setFullScreenMode}/> */}
+      <FullScreenModal
+        currentStyle={currentStyle}
+        fullScreenMode={fullScreenMode}
+        setFullScreenMode={setFullScreenMode}
+        currentIndex={currentFSIndex}
+        setCurrentIndex={setCurrentFSIndex}
+        changeImage={changeImage}
+        idPrefix={'fs-'}
+      />
+
+
       <ImageViewer
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
@@ -60,6 +87,8 @@ export default function Gallery ({currentStyle}) {
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
+        idPrefix={'n-'}
+
       />
 
       <IconCarousel
@@ -67,6 +96,7 @@ export default function Gallery ({currentStyle}) {
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
+        idPrefix={'n-'}
       />
     </div>
   )

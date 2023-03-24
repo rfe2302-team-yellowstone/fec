@@ -1,12 +1,12 @@
 import React from 'react'
-export default function IconCarouselItem ({photos, i, handleIconClick}) {
+export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix}) {
 
   return (
 
 
-      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`slide-icon-a${i}`} className="carousel-item h-max-s">
+      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className="carousel-item h-max-s">
         {/* <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" className="rounded-box" /> */}
-        <img src={photos[i].thumbnail_url} className="h-16" id={`slide-icon-${i}`}/>
+        <img src={photos[i].thumbnail_url} className="h-16" id={`${idPrefix}slide-icon-${i}`}/>
 
       </a>
 

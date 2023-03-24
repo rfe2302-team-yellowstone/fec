@@ -12,17 +12,16 @@ export default function Gallery ({currentStyle}) {
 
   const prefix='n-'
 
-  // Given an index position, calculate image to show in carousel
+   // Given an index position, calculate image to show in carousel
   const changeImage = (index, prefix) => {
 
     prefix = prefix || ''
 
-    console.log('change image: ', index)
+    console.log('current regular index: ', currentIndex)
+    console.log('current fs index: ', currentFSIndex)
 
     // Set the ID of the clicked image
     const imageID = `${prefix}slide-img-${index}`
-
-    console.log(imageID)
 
     // Just return if same image
     if(index === currentIndex) {
@@ -44,21 +43,16 @@ export default function Gallery ({currentStyle}) {
     //  - Current container's x position + (width of image div  *  nextIndex)
     let scrollLeft = containerRect.x + width * index
 
-    console.log('scrollLeft', scrollLeft)
-    console.log('container', containerRect.x)
-    console.log('width', width)
-    console.log('index', index)
-
     // Scroll the div to the clicked image position
     // - scrollLeft is the x-axis of the carousel
     containerElement.scrollLeft = scrollLeft;
 
     // Finally set the new index
     if (prefix === 'fs-') {
-      console.log('----setting fullscreen index')
+      console.log('----setting fullscreen index', index)
       setCurrentFSIndex(index)
     } else {
-      console.log('----setting regular index')
+      console.log('----setting regular and fs index', index)
       setCurrentIndex(index)
 
     }
@@ -73,8 +67,10 @@ export default function Gallery ({currentStyle}) {
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
         setFullScreenMode={setFullScreenMode}
-        currentIndex={currentFSIndex}
-        setCurrentIndex={setCurrentFSIndex}
+        currentFSIndex={currentFSIndex}
+        setCurrentFSIndex={setCurrentFSIndex}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
         idPrefix={'fs-'}
       />

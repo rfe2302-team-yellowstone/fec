@@ -1,8 +1,10 @@
 import React from 'react'
+import { useEffect } from 'react'
 import ImageViewer from './ImageViewer.jsx'
 
 
-export default function FullScreenModal ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
+export default function FullScreenModal ({currentStyle, fullScreenMode, setFullScreenMode, currentFSIndex, setCurrentFSIndex, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
+
 
 
   return (

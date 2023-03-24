@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 export default function QAndA ({product}) {
   const [questions, setQuestions] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
+  const [tempQuestions, setTempQuestions] = useState([]);
   const clicks = useSelector(state => state.clickTracker)
   const dispatch = useDispatch();
   // console.log('initial product:', product);
@@ -31,7 +32,7 @@ export default function QAndA ({product}) {
 
   return (
     <section className='flex flex-col items-center my-4'>
-      <QAndAHeader />
+      <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions} tempQuestions={tempQuestions} setTempQuestions={setTempQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>
       {/* <div>

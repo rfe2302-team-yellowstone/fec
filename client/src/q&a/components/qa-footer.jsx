@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import QuestionFormModal from './question-form-modal.jsx';
 
 const QAndAFooter = ({productId, productName, allQuestions, setQuestions, questions}) => {
-  console.log('all questions length:', allQuestions.length);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddAQuestionClick = e => {

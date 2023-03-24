@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 import ImageViewer from './ImageViewer.jsx'
 
 
-export default function FullScreenModal ({currentStyle, fullScreenMode, setFullScreenMode, currentFSIndex, setCurrentFSIndex, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
+export default function FullScreenModalTwo ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
 
 
   //const [showModal, setShowModal] = React.useState(false);
+  // useEffect(() => {
+  //   setTimeout(()=> changeImage(currentIndex, 'fs-'),10)
+  // }, [fullScreenMode])
 
   return (
     <>

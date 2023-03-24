@@ -36,7 +36,7 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
         })}
       </div>
       <div>
-        <span>by {answer.answerer_name}, DatePlaceHolder | Helpful? </span>
+        <span>by {answer.answerer_name}, {answer.date.slice(0, 10)} | Helpful? </span>
         <button className='btn btn-xs btn-ghost' onClick={handleHelpfulClick}>Yes</button>
         <span>({helpfulCount}) | </span>
         <button className='btn btn-xs btn-ghost' onClick={handleReportClick}>Report</button>

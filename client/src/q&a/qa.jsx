@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 export default function QAndA ({product}) {
   const [questions, setQuestions] = useState([]);
+  const [allQuestions, setAllQuestions] = useState([]);
   const clicks = useSelector(state => state.clickTracker)
   const dispatch = useDispatch();
   // console.log('initial product:', product);
@@ -18,20 +19,21 @@ export default function QAndA ({product}) {
     axios.get('http://localhost:3000/qa/questions', {
       params: {
         'product_id': product.id,
-        'count': 4
+        'count': 1000
       }
     })
       .then(response => {
         // console.log('successfully retrieved questions from Atelier Questions API:', response.data.results)
-        setQuestions(response.data.results)
+        setQuestions(response.data.results.slice(0, 2));
+        setAllQuestions(response.data.results);
       })
   }, []);
 
   return (
     <section className='flex flex-col items-center my-4'>
-      <QAndAHeader />
+      <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
-      <QAndAFooter productId={product.id} productName={product.name}/>
+      <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>
       {/* <div>
         <button
           aria-label="Increment value"

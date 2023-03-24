@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default function QuestionsList ({questions, productName}) {
 
   return (
-    <ul className='my-2'>
+    <ul className='my-2 h-96 overflow-y-auto'>
       {questions.map(question => {
         return <Question key={question.question_id} question={question} productName={productName}/>
       })}

@@ -49,10 +49,11 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
       // onMouseEnter={() => setExpandStyle({display:'block'})}
       // onMouseLeave={() => setExpandStyle({display:'none'})}
     >
+      {/* Actual image */}
       <img
         id={`${idPrefix}slide-img-img${i}`}
         src={photos[i].url}
-        className="w-4/6 self-center"
+        className="w-4/6 self-center rounded-box"
         onClick={handleImageClick}
       />
 

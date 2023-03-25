@@ -6,8 +6,8 @@ export default function QuantitySelector ({sizes, currentSize, handleQuantityCha
 
   return (
 
-    <div className="dropdown dropdown-bottom flex-none">
-      <p></p>
+    <div id='overview-quantity-selector' className="dropdown dropdown-bottom flex flex-col items-center">
+      <p>Quantity</p>
       <label tabIndex={0} className="btn m-1 w-36">
         {currentQuantity}
 

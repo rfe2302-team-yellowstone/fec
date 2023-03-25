@@ -22,7 +22,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
 
     (Object.keys(currentStyle).length > 0) &&
 
-    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box">
+    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box mt-4">
       {
         currentStyle.photos.map((photo, i) => {
           return (

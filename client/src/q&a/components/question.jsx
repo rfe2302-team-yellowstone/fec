@@ -51,22 +51,25 @@ export default function Question ({question, productName}) {
 
   return (
     <li className='w-[60rem] border p-2 border-gray-200 rounded-lg shadow-sm'>
-      <div className='flex'>
-        <span className='text-lg'>Q: {question.question_body}</span>
+      <div className='flex mb-2'>
+        <span className='w-8/12'>
+          <span className='text-xl font-bold'>Q: </span>
+          <span className='text-lg ml-4'>{question.question_body}</span>
+        </span>
         <span className='ml-auto'>
           <span>Helpful? </span>
           <button className='btn btn-xs btn-ghost underline' onClick={handleHelpfulClick}>Yes</button>
           <span>({helpfulCount}) | </span>
-          <button className='btn btn-xs btn-ghost' onClick={handleAddAnswerClick}>Add Answer</button>
+          <button className='btn btn-xs btn-ghost underline' onClick={handleAddAnswerClick}>Add Answer</button>
         </span>
       </div>
       <div className='flex'>
-        <span className='text-lg'>A: </span>
+        <span className='text-xl font-bold'>A: </span>
         <AnswersList answers={answers}/>
       </div>
       {allAnswers.length === answers.length
         ? <button className='btn btn-xs btn-ghost btn-disabled'>NO MORE ANSWERS</button>
-        : <button className='btn btn-xs btn-ghost' onClick={handleLoadMoreAnswersClick}>LOAD MORE ANSWERS</button>
+        : <button className='btn btn-xs btn-ghost ml-9' onClick={handleLoadMoreAnswersClick}>LOAD MORE ANSWERS</button>
       }
       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
     </li>

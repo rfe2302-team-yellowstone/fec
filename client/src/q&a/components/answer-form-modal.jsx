@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useForm from '../hooks/useForm.js';
+import UploadWidget from './upload-widget.jsx';
 
 export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, productName, questionBody, questionId}) {
 
@@ -25,7 +26,6 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
     setImageURL('');
   }
   const postValues = e => { // custom callback to run after form validates on submit
-
     axios.post(`http://localhost:3000/qa/questions/${questionId}/answers`, {
       question_id: questionId,
       body: values.answerBody,
@@ -147,7 +147,7 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
               }
             </label>
           </div>
-          <div className="form-control w-full">
+          {/* <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Your image URLs</span>
             </label>
@@ -163,8 +163,17 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
                 return <img key={image} src={image} alt='answer image' className='w-20 border border-solid border-stone-500'/>
               })}
             </div>
-          </div>
-
+          </div> */}
+          <UploadWidget imageURLs={imageURLs} setImageURLs={setImageURLs}/>
+          {/* <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text">Cloudinary Upload</span>
+            </label>
+            <input type="file" className="file-input file-input-bordered w-full" onChange={handleAddImage} multiple/>
+            <label className="label">
+              <span className="label-text-alt">Error label</span>
+            </label>
+          </div> */}
           <input type='submit' value='Submit Question' className='btn btn-primary mt-4'/>
         </form>
         <div className="modal-action">

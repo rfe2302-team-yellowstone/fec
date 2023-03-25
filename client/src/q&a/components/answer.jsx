@@ -29,17 +29,18 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
 
   return (
     <li className='mb-2 border border-gray-200 rounded-lg shadow-sm p-2'>
-      <div className='mb-2'>{answer.body}</div>
-      <div className='mb-2'>
+      <div className='mb-2 text-gray-600'>{answer.body}</div>
+      <div className='mb-2 flex'>
         {answer.photos.map(photo => {
-          return <img onClick={handleImageClick} key={photo.url} src={photo.url} alt='answer image' className='w-20 border border-solid border-stone-500'/>
+          return <img onClick={handleImageClick} key={photo.url} src={photo.url} alt='answer image' className='w-12 h-10 border border-solid border-stone-500'/>
         })}
       </div>
       <div>
-        <span>by {answer.answerer_name}, {answer.date.slice(0, 10)} | Helpful? </span>
-        <button className='btn btn-xs btn-ghost' onClick={handleHelpfulClick}>Yes</button>
+        <span className='text-sm'>by {answer.answerer_name}, {answer.date.slice(0, 10)}</span>
+        <span> | Helpful? </span>
+        <button className='btn btn-xs btn-ghost -m-2 mr-0.5 underline' onClick={handleHelpfulClick}>Yes</button>
         <span>({helpfulCount}) | </span>
-        <button className='btn btn-xs btn-ghost' onClick={handleReportClick}>Report</button>
+        <button className='btn btn-xs btn-ghost underline' onClick={handleReportClick}>Report</button>
       </div>
     </li>
   )

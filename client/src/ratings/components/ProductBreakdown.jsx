@@ -23,7 +23,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
       const percentage = (metaData.characteristics[key].value) / 5 * 100
       newCharacteristicRatings[key] = percentage
       newRightEMval[key] = (-18.5 + (percentage * .17)).toString() + 'em'
-      console.log(newCharacteristicRatings)
+      // console.log(newCharacteristicRatings)
     }
 
     setCharacteristics(newCharacteristics)
@@ -63,7 +63,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
     const triangleWidth = 10 //px
     const totalBarWidth = 200 // px
     const position = percentage * (totalBarWidth - triangleWidth) / 100
-    console.log(position)
+    // console.log(position)
     const trianglePosition = position - 4.5
     return (
       <div className="flex flex-col items-center">
@@ -102,7 +102,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
           </div>
         ) : (
           <div>
-            {console.log(Object.entries(characteristics))}
+            {/* {console.log(Object.entries(characteristics))} */}
             {characteristicsEntries.map(renderCharacteristicComponent)}
           </div>
         )}

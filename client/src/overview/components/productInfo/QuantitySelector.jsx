@@ -8,14 +8,14 @@ export default function QuantitySelector ({sizes, currentSize, handleQuantityCha
 
     <div id='overview-quantity-selector' className="dropdown dropdown-bottom flex flex-col items-center ">
       <p>Quantity</p>
-      <label tabIndex={0} className="btn m-1 w-36 ">
+      <label tabIndex={0} className="btn m-1 w-36">
         {currentQuantity}
 
-        <ul name="size" tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto h-48">
+        <ul name="size" tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-hidden h-48">
         {
           // Create a quick range from 0 to the max
           [...Array(quantityMax).keys()].map((i) => {
-            return (<li key={i} onClick={handleQuantityChange} className="text-slate-800"><a>{i + 1}</a></li>)
+            return (<li key={i} onClick={handleQuantityChange} className="text-slate-800 flex-none"><a>{i + 1}</a></li>)
           })
         }
       </ul>

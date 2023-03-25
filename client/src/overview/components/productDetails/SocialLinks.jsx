@@ -22,13 +22,15 @@ export default function SocialLinks () {
       </div>
 
       <div id='pinterest-inline-button' className="btn btn-circle p-2">
-        <a href="https://pinterest.com/" >
+        <a href="https://pinterest.com/" title='Share on Pinterest'>
           <img src={PinterestLogo} ></img>
         </a>
       </div>
 
       <div id='share-inline-button' className="btn btn-circle p-2">
-        <img src={ShareLogo} ></img>
+        <a title='Copy Link'>
+          <img src={ShareLogo} ></img>
+        </a>
       </div>
     </div>
 

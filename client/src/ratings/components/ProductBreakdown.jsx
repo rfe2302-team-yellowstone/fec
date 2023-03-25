@@ -40,17 +40,18 @@ const ProductBreakdown = ({ reviews, metaData }) => {
     return `${position}%`
   }
 
-  const renderCharacteristicComponent = ([title, value]) => {
-    return (
-      <div key={value}>
-        <div className="font-bold mb-2">{title}</div>
-        {getProductBreakdownBar(title)}
-      </div>
-    );
-  };
+ const renderCharacteristicComponent = ([title, value]) => {
+  return (
+    <div className="mb-6" key="value">
+      <div className="font-bold mb-2">{title}</div>
+      {getProductBreakdownBar(title, value)}
+    </div>
+  )
+ }
 
 
   const getProductBreakdownBar = (title, value) => {
+    console.log(title, value, '-------GETPRODUCTBREAKDOWNBAR------')
     let firstChar, secondChar, thirdChar;
     if (title === 'Size') {
       firstChar = 'A size too small'
@@ -78,26 +79,26 @@ const ProductBreakdown = ({ reviews, metaData }) => {
       thirdChar = 'Runs Long'
     }
 
-    const percentage = (parseFloat(value) / 5) * 100;
-    const triangleWidth = 10; // in pixels
-    const totalBarWidth = 200; // in pixels
-    const position = percentage * (totalBarWidth - triangleWidth) / 100;
-    const secondCharacteristicPercentage =50
+    const percentage = (parseFloat(value) / 5) * 100
+    const barWidth = 40
+    const triangleSize = 4
     return (
-      <div key={title}>
-        <p>{title}</p>
-        <div id="metadata-bar">
-          <span id="triangle" style={{ left: `${position}%` }}>▲</span>
-          <div className="metadata-bar-individual border">
-            <div className="metadata-bar-individual" style={{ height: "2em", width: `${percentage}%` }} />
-          </div>
+      <div className="relative">
+        <div className="h-2 w-full bg-gray-300 rounded-full">
+          <div className="h-full bg-green-500 prounded-full" style={{width: `${percentage}`}}></div>
         </div>
-        <div id="first-characteristic">{firstChar} </div>
-        <div id="third-characteristic">{thirdChar}</div>
+        <div className="absolute -top-3" style={{left: `${percentage}%`, transform: `translate(-${triangleSize}px, 0)`}}
+        >
+          <div className="w-0 h-0 border-t-4 border-r-4 border-b-0 border-l-4 border-gray-600 transform rotate-45"></div>
+        </div>
+        <div className="flex justify-between text-xs text-gray-600 mt-2">
+          <div>{firstChar}</div>
+          <div>{secondChar}</div>
+          <div>{thirdChar}</div>
+        </div>
       </div>
-    );
-
-          }
+    )
+    }
 
     return (
       <div>
@@ -107,7 +108,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
           </div>
         ) : (
           <div>
-            <div>THIS WORKS BEFORE OBJECT.ENTRIES</div>
+
             {console.log(Object.entries(characteristics))}
             {characteristicsEntries.map(renderCharacteristicComponent)}
           </div>

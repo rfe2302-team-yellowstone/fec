@@ -5,6 +5,7 @@ import ReviewTile from "./ReviewTile.jsx"
 import NewReview from "./NewReview.jsx"
 import MoreReviews from "./MoreReviews.jsx"
 import Sort from "./Sort.jsx"
+import axios from 'axios'
 
 const Reviews = ({product, reviews, setReviews}) => {
   // will need to style later
@@ -16,6 +17,13 @@ const Reviews = ({product, reviews, setReviews}) => {
   useEffect(() => {
     setOrder(reviews)
   }, [reviews])
+
+  const reviewResetter = () => {
+    axios.get(`/reviews?product_id=${product.id}&count=1000`)
+    .then(response => {
+      setReviews(response.data.results)
+    })
+  }
 
   // useEffect(() => {
   //   console.log(order, '-----ORDER------')

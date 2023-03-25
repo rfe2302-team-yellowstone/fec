@@ -32,7 +32,7 @@ const ReviewTile = ({review}) => {
 
 
   return (
-    <div>
+    <div className="mr-4">
       {/* {review.reviewer_name}
       {review.body} */}
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm">
@@ -86,7 +86,7 @@ const ReviewTile = ({review}) => {
         <p className="mt-4 mb-8 text-sm text-gray-600">
          {showFullReview ? review.body : review.body.substring(0, 250)}
          {review.body.length > 250 && !showFullReview && (
-          <button className='btn btn-sm btn-active btn-ghost' onClick={handleShowMore}>
+          <button className='btn btn-xs btn-ghost' onClick={handleShowMore}>
           Show More...
           </button>
          )}

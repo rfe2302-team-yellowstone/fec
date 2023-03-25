@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-const RatingBreakdown = ({reviews, metaData}) => {
+const RatingBreakdown = ({reviews, setReviews, metaData}) => {
 
   const [metaDataRatings, setMetaDataRatings] = useState({})
   const [metaDataRecommended, setMetaDataRecommended] = useState({})
@@ -168,13 +168,18 @@ const RatingBreakdown = ({reviews, metaData}) => {
            </span>
            <span className="flex flex-col w-full gap-4 pt-6">
            <span className="flex items-center w-full gap-2">
+           <a href="#" onClick={() => setReviews(reviews.filter((review) => review.rating === 5))} className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
-            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500"
+            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500 inline-block"
+            style={{whitespace: 'nowrap'}}
             >
+            <span style={{display: 'inline-block'}}>
               5 star
+              </span>
             </label>
+            </a>
             <progress
             aria-labelledby="p03e-label"
             id="p03e"

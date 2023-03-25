@@ -54,7 +54,7 @@ const App = ({initialProduct}) => {
 
       <Overview cart={cart} product={product} handleSearch={handleSearch}/>
       <Related product={product}/>
-      <Ratings product={product}>Ratings</Ratings>
+      <Ratings product={product}></Ratings>
       <QAndA product={product}/>
     </div>
   )

@@ -37,8 +37,8 @@ useEffect(() => {
 }, [])
 
 // useEffect(() => {
-//   console.log(reviews)
-// }, [reviews])
+//   console.log(metaData)
+// }, [metaData])
 
   const relevanceSorter = () => {
     const weightFactor = 0.05
@@ -61,7 +61,7 @@ return (
   <div className="grid grid-cols-3 gap-4">
   <div className="col-span-1 pl-4">
   <div className="pb-4">
-  <RatingBreakdown  reviews={reviews} metaData={metaData}></RatingBreakdown>
+  <RatingBreakdown  reviews={reviews} setReviews={setReviews} metaData={metaData}></RatingBreakdown>
   </div>
   <ProductBreakdown className ="pt-16" reviews={reviews} metaData={metaData}></ProductBreakdown>
   </div>

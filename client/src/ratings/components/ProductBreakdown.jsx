@@ -1,79 +1,112 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Characteristics from './Characteristics.jsx'
 import classnames from 'classnames'
 
-const ProductBreakdown = ({reviews, metaData}) => {
+const ProductBreakdown = ({ reviews, metaData }) => {
 
-  const totalReviews = reviews.length
-  const [rating, setRating] = useState(0)
-  // const [characteristics, setCharacteristics]  = useState()
+  const [hoveredScore, setHoveredScore] = useState(null)
+
+  const [characteristicsUpdated, setCharacteristicsUpdated] = useState(false)
+
+  const [characteristics, setCharacteristics] = useState({})
+  const [characteristicRatings, setCharacteristicRatings] = useState({})
+  const [rightEMval, setRightEMval] = useState({})
+  const [characteristicsEntries, setCharacteristicsEntries] = useState([])
 
   useEffect(() => {
-    let score = 0
-    for (let i = 0; i < totalReviews; i++) {
-      score += reviews[i].rating
-    }
-    score = score/totalReviews
-    setRating(Math.round(score * 10)/10)
-  }, [reviews])
+    const newCharacteristics = {}
+    const newCharacteristicRatings = {}
+    const newRightEMval = {}
 
-  const characteristics = metaData.characteristics ? Object.entries(metaData.characteristics) : []
-
-  const getScaleColor = (value) => {
-    if (value <= 2) {
-      return "bg-red-500";
-    } else if (value <= 3) {
-      return "bg-yellow-500"
-    } else if (value <= 4) {
-      return "bg-green-500"
-    } else {
-      return "bg-blue-500"
+    for (let key in metaData.characteristics) {
+      newCharacteristics[key] = metaData.characteristics[key].value
+      const percentage = (metaData.characteristics[key].value) / 5 * 100
+      newCharacteristicRatings[key] = percentage
+      newRightEMval[key] = (-18.5 + (percentage * .17)).toString() + 'em'
+      // console.log(newCharacteristicRatings)
     }
+
+    setCharacteristics(newCharacteristics)
+    setCharacteristicRatings(newCharacteristicRatings)
+    setRightEMval(newRightEMval)
+
+    setCharacteristicsEntries(Object.entries(newCharacteristics))
+
+  }, [metaData])
+
+  const getArrowPosition = (score) => {
+    const scoreValues = Object.keys(score).map(Number)
+    const position = score / 5 * 100
+    return `${position}%`
   }
 
+ const renderCharacteristicComponent = ([title, value]) => {
   return (
-    <>
-    <div></div>
-     {characteristics.length > 0 ? (
-    <div className="flex flex-col gap-2">
-    {characteristics.map(([name, value]) => (
-      <div className="flex items-center gap-2" key={name}>
-      <div className="w-32">{name}</div>
-      <div
-      className={classnames(
-        "w-full h-4 rounded-full",
-        getScaleColor(value.value)
-      )}
-      style={{width: `${(value.value/5) * 100}%`}}
-      ></div>
-      <div className="w-8">{Math.round(value.value * 100)/100}</div>
-       </div>
-    ))}
+    <div className="mb-6" key="value">
+      <div className="font-bold mb-2">{title}</div>
+      {getProductBreakdownBar(title, value)}
     </div>
-    ) : (<div>Loading....</div>)}
-    </>
   )
-}
+ }
 
+  const getProductBreakdownBar = (title, value) => {
+    const characteristicMap = {
+      Size: ["A size too small", "Perfect", "A size too wide"],
+    Width: ["Too narrow", "Perfect", "Too wide"],
+    Comfort: ["Uncomfortable", "Ok", "Perfect"],
+    Quality: ["Poor", "What I expected", "Perfect"],
+    Length: ["Runs short", "Perfect", "Runs long"],
+    Fit: ["Runs tight", "Perfect", "Runs long"],
+    }
+    const characteristicValues = characteristicMap[title]
+    const percentage = (parseFloat(value) / 5) * 100
+    const triangleWidth = 10 //px
+    const totalBarWidth = 200 // px
+    const position = percentage * (totalBarWidth - triangleWidth) / 100
+    // console.log(position)
+    const trianglePosition = position - 4.5
+    return (
+      <div className="flex flex-col items-center">
+
+        <div className="relative w-full h-3 bg-gray-300 rounded-lg overflow-hidden">
+          <div className="absolute top-0 left-0 h-full bg-green-500" style={{width: `${percentage}%`}}></div>
+          {/* <div className="absolute top-0 left-0 h-full bg-gray-400" style={{width: `${100 - percentage}%`}}></div> */}
+          <div className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-full" style={{left: `{${percentage}%}`}}>
+            ▲
+          </div>
+        </div>
+        <div className="flex justify-between w-full mt-2 text-sm text-gray-500">
+
+          <div>{characteristicValues[0]}</div>
+          <div>{characteristicValues[1]}</div>
+          <div>{characteristicValues[2]}</div>
+        </div>
+        <div className="relative w-full mt-2">
+        <div className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-full" style={{left: `${percentage}%`, marginTop:"-15px"}}>
+            ▲
+          </div>
+          {/* <span className="absolute w-0 h-0 border-t border-transparent border-solid border-l-4 border-r-4"
+            style={{borderBottomColor: "#38a169", marginLeft: `${trianglePosition}%`, top: "100%", left: "50%"}}> ▲</span> */}
+        </div>
+      </div>
+    );
+
+
+  }
+
+    return (
+      <div>
+        {characteristicsEntries.length === 0 ? (
+          <div>
+            Nothing here
+          </div>
+        ) : (
+          <div>
+            {/* {console.log(Object.entries(characteristics))} */}
+            {characteristicsEntries.map(renderCharacteristicComponent)}
+          </div>
+        )}
+      </div>
+    );
+        }
 export default ProductBreakdown
-
-  //   <div>
-  //   <h1>Comfort</h1>
-  //   <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
-  //   <div className="w-full flex justify-between text-xs px-2">
-  //   <span>Too small</span>
-  // <span>|</span>
-  // <span>Perfect</span>
-  // <span>|</span>
-  // <span>Too large</span>
-  //   </div>
-  //   <h1>Style</h1>
-  //   <input type="range" min="0" max="100" value={`${rating}/5 * 100`} className="range" step="25" />
-  //   <div className="w-full flex justify-between text-xs px-2">
-  //   <span>Too small</span>
-  // <span>|</span>
-  // <span>Perfect</span>
-  // <span>|</span>
-  // <span>Too large</span>
-  //   </div>
-  // </div>

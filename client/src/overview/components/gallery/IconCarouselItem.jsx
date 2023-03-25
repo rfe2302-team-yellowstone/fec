@@ -4,9 +4,9 @@ export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix}
   return (
 
 
-      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className="carousel-item h-max-s">
+      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className="carousel-item h-max-s transition duration-500 hover:scale-125 " >
         {/* <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" className="rounded-box" /> */}
-        <img src={photos[i].thumbnail_url} className="h-16" id={`${idPrefix}slide-icon-${i}`}/>
+        <img src={photos[i].thumbnail_url} className="h-16 rounded-s" id={`${idPrefix}slide-icon-${i}`}/>
 
       </a>
 

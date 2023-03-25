@@ -11,7 +11,7 @@ const UploadWidget = ({setImageURLs}) => {
       uploadPreset: 'q0asd8f7',
       maxFiles: 5
     }, (err, result) => {
-      console.log('result:', result);
+      // console.log('result:', result);
       if (err) {
         console.log('error:', err);
       }

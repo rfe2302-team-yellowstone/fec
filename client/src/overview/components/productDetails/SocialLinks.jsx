@@ -10,15 +10,21 @@ export default function SocialLinks () {
     <div className='flex flex-row items-center space-x-2 mr-4 ml-4'>
 
       <div id='facebook-inline-button' className="btn btn-circle">
-        <img src={FacebookLogo} ></img>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=sup/" title='Share on Facebook'>
+          <img src={FacebookLogo} ></img>
+        </a>
       </div>
 
       <div id='twitter-inline-button' className="btn btn-circle p-2">
-        <img src={TwitterLogo} ></img>
+        <a href="https://twitter.com/intent/tweet?text=sup/" title='Share on Twitter'>
+          <img src={TwitterLogo} ></img>
+        </a>
       </div>
 
       <div id='pinterest-inline-button' className="btn btn-circle p-2">
-        <img src={PinterestLogo} ></img>
+        <a href="https://pinterest.com/" >
+          <img src={PinterestLogo} ></img>
+        </a>
       </div>
 
       <div id='share-inline-button' className="btn btn-circle p-2">

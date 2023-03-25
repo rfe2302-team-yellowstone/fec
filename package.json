@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.21.3",
+    "@cloudinary/url-gen": "^1.9.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@heroicons/react": "^1.0.6",

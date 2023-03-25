@@ -5,9 +5,7 @@ const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setT
   const [query, setQuery] = useState('');
 
   const search = (searchTerm, allQuestions) => {
-    console.log('searchTerm:', searchTerm.trim().length, 'allquestions length', allQuestions.length);
     if (searchTerm.trim().length < 3 && allQuestions.length > 0) {
-      console.log('am i running?')
       setQuestions(allQuestions.slice(0, 2));
     }
     if (searchTerm.trim().length >= 3 && allQuestions.length > 0) {
@@ -22,6 +20,10 @@ const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setT
 
   const handleSearchChange = e => {
     setQuery(e.target.value);
+  }
+  const handleSearchButtonClick = e => {
+    e.preventDefault();
+    console.log('click!');
   }
 
   useEffect(() => {

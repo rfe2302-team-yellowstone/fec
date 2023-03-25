@@ -42,15 +42,30 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
 
   return (
-    <div className='flex-1 flex-col flex w-1/4' >
+    <div className='flex-1 flex-col flex w-1/4 flex-wrap mt-auto' >
       <OverallRatingPlaceholder />
       <Header product={product} currentStyle={currentStyle}/>
       <StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />
-      <div className='flex justify-around items-center'>
-        <SizeSelector sizes={sizes} currentSize={currentSize} setCurrentSize={setCurrentSize} handleSizeChange={handleSizeChange}/>
-        <QuantitySelector sizes={sizes} currentQuantity={currentQuantity} handleQuantityChange={handleQuantityChange} quantityMax={quantityMax}/>
+
+      <form className='flex justify-around space-x-4 mt-4'>
+        <SizeSelector
+          sizes={sizes}
+          currentSize={currentSize}
+          setCurrentSize={setCurrentSize}
+          handleSizeChange={handleSizeChange}
+        />
+
+
+        <QuantitySelector
+          sizes={sizes}
+          currentQuantity={currentQuantity}
+          handleQuantityChange={handleQuantityChange}
+          quantityMax={quantityMax}
+        />
+
         <Actions />
-      </div>
+      </form>
+
     </div>
   )
 }

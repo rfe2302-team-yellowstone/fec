@@ -6,12 +6,12 @@ export default function QuantitySelector ({sizes, currentSize, handleQuantityCha
 
   return (
 
-    <div className="dropdown dropdown-bottom flex-none">
-      <p></p>
-      <label tabIndex={0} className="btn m-1 w-36">
+    <div id='overview-quantity-selector' className="dropdown dropdown-bottom flex flex-col items-center ">
+      <p>Quantity</p>
+      <label tabIndex={0} className="btn m-1 w-36 ">
         {currentQuantity}
 
-        <ul name="size" tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box">
+        <ul name="size" tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto h-48">
         {
           // Create a quick range from 0 to the max
           [...Array(quantityMax).keys()].map((i) => {

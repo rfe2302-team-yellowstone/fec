@@ -6,6 +6,8 @@ import Announcements from './components/announcements/Announcements.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
 import ProductDetails from './components/productDetails/ProductDetails.jsx'
+//import FullScreenModal from './components/gallery/FullScreenModal.jsx';
+import FullScreenModalTwo from './components/gallery/FullScreenModalTwo.jsx';
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
@@ -16,6 +18,12 @@ export default function Overview({product, handleSearch}) {
   const [styles, setStyles] = useState([])
   const [currentStyle, setCurrentStyle] = useState({})
   const [sizes, setSizes] = useState({})
+  const [fullScreenMode, setFullScreenMode] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0) // index position of image currently showing
+
+
+
+
 
   // Get initial Styles (and size) information
   useEffect(() => {
@@ -65,6 +73,49 @@ export default function Overview({product, handleSearch}) {
     setSizes(sizes)
   }
 
+  // Given an index position, calculate image to show in carousel
+  const changeImage = (index, prefix) => {
+
+    prefix = prefix || ''
+    console.log('\n\n ----------')
+    console.log('prefix: ', prefix)
+    console.log('current index: ', currentIndex)
+    console.log('next index: ', index)
+
+
+    // Set the ID of the clicked image
+    const imageID = `${prefix}slide-img-${index}`
+
+    // Just return if same image
+    if ((index === currentIndex) && (prefix !== 'fs-')) {
+      return;
+    }
+
+    // Get elements from DOM
+    const imageElement = document.getElementById(imageID);
+    const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
+
+    // Get the position of the clicked image relative to the viewport
+    const containerRect = containerElement.getBoundingClientRect();
+    const imageRect = imageElement.getBoundingClientRect();
+
+    // Width of each image div
+    let width = imageRect.width
+
+    // Calculate distance you need to scroll from left
+    //  - Current container's x position + (width of image div  *  nextIndex)
+    let scrollLeft = containerRect.x + width * index
+
+    // Scroll the div to the clicked image position
+    // - scrollLeft is the x-axis of the carousel
+    containerElement.scrollLeft = scrollLeft;
+
+    // Finally set the new index
+    setCurrentIndex(index)
+
+  }
+
+
 
   const quickLinks = [
     'Overview',
@@ -77,9 +128,35 @@ export default function Overview({product, handleSearch}) {
     <div id="overview">
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
+      <FullScreenModalTwo
+        currentStyle={currentStyle}
+        fullScreenMode={fullScreenMode}
+        setFullScreenMode={setFullScreenMode}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        // currentIndex={currentIndex}
+        // setCurrentIndex={setCurrentIndex}
+        changeImage={changeImage}
+        idPrefix={'fs-'}
+      />
+
       <div className="flex ">
-        <Gallery currentStyle={currentStyle}/>
-        <ProductInfo product={product} styles={styles} currentStyle={currentStyle} sizes={sizes} setCurrentStyle={setCurrentStyle}/>
+        <Gallery
+          currentStyle={currentStyle}
+          fullScreenMode={fullScreenMode}
+          setFullScreenMode={setFullScreenMode}
+          currentIndex={currentIndex}
+          setCurrentIndex={setCurrentIndex}
+          changeImage={changeImage}
+        />
+
+        <ProductInfo
+          product={product}
+          styles={styles}
+          currentStyle={currentStyle}
+          sizes={sizes}
+          setCurrentStyle={setCurrentStyle}
+        />
       </div>
       <ProductDetails product={product} />
     </div>

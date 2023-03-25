@@ -1,9 +1,5 @@
 import React from 'react'
 import AddToCartButton from '../../../assets/add-to-cart.svg'
-import FacebookLogo from '../../../assets/facebook.svg'
-import TwitterLogo from '../../../assets/twitter.svg'
-import PinterestLogo from '../../../assets/pinterest.svg'
-import ShareLogo from '../../../assets/share.svg'
 import FavoriteLogo from '../../../assets/favorite.svg'
 
 export default function Actions () {
@@ -24,21 +20,6 @@ export default function Actions () {
           <img src={FavoriteLogo} ></img>
         </div>
 
-        <div id='facebook-inline-button' className="btn btn-circle">
-          <img src={FacebookLogo} ></img>
-        </div>
-
-        <div id='twitter-inline-button' className="btn btn-circle p-2">
-          <img src={TwitterLogo} ></img>
-        </div>
-
-        <div id='pinterest-inline-button' className="btn btn-circle p-2">
-          <img src={PinterestLogo} ></img>
-        </div>
-
-        <div id='share-inline-button' className="btn btn-circle p-2">
-          <img src={ShareLogo} ></img>
-        </div>
 
 
       </div>

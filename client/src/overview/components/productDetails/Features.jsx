@@ -2,8 +2,8 @@ import React from 'react'
 export default function Features ({features}) {
 
   return (
-    <div className='flex-1 mr-4 ml-4'>
-      <ul>
+    <div className='flex-1 flex mr-4 ml-4 text-center items-center justify-center'>
+      <ul className=''>
         {
           features.map((feature, i) => {
             return (

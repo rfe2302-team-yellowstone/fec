@@ -122,8 +122,6 @@ const RelatedCard = ({product}) => {
 
       <div id = {card.id} onClick={cardClick} key={card.id} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
 
-          {/* <div id = {card.id} className="card w-5/12 h-5/12 bg-base-100"> */}
-
           <div id = {card.id} className="relative h-64 w-52">
 
             <img id = {card.id} className="absolute object-cover h-full w-full"
@@ -201,7 +199,7 @@ const RelatedCard = ({product}) => {
             </span>
             </span>
             </div>
-          {/* </div> */}
+
       </div>
     );
 

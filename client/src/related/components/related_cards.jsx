@@ -3,8 +3,7 @@ import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 import Comparison from "./comparison_modal.jsx";
 import axios from "axios"
-// import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from "pure-react-carousel";
-// import "pure-react-carousel/dist/react-carousel.es.css";
+
 
 
 const RelatedCard = ({product}) => {
@@ -112,7 +111,7 @@ const RelatedCard = ({product}) => {
 
       setOpenModal(!openModal)
     }
-    console.log(relatedItems)
+
 
     const cardClick = (event) => {
       const containerElement = document.getElementById(`${event.target.id}`)
@@ -206,24 +205,6 @@ const RelatedCard = ({product}) => {
       </div>
     );
 
-
-    // const newCards = relatedItems.map((card, i) =>
-    //  <Slide key = {i} index={i} className="aspect-w-5 aspect-h-3">
-    //      <div className="relative h-64 w-full">
-    //         <img src={card.url === null? "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png" : card.url} className="relative h-64 w-full" />
-    //           <div className="flex flex-shrink-0 relative ">
-
-    //               <div className="bg-gray-800 bg-opacity-30 absolute">
-    //                   <div className="flex flex-col w-full h-full items-end pb-6">
-    //                       <h2 className="lg:text-xl leading-4 text-base lg:leading-5 text-white">{card.name}</h2>
-    //                       <h3 className="text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-white">{card.default_price}</h3>
-    //                   </div>
-    //               </div>
-    //           </div>
-    //       </div>
-    //   </Slide>
-
-    //   );
 
 
 

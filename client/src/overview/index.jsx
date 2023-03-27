@@ -73,7 +73,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     setSizes(sizes)
   }
 
-  // Given an index position, calculate image to show in carousel
+  // Given an index position, calculate where to scroll to in the carousel
   const changeImage = (index, prefix) => {
 
     prefix = prefix || ''
@@ -83,10 +83,10 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     console.log('next index: ', index)
 
 
-    // Set the ID of the clicked image
+    // Set the image ID of the index that was given
     const imageID = `${prefix}slide-img-${index}`
 
-    // Just return if same image
+    // Just return if it's the same image and we're not in fullscreen mode
     if ((index === currentIndex) && (prefix !== 'fs-')) {
       return;
     }
@@ -99,10 +99,10 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     const containerRect = containerElement.getBoundingClientRect();
     const imageRect = imageElement.getBoundingClientRect();
 
-    // Width of each image div
+    // Width of each image div (each card is the same size)
     let width = imageRect.width
 
-    // Calculate distance you need to scroll from left
+    // Calculate distance you need to scroll from left side of screen
     //  - Current container's x position + (width of image div  *  nextIndex)
     let scrollLeft = containerRect.x + width * index
 

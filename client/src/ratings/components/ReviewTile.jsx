@@ -32,7 +32,7 @@ const ReviewTile = ({review}) => {
 
 
   return (
-    <div>
+    <div className="mr-4">
       {/* {review.reviewer_name}
       {review.body} */}
       <div className="p-4 border border-gray-200 rounded-lg shadow-sm">
@@ -75,7 +75,6 @@ const ReviewTile = ({review}) => {
           viewBox="0 0 20 20"
           >
           <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z"/>
-
           </svg>
         ))}
         </div>
@@ -87,7 +86,7 @@ const ReviewTile = ({review}) => {
         <p className="mt-4 mb-8 text-sm text-gray-600">
          {showFullReview ? review.body : review.body.substring(0, 250)}
          {review.body.length > 250 && !showFullReview && (
-          <button className='btn btn-sm btn-active btn-ghost' onClick={handleShowMore}>
+          <button className='btn btn-xs btn-ghost' onClick={handleShowMore}>
           Show More...
           </button>
          )}

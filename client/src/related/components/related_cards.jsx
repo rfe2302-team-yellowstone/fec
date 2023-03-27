@@ -5,6 +5,7 @@ import Comparison from "./comparison_modal.jsx";
 import axios from "axios"
 
 
+
 const RelatedCard = ({product}) => {
     //Hooks
     const [relatedItems, setRelatedItems] = useState([]);
@@ -16,6 +17,7 @@ const RelatedCard = ({product}) => {
     let fetchingRelatedProducts = () => axios.get(`http://localhost:3000/products/${product.id}/related`)
     .then(response => {
       let relatedIds = response.data;
+
 
       let getProductInfo = Promise.all(relatedIds.map(id =>
         axios.get(`/products/${id}`)
@@ -110,22 +112,31 @@ const RelatedCard = ({product}) => {
       setOpenModal(!openModal)
     }
 
-    const cards = relatedItems.map((card) =>
 
-      <div key={card.id} className="carousel-item rounded-box  w-1/2">
+    const cardClick = (event) => {
+      const containerElement = document.getElementById(`${event.target.id}`)
+      console.log(containerElement.getBoundingClientRect())
+    }
 
-          <div className="card w-96 bg-base-100 shadow-xl">
+    const cards = relatedItems.map((card, i) =>
 
-          <figure className="relative  w-full h-3/4">
+      <div id = {card.id} onClick={cardClick} key={card.id} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
 
-            <img className="w-full h-full" src={card.url}/>
-            <label onClick={modalHandler} id = {card.id} className = 'btn btn-ghost absolute top-2 right-0  '><svg id ={card.id}xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></label>  </figure>
-            <div className="card-body">
-              <h2 className="card-title">{card.name}</h2>
-              <p>{card.description}</p>
-              <p>{'$' + card.default_price}</p>
+          <div id = {card.id} className="relative h-64 w-52">
+
+            <img id = {card.id} className="absolute object-cover h-full w-full"
+            src={card.url === null? "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png" : card.url}/>
+
+            <button onClick={modalHandler} id = {card.id} className = 'btn btn-ghost btn-sm absolute top-2 right-0  '>
+              <svg id ={card.id} xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="hsl(189.419, 100%, 66%)"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" /></svg>
+            </button>
+          </div>
+            <div id = {card.id} className="body p-2">
+              <p id = {card.id} className="text-sm">{card.category}</p>
+              <p id = {card.id} className= 'text-md'>{card.name}</p>
+              <p id = {card.id} className= 'text-sm'>{'$' + card.default_price}</p>
               <span className="flex gap-1 text-amber-400" role="img">
-                <span aria-hidden="true"   className={`w-6 h-6 ${card.rating > .5 ? "text-yellow-500" : "text-gray-300"}`}>
+                <span aria-hidden="true"   className={`w-4 h-4 ${card.rating > .5 ? "text-yellow-500" : "text-gray-300"}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path
                     fillRule="evenodd"
@@ -134,12 +145,12 @@ const RelatedCard = ({product}) => {
                     </path>
                   </svg>
                 </span>
-            <span aria-hidden="true"  className={`w-6 h-6 ${card.rating > 1.5 ? "text-yellow-500" : "text-gray-300"}`}>
+            <span aria-hidden="true"  className={`w-4 h-4 ${card.rating > 1.5 ? "text-yellow-500" : "text-gray-300"}`}>
               <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6">
+              className="w-4 h-4">
               <path
               fillRule="evenodd"
               d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
@@ -147,12 +158,12 @@ const RelatedCard = ({product}) => {
               > </path>
               </svg>
             </span>
-            <span aria-hidden="true"   className={`w-6 h-6 ${card.rating > 2.5 ? "text-yellow-500" : "text-gray-300"}`}>
+            <span aria-hidden="true"   className={`w-4 h-4 ${card.rating > 2.5 ? "text-yellow-500" : "text-gray-300"}`}>
               <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6">
+              className="w-4 h-4">
               <path
               fillRule="evenodd"
               d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
@@ -160,12 +171,12 @@ const RelatedCard = ({product}) => {
               > </path>
               </svg>
             </span>
-              <span aria-hidden="true"   className={`w-6 h-6 ${card.rating > 3.5 ? "text-yellow-500" : "text-gray-300"}`}>
+              <span aria-hidden="true"   className={`w-4 h-4 ${card.rating > 3.5 ? "text-yellow-500" : "text-gray-300"}`}>
               <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6">
+              className="w-4 h-4">
               <path
               fillRule="evenodd"
               d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
@@ -173,12 +184,12 @@ const RelatedCard = ({product}) => {
               > </path>
               </svg>
             </span>
-            <span aria-hidden="true"   className={`w-6 h-6 ${card.rating > 4.5 ? "text-yellow-500" : "text-gray-300"}`}>
+            <span aria-hidden="true"   className={`w-4 h-4 ${card.rating > 4.5 ? "text-yellow-500" : "text-gray-300"}`}>
               <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-6 h-6">
+              className="w-4 h-4">
               <path
               fillRule="evenodd"
               d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
@@ -188,13 +199,20 @@ const RelatedCard = ({product}) => {
             </span>
             </span>
             </div>
-          </div>
+
       </div>
     );
+
+
+
+
 
     return (
       <>{cards} <Comparison openModal={openModal} setOpenModal={setOpenModal} product={product} relatedItems = {relatedItems} comparedProduct={comparedProduct}/> </>
     )
+
+
+
 }
 
 export default RelatedCard;

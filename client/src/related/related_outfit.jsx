@@ -5,7 +5,7 @@ import RelatedCarousel from "./components/related_carousel.jsx"
 import OutfitCarousel from "./components/outfit_carousel.jsx"
 
 
-const Related = ({product, onMouseOver}) => {
+const Related = ({product, onMouseOver}, updateProduct) => {
   const [reviews, setReviews] = useState([]);
 
   let getRating = ()=>{
@@ -19,8 +19,9 @@ const Related = ({product, onMouseOver}) => {
   }, [])
 
   return (
-  <div className = 'flex flex-col items-center w-100' onMouseOver={onMouseOver}>
-    <RelatedCarousel product = {product}/>
+  <div className ="grid col-span-1 place-items-center">
+    <RelatedCarousel  product = {product} updateProduct={updateProduct}/>
+    <></>
     <OutfitCarousel product = {product} reviews = {reviews}/>
   </div>
   )

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
-import axios from 'axios'
 
-const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
+const RatingBreakdown = ({reviews, setReviews, metaData}) => {
 
   const [metaDataRatings, setMetaDataRatings] = useState({})
   const [metaDataRecommended, setMetaDataRecommended] = useState({})
@@ -12,7 +11,6 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
   const [two, setTwo] = useState(0);
   const [one, setOne] = useState(0);
   const [recommended, setRecommended] = useState(0)
-
 
   const reviewCalculator = () => {
     let amtOfReviews = 0
@@ -55,7 +53,23 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
     let ones = Number(metaDataRatings[1])
     let score = (fives * 5 + fours * 4 + threes * 3+ twos * 2 + ones) / (totalReviews)
     let recommending = metaDataRecommended[true]
-
+    // for (let i = 0; i < totalReviews; i++) {
+    //   score += reviews[i].rating
+    //   if (reviews[i].rating === 5) {
+    //     fives += 1
+    //   } else if (reviews[i].rating === 4) {
+    //    fours += 1
+    //   } else if (reviews[i].rating === 3) {
+    //     threes += 1
+    //   } else if (reviews[i].rating === 2) {
+    //     twos += 1
+    //   } else if (reviews[i].rating === 1) {
+    //     ones += 1
+    //   }
+    //   if (reviews[i].recommend === true) {
+    //     recommending += 1
+    //   }
+    // }
     setRating(Math.round(score * 100)/100)
     setFive(fives)
     setFour(fours)
@@ -64,48 +78,6 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
     setOne(ones)
     setRecommended(recommending)
   }, [metaDataRatings])
-
-  const fiveSetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results.filter(review => review.rating === 5))
-    })
-  }
-
-  const fourSetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results.filter(review => review.rating === 4))
-    })
-  }
-
-  const threeSetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results.filter(review => review.rating === 3))
-    })
-  }
-
-  const twoSetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results.filter(review => review.rating === 2))
-    })
-  }
-
-  const oneSetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results.filter(review => review.rating === 1))
-    })
-  }
-
-  const reviewResetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results)
-    })
-  }
 
   return (
     <div>
@@ -196,8 +168,7 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
            </span>
            <span className="flex flex-col w-full gap-4 pt-6">
            <span className="flex items-center w-full gap-2">
-           <a href="#" onClick={fiveSetter}
-           className="inline" style={{whitespace: 'nowrap'}}>
+           <a href="#" onClick={() => setReviews(reviews.filter((review) => review.rating === 5))} className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
@@ -221,19 +192,13 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
             <span className="text-xs font-bold w-9 text-slate-700">{five}</span>
            </span>
            <span className="flex items-center w-full gap-2">
-           <a href="#" onClick={fourSetter}
-           className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
-            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500 inline-block"
-            style={{whitespace: 'nowrap'}}
+            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500"
             >
-            <span style={{display: 'inline-block'}}>
               4 star
-              </span>
             </label>
-            </a>
             <progress
             aria-labelledby="p03e-label"
             id="p03e"
@@ -245,19 +210,13 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
             <span className="text-xs font-bold w-9 text-slate-700">{four}</span>
            </span>
            <span className="flex items-center w-full gap-2">
-           <a href="#" onClick={threeSetter}
-           className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
-            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500 inline-block"
-            style={{whitespace: 'nowrap'}}
+            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500"
             >
-            <span style={{display: 'inline-block'}}>
               3 star
-              </span>
             </label>
-            </a>
             <progress
             aria-labelledby="p03e-label"
             id="p03e"
@@ -269,19 +228,13 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
             <span className="text-xs font-bold w-9 text-slate-700">{three}</span>
            </span>
            <span className="flex items-center w-full gap-2">
-           <a href="#" onClick={twoSetter}
-           className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
-            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500 inline-block"
-            style={{whitespace: 'nowrap'}}
+            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500"
             >
-            <span style={{display: 'inline-block'}}>
               2 star
-              </span>
             </label>
-            </a>
             <progress
             aria-labelledby="p03e-label"
             id="p03e"
@@ -293,19 +246,13 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
             <span className="text-xs font-bold w-9 text-slate-700">{two}</span>
            </span>
            <span className="flex items-center w-full gap-2">
-           <a href="#" onClick={oneSetter}
-           className="inline" style={{whitespace: 'nowrap'}}>
             <label
             id="p03e-label"
             htmlFor="p03e"
-            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500 inline-block"
-            style={{whitespace: 'nowrap'}}
+            className="mb-0 text-xs text-center w-9 shrink-0 text-slate-500"
             >
-            <span style={{display: 'inline-block'}}>
               1 star
-              </span>
             </label>
-            </a>
             <progress
             aria-labelledby="p03e-label"
             id="p03e"
@@ -317,9 +264,6 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
             <span className="text-xs font-bold w-9 text-slate-700">{one}</span>
            </span>
            </span>
-           <div className="flex items-center mb-4">
-           <button className="btn btn-active btn-link" onClick={reviewResetter}>Show all reviews</button>
-           </div>
         </div>
       </div>
     </div>

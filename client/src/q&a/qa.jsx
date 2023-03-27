@@ -1,11 +1,12 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import QAndAHeader from './components/qa-header.jsx';
 import QuestionsList from './components/questions-list.jsx';
 import QAndAFooter from './components/qa-footer.jsx';
 import {useSelector, useDispatch } from 'react-redux';
 import { trackClick } from '../features/click-tracker/clickTrackerSlice';
+import { trackModule } from '../features/module-tracker/moduleTrackerSlice';
 import PropTypes from 'prop-types';
 
 export default function QAndA ({product}) {
@@ -30,11 +31,11 @@ export default function QAndA ({product}) {
   }, []);
 
   return (
-    <section className='flex flex-col items-center my-4'>
+    <section className='flex flex-col items-center my-4' onMouseOver={e => dispatch(trackModule('qa'))}>
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>
-      {/* <div>
+      <div>
         <button
           aria-label="Increment value"
           onClick={(e) => {
@@ -48,8 +49,10 @@ export default function QAndA ({product}) {
         >
           Test Click
         </button>
-        <span>{JSON.stringify(clicks)}</span>
-      </div> */}
+        <span>Our Clicks: {JSON.stringify(clicks)}</span>
+        <button onClick={e => dispatch(trackModule('qa'))}>CHange Module</button>
+        <div>Current module: {module}</div>
+      </div>
       {/* Uncomment the div above to see Redux in action for DOM element onClick metadata tracking! */}
     </section>
   )

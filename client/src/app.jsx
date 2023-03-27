@@ -69,13 +69,9 @@ const App = ({initialProduct}) => {
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
 
       <Overview cart={cart} product={product} handleSearch={handleSearch} onMouseOver={e => dispatch(trackModule('overview'))}/>
-      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))}/>
+      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct}/>
       <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}></Ratings>
       <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>
-      <Overview cart={cart} product={product} handleSearch={handleSearch}/>
-      <Related product={product} updateProduct={updateProduct}/>
-      <Ratings product={product}></Ratings>
-      <QAndA product={product}/>
     </div>
   )
 

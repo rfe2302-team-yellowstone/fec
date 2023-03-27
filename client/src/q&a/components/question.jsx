@@ -54,7 +54,7 @@ export default function Question ({question, productName}) {
       <div className='flex mb-2'>
         <span className='w-8/12'>
           <span className='text-xl font-bold'>Q: </span>
-          <span className='text-lg ml-4'>{question.question_body}</span>
+          <span className='text-lg ml-4 font-semibold'>{question.question_body}</span>
         </span>
         <span className='ml-auto'>
           <span>Helpful? </span>

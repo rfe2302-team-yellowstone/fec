@@ -10,7 +10,7 @@ import ProductBreakdown from "./components/ProductBreakdown.jsx"
 
 // require("dotenv").config();
 
-const Ratings = ({product}) => {
+const Ratings = ({product, onMouseOver}) => {
 
   // const [loading, setLoading] = useState(false)
   const [reviews, setReviews] = useState([])
@@ -57,7 +57,7 @@ useEffect(() => {
   const orderedReviews = relevanceSorter()
 
 return (
-  <div>
+  <div onMouseOver={onMouseOver}>
   <div className="grid grid-cols-3 gap-4">
   <div className="col-span-1 pl-4">
   <div className="pb-4">

@@ -1,18 +1,34 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import Related from "./related/related_outfit.jsx"
 import Overview from "./overview/index.jsx"
 import Ratings from "./ratings/Ratings.jsx";
 import QAndA from "./q&a/qa.jsx";
 import axios from 'axios'
-
-
+import { trackClick } from './features/click-tracker/clickTrackerSlice';
+import { trackModule } from './features/module-tracker/moduleTrackerSlice';
 
 const App = ({initialProduct}) => {
 // test
 
   const [cart, setCart] = useState([])
   const [product, setProduct] = useState(initialProduct)
+  const dispatch = useDispatch();
+  const module = useSelector(state => state.moduleTracker);
+  const ModuleRef = useRef(module);
+  ModuleRef.current = module;
+
+  useEffect(() => {
+    window.addEventListener('click', e => {
+      // console.log(e.target);
+      dispatch(trackClick({
+        elementClicked: e.target.outerHTML,
+        timeOfClick: (new Date()).toString(),
+        moduleClicked: ModuleRef.current
+      }))
+    })
+  }, []);
 
   const updateProduct = (productID) => {
     // handles clicks on new products
@@ -52,10 +68,10 @@ const App = ({initialProduct}) => {
     <div>
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
 
-      <Overview cart={cart} product={product} handleSearch={handleSearch}/>
-      <Related product={product}/>
-      <Ratings product={product}></Ratings>
-      <QAndA product={product}/>
+      <Overview cart={cart} product={product} handleSearch={handleSearch} onMouseOver={e => dispatch(trackModule('overview'))}/>
+      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))}/>
+      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}></Ratings>
+      <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>
     </div>
   )
 

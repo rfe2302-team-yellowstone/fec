@@ -19,8 +19,9 @@ const Related = ({product, onMouseOver}) => {
   }, [])
 
   return (
-  <div className = 'flex flex-col items-center w-100' onMouseOver={onMouseOver}>
-    <RelatedCarousel product = {product}/>
+  <div className ="grid col-span-1 place-items-center">
+    <RelatedCarousel  product = {product}/>
+    <></>
     <OutfitCarousel product = {product} reviews = {reviews}/>
   </div>
   )

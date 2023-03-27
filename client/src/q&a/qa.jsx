@@ -35,7 +35,7 @@ export default function QAndA ({product}) {
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>
-      <div>
+      {/* <div>
         <button
           aria-label="Increment value"
           onClick={(e) => {
@@ -52,7 +52,7 @@ export default function QAndA ({product}) {
         <span>Our Clicks: {JSON.stringify(clicks)}</span>
         <button onClick={e => dispatch(trackModule('qa'))}>CHange Module</button>
         <div>Current module: {module}</div>
-      </div>
+      </div> */}
       {/* Uncomment the div above to see Redux in action for DOM element onClick metadata tracking! */}
     </section>
   )

@@ -18,7 +18,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   // console.log('current style: ', currentStyle)
 
 
-  const [currentSize, setCurrentSize] = useState('Select size')
+  const [currentSize, setCurrentSize] = useState('Select Size')
   const [currentQuantity, setCurrentQuantity] = useState('-')
   const [quantityMax, setQuantityMax] = useState('-')
 
@@ -30,6 +30,9 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
     // Set new quantity max
     setQuantityMax(sizes[event.target.innerHTML])
+
+    // Set current quantity to 1
+    setCurrentQuantity(1)
   }
 
   const handleQuantityChange = (event) => {
@@ -59,6 +62,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
         <QuantitySelector
           sizes={sizes}
           currentQuantity={currentQuantity}
+          currentSize={currentSize}
           handleQuantityChange={handleQuantityChange}
           quantityMax={quantityMax}
         />

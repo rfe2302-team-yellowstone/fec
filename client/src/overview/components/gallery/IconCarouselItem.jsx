@@ -1,14 +1,16 @@
 import React from 'react'
-export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix}) {
+export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix, currentIndex}) {
 
   return (
 
 
-      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className="carousel-item h-max-s transition duration-500 hover:scale-125 " >
+      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className={`carousel-item h-max-s transition duration-500 hover:scale-125`} >
         {/* <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" className="rounded-box" /> */}
-        <img src={photos[i].thumbnail_url} className="h-24 s:h-16 rounded-s" id={`${idPrefix}slide-icon-${i}`}/>
+        <img src={photos[i].thumbnail_url} className={`h-24 s:h-16 rounded-s hover:drop-shadow-[0_12px_12px_rgba(0,0,0,0.25)] ${(currentIndex === i) && 'border-b-[6px] border-tahiti-100'}`} id={`${idPrefix}slide-icon-${i}`}/>
 
       </a>
+
+      // hover:drop-shadow-[0_30px_30px_-2px_rgba(35,35,35)]
 
     // <div id={`slide${i}`} className="carousel-item relative w-full grid justify-items-center items-center">
     //   <img src={photos[i].url} className="w-4/6" />

@@ -40,11 +40,28 @@ export default function Overview({product, handleSearch, onMouseOver}) {
   }, [product])
 
 
+  // Update images, reset quantity and sizes, when a new style is selected
+  const handleStyleChange = (event) => {
+    event.preventDefault()
+
+    // Get the index of the style that was selected
+    let styleIndex = +event.target.getAttribute('i')
+
+    // Reset style and sizes (which resets quantity as well through a useEffect hook)
+    setCurrentStyle(styles[styleIndex])
+    getSizesFromStyle(styles[styleIndex])
+
+    // Reset carousels to first image
+    setCurrentIndex(0)
+    changeImage(0, 'n-')
+
+  }
+
+
 
   // Function to map style skus into sizes and quantities
   // Creates an array of tuples (size and quantity). Only stores if available.
   const getSizesFromStyle = (style) => {
-
 
     let sizes = {}
     let skus = style.skus;
@@ -167,6 +184,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
           currentStyle={currentStyle}
           sizes={sizes}
           setCurrentStyle={setCurrentStyle}
+          handleStyleChange={handleStyleChange}
         />
       </div>
       <ProductDetails product={product} />

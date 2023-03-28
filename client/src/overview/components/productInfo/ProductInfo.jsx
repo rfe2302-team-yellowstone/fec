@@ -7,7 +7,7 @@ import QuantitySelector from './QuantitySelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange}) {
 
   // Test style:
   // style ID: 221064
@@ -22,6 +22,11 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   const [currentQuantity, setCurrentQuantity] = useState('-')
   const [quantityMax, setQuantityMax] = useState('-')
 
+  // Reset size and quantity when styles or sizes change
+  useEffect(() => {
+    setCurrentSize('Select Size')
+    setCurrentQuantity('-')
+  }, [currentStyle])
 
   let handleSizeChange = (event) => {
     event.preventDefault()
@@ -44,11 +49,17 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
 
 
+
   return (
     <div className='flex-1 flex-col flex flex-wrap mt-auto' >
       <OverallRatingPlaceholder />
       <Header product={product} currentStyle={currentStyle}/>
-      <StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />
+      <StyleSelector
+        styles={styles}
+        currentStyle={currentStyle}
+        setCurrentStyle={setCurrentStyle}
+        handleStyleChange={handleStyleChange}
+      />
 
       <form className='flex justify-around space-x-4 mt-4'>
         <SizeSelector

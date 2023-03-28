@@ -1,4 +1,3 @@
-import { current } from '@reduxjs/toolkit'
 import React from 'react'
 
 export default function QuantitySelector ({sizes, currentSize, handleQuantityChange, currentQuantity, quantityMax}) {

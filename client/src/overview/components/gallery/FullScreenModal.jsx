@@ -7,7 +7,7 @@ import PanAndZoomImage from './PanAndZoomImage.jsx'
 
 
 
-export default function FullScreenModalThree ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
+export default function FullScreenModal ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
 
   //const [showModal, setShowModal] = React.useState(false);

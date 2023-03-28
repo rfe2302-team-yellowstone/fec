@@ -6,6 +6,10 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 // import the AddPerson component being tested
 import Header from '../components/productInfo/Header.jsx';
+import StyleSelector from '../components/productInfo/StyleSelector.jsx';
+import QuantitySelector from '../components/productInfo/QuantitySelector.jsx';
+import OverallRatingPlaceholder from '../components/productInfo/OverallRatingPlaceholder.jsx';
+import Actions from '../components/productInfo/Actions.jsx';
 
 import testObjects from './testObjects.js'
 
@@ -14,9 +18,10 @@ const addPerson = jest.fn();
 
 // test files
 const product = testObjects.product
-const currentStyle = testObjects.style
+const styles = testObjects.styles
+const currentStyle = styles[0]
 
-// describe the test suite for AddPerson component
+// describe the test suite for Header component
 describe('Header', () => {
 
 
@@ -25,6 +30,9 @@ describe('Header', () => {
 
     // render the Header component with props
     render(<Header product={product} currentStyle={currentStyle} />);
+
+    // Product Rating
+    expect(screen.getByText('rating placeholder')).toBeInTheDocument();
 
     // Product Category
     expect(screen.getByText('overview category')).toBeInTheDocument();
@@ -41,6 +49,70 @@ describe('Header', () => {
     // assert that the "Submit" button is present in the document
     // expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
+
+
+  test('should contain all styles', () => {
+
+    const setCurrentStyle = jest.fn();
+
+
+    // render the Header component with props
+    render(<StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />);
+
+    // Category Name
+    expect(screen.getByText('Cerulean')).toBeInTheDocument();
+
+    // Product Name
+    expect(screen.getByRole('overview product name')).toBeInTheDocument();
+
+
+
+    // assert that the "Submit" button is present in the document
+    // expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+  });
+
+
+
+  /*
+    Styles:
+      - Should call changeImage when new style selected
+
+    Quantity:
+      - Should be set to '-' during initial render
+      - Should default to 1 once size is selected
+      - Should show integers from 1 to max sku quantity
+
+    Actions
+      - should show 'Add to cart' and 'favorite' buttons
+      ** - should add item to cart when clicked
+
+
+    Gallery:
+      - should load all images in gallery
+      - should show prev arrow grayed out for first image
+      - should show next arrow grayed out for last image
+      - Next arrow should change image to next in carousel
+      - Next arrow should change image to next in main image viewer
+      - Prev arrow should change image to previous in carousel
+      - Prev arrow should change image to previous in main image viewer
+
+    Carousel:
+      - Should call changeImage when new style selected
+      - should expand when hovered over
+
+    Full Screen:
+      - should launch image selected in main image viewer
+      - should load all images in gallery
+      - should show prev arrow grayed out for first image
+      - should show next arrow grayed out for last image
+
+    Product Description:
+      - should show slogan
+      - should show features
+      - should show social media buttons
+
+
+  */
 
 
   // test('should call addPerson function with name and age on form submit', async () => {

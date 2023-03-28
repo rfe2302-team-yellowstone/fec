@@ -16,8 +16,8 @@ const PanAndZoomImage = ({ src, i }) => {
 
   const containerRef = useRef();
 
-  console.log('container ref:', containerRef)
-  console.log('window:', window)
+  // console.log('container ref:', containerRef)
+  // console.log('window:', window)
 
   const onLoad = (e) => {
     setImage({

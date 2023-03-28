@@ -1,7 +1,7 @@
 import React from 'react'
 import StyleSelectorItem from './StyleSelectorItem.jsx'
 
-export default function StyleSelector ({styles, currentStyle, setCurrentStyle}) {
+export default function StyleSelector ({styles, currentStyle, setCurrentStyle, handleStyleChange}) {
 
   // console.log('styleselect', styles)
   // console.log('styleselect', currentStyle)
@@ -15,9 +15,11 @@ export default function StyleSelector ({styles, currentStyle, setCurrentStyle}) 
           styles.map((style, i) => {
             return <StyleSelectorItem
               key={i}
+              i={i}
               style={style}
               currentStyle={currentStyle}
               setCurrentStyle={setCurrentStyle}
+              handleStyleChange={handleStyleChange}
             />
 
           })

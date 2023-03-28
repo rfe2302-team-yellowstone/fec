@@ -7,30 +7,13 @@ import PanAndZoomImage from './PanAndZoomImage.jsx'
 
 
 
-export default function FullScreenModalThree ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
+export default function FullScreenModalFour ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
 
   //const [showModal, setShowModal] = React.useState(false);
   // useEffect(() => {
   //   setTimeout(()=> changeImage(currentIndex, 'fs-'),10)
   // }, [fullScreenMode])
-  const [index, setIndex] = useState(currentIndex)
-
-  const handleFSNavigationOnClick = (event) => {
-    event.preventDefault()
-
-    if (event.target.id.indexOf('next-button') >= 0) {
-      console.log(idPrefix, ' + ', index)
-      setIndex(index + 1)
-    } else {
-      console.log(idPrefix, ' - ', currentIndex)
-      setIndex(index - 1)
-    }
-  }
-
-  useEffect(() => {
-    setIndex(currentIndex)
-  }, [currentIndex] )
 
   return (
     <>
@@ -86,12 +69,12 @@ export default function FullScreenModalThree ({currentStyle, fullScreenMode, set
                   </button>
 
                 </div>
-                <NavigationButtons
-                  i={index}
+                {/* <NavigationButtons
+                  i={currentIndex}
                   idPrefix={idPrefix}
-                  handleNavigationOnClick={handleFSNavigationOnClick}
+                  handleNavigationOnClick={handleNavigationOnClick}
                   photosLength={currentStyle.photos.length}
-                />
+                /> */}
                 {/*body*/}
                 {/* <img src={currentStyle.photos[0].url}></img> */}
                 {/* <div id='map' className='grid justify-center ' >
@@ -101,16 +84,26 @@ export default function FullScreenModalThree ({currentStyle, fullScreenMode, set
                   <div id="small"></div>
                   <div id="mag"></div> */}
 
-
+                {/*
                 <div className='cursor-move z-40'>
                   <PanAndZoomImage
-                    src={currentStyle.photos[index].url}
-                    i={index}
+                    src={currentStyle.photos[currentIndex].url}
+                    i={currentIndex}
 
                   />
-                  {/* <img src={'https://www.bbc.co.uk/london/travel/downloads/tube_map.gif'}></img> */}
 
-                </div>
+
+                </div> */}
+
+            <ImageViewer
+              currentStyle={currentStyle}
+              fullScreenMode={fullScreenMode}
+              setFullScreenMode={setFullScreenMode}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              changeImage={changeImage}
+              idPrefix={idPrefix}
+            />
 
 
 

@@ -3,6 +3,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import ExpandButton from './ExpandButton.jsx'
 import NavigationButtons from './NavigationButtons.jsx'
+import PanAndZoomImage from './PanAndZoomImage.jsx'
 
 export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
@@ -31,12 +32,23 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
 
     >
       {/* Actual image */}
-      <img
-        id={`${idPrefix}slide-img-img${i}`}
-        src={photos[i].url}
-        className={`w-4/6 self-center rounded-box ${fullScreenMode ? '' : ''}`}
-        onClick={handleImageClick}
-      />
+      { /* Regular image */
+        (!fullScreenMode) &&
+        <img
+          id={`${idPrefix}slide-img-img${i}`}
+          src={photos[i].url}
+          className={`w-4/6 self-center rounded-box ${fullScreenMode ? '' : ''}`}
+          onClick={handleImageClick}
+        />
+      }
+      { /* Full screen image w/ pan and zoom */
+        (fullScreenMode) &&
+        <PanAndZoomImage
+          src={photos[i].url}
+          i={i}
+
+        />
+      }
 
       <NavigationButtons
         i={i}

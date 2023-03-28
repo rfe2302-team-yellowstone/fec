@@ -37,7 +37,7 @@ const Sort = ({reviews, setReviews, order, setOrder}) => {
       console.log(a.reviewer_name, aScore, b.reviewer_name, bScore)
       return aScore - bScore;
     })
-    console.log(orderedReviews)
+
     setOrder(orderedReviews.reverse())
   }
 

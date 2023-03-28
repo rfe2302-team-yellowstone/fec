@@ -42,7 +42,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
 
  const renderCharacteristicComponent = ([title, value]) => {
   return (
-    <div className="mb-6" key="title">
+    <div className="mb-6" key={title}>
       <div className="font-bold mb-2">{title}</div>
       {getProductBreakdownBar(title, value)}
     </div>

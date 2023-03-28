@@ -135,7 +135,7 @@ const NewReview = ({product, reviews}) => {
   // }
 
   return (
-    <div>
+    <div data-testid="modal">
       <button type="button"  className="btn btn-active btn-primary" onClick={() => setForm(true)}>Add a review</button>
       {form && (
         <div className="fixed z-10 inset-0 overflow-y-auto">

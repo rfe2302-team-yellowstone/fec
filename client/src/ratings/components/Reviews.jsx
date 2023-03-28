@@ -11,20 +11,12 @@ const Reviews = ({product, reviews, setReviews}) => {
   // will need to style later
 
   const [sort, setSort] = useState('Relevant')
-  const [order, setOrder] = useState(reviews)
+  const [order, setOrder] = useState([])
   const [maxReviews, setMaxReviews] = useState(2)
 
   useEffect(() => {
     setOrder(reviews)
   }, [reviews])
-
-  const reviewResetter = () => {
-    axios.get(`/reviews?product_id=${product.id}&count=1000`)
-    .then(response => {
-      setReviews(response.data.results)
-    })
-  }
-
   // useEffect(() => {
   //   console.log(order, '-----ORDER------')
   // }, [order])
@@ -33,8 +25,10 @@ const Reviews = ({product, reviews, setReviews}) => {
     <div>
     <div className="overflow-y-scroll max-h-screen scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
         <div className="mb-4">
+        <div className="sticky top-0 z-10 bg-white">
           <Sort reviews={reviews} setReviews={setReviews} order={order} setOrder={setOrder}></Sort>
-          {order.slice(0, maxReviews).map(review => (
+          </div>
+          {Array.isArray(order) && order.slice(0, maxReviews).map(review => (
           <ul key={review.review_id}>
           <ReviewTile review={review}></ReviewTile>
           </ul>

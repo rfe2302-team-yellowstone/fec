@@ -70,7 +70,7 @@ const App = ({initialProduct}) => {
 
       <Overview cart={cart} product={product} handleSearch={handleSearch} onMouseOver={e => dispatch(trackModule('overview'))}/>
       <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct}/>
-      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}></Ratings>
+      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}/>
       <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>
     </div>
   )

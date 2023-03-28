@@ -91,22 +91,22 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
         <h4 className='text-lg mb-2'>About the {productName}</h4>
         <form onSubmit={handleSubmit}>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='question-body-label'>
               <span className="label-text">Your Question</span>
             </label>
             <textarea id='question-body' name='questionBody' placeholder='Example: Is this machine washable?' className='textarea textarea-bordered w-full'
-            onChange={handleChange}>
+            onChange={handleChange} aria-labelledby='question-body-label' >
             </textarea>
             <label className="label">
               {errors.questionBody && <span className='label-text-alt text-red-500'>{errors.questionBody}</span>}
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='nickname-label'>
               <span className="label-text">Your Nickname</span>
             </label>
             <input type="text" id='nickname' name='nickname' placeholder='Example: jackson11!' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='nickname-label'
             />
             <label className="label">
               {errors.nickname ?
@@ -116,11 +116,11 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='email-label'>
               <span className="label-text">Your email</span>
             </label>
             <input type="text" id='nickname' name='email' placeholder='Example: john.smith@example.com' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='email-label'
             />
             <label className="label">
               {errors.email ?

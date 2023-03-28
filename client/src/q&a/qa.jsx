@@ -18,7 +18,6 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
   const dispatch = useDispatch();
   const ModuleRef = useRef(module);
   ModuleRef.current = module;
-  // console.log('initial product:', product);
 
   useEffect(() => {
     axios.get('/qa/questions', {

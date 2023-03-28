@@ -85,7 +85,7 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(postValues, validate, defaultErrors);
 
   return (
-    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`}>
+    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`} role='dialog' aria-modal='true'>
       <div className='modal-box'>
         <h3 className='text-3xl'>Ask Your Question</h3>
         <h4 className='text-lg mb-2'>About the {productName}</h4>

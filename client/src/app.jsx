@@ -69,10 +69,10 @@ const App = ({initialProduct}) => {
     <div data-testid="app-container">
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
 
-      <Overview cart={cart} product={product} handleSearch={handleSearch} onMouseOver={e => dispatch(trackModule('overview'))}/>
-      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct}/>
-      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}/>
-      <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>
+      <Overview cart={cart} product={product} handleSearch={handleSearch} data-testid="overview" onMouseOver={e => dispatch(trackModule('overview'))}/>
+      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct}  data-testid="related-outfit"/>
+      <Ratings product={product} data-testid="ratings" onMouseOver={e => dispatch(trackModule('ratings'))}/>
+      <QAndA product={product} data-testid="qAndA" onMouseOver={e => dispatch(trackModule('qa'))}/>
     </div>
   )
 

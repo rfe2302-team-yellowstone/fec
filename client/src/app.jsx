@@ -66,7 +66,7 @@ const App = ({initialProduct}) => {
 
 
   return (
-    <div>
+    <div data-testid="app-container">
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
 
       <Overview cart={cart} product={product} handleSearch={handleSearch} onMouseOver={e => dispatch(trackModule('overview'))}/>

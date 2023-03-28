@@ -3,34 +3,44 @@ import debounce from "../../lib/debounce.js";
 
 const Search = ({ reviews, setReviews, allReviews }) => {
   const [searchInput, setSearchInput] = useState("");
-  const [searchResult, setSearchResult] = useState("");
+  // const [searchResult, setSearchResult] = useState(null);
+  // const [searchActive, setSearchActive] = useState(false);
 
   const handleChange = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setSearchInput(e.target.value);
   };
 
   const searcher = (searchInput, allReviews) => {
-    if (searchInput.trim().length < 3) {
+    if (searchInput.trim().length < 3 && allReviews.length > 0) {
       setReviews(allReviews);
-    } else {
-      let searchResult = reviews.filter((review) => {
-         setSearchResult(review.results.body.includes(searchInput));
-        setReviews(searchResult);
-      });
+    }
+    if (searchInput.trim().length >= 3 && allReviews.length > 0) {
+      const searchResult = allReviews.filter(review => {
+        return review.summary.includes(searchInput)
+      })
+      setReviews(searchResult)
     }
   };
 
-  const debouncedSearch = useRef(debounce(searcher, 500)).current;
+  // const debouncedSearch = useRef(debounce(searcher, 500)).current;
+
+  const handleSearch = debounce(() => {
+    searcher(searchInput, allReviews);
+  }, 500);
 
   const handleClick = (e) => {
     e.preventDefault();
-    setReviews(searchInput);
+    console.log(searchInput)
+    // setReviews(searchResult);
+    // setSearchInput('')
   };
 
-  // useEffect(() => {
-  //   debouncedSearch(searchInput, allReviews)
-  // }, [searchInput])
+  useEffect(() => {
+    console.log(searchInput.length, 'SEARCHINPUT')
+    console.log(reviews, 'REVIEWS')
+    handleSearch(searchInput, allReviews)
+  }, [searchInput])
 
   return (
     <div className="flex items-center mb-4">

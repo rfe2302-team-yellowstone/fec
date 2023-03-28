@@ -29,7 +29,7 @@ useEffect(() => {
   })
   .then(() => {
     axios.get(`/reviews/meta?product_id=${product.id}`)
-    .then((results) =>{
+    .then((results) => {
       // console.log(results.data)
       setMetaData(results.data)
     })
@@ -42,27 +42,6 @@ useEffect(() => {
 useEffect(() => {
   console.log(reviews)
 }, [reviews])
-
-
-  const relevanceSorter = () => {
-    // const weightFactor = 0.05
-    // const orderedReviews = reviews.sort((a, b) => {
-    //   const aDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
-    //   const bDays = Math.floor((new Date() - new Date(a.date)) / (1000 * 60 * 60 * 24))
-    //   const aScore = a.helpfulness * weightFactor + aDays // .5 is the weight factor - otherwise helpfulness will be overemphasized
-    //   const bScore = b.helpfulness * weightFactor + bDays
-    //   // console.log(a.reviewer_name, aScore, b.reviewer_name, bScore)
-    //   return aScore - bScore;
-    // })
-    // // console.log(orderedReviews)
-    // return orderedReviews.reverse()
-    // axios.get(`/reviews?product_id=${product.id}&count=1000&sort=relevant`)
-    // .then(response => {
-    //   setReviews(response.data.results)
-    // })
-  }
-
-  // const orderedReviews = relevanceSorter()
 
 return (
   <div onMouseOver={onMouseOver}>

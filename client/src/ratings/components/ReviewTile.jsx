@@ -86,7 +86,7 @@ const ReviewTile = ({review}) => {
         <p className="mt-4 mb-8 text-sm text-gray-600">
          {showFullReview ? review.body : review.body.substring(0, 250)}
          {review.body.length > 250 && !showFullReview && (
-          <button className='btn btn-xs btn-ghost' onClick={handleShowMore}>
+          <button className='btn btn-xs btn-accent' onClick={handleShowMore}>
           Show More...
           </button>
          )}

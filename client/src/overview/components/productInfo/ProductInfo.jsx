@@ -45,7 +45,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
 
   return (
-    <div className='flex-1 flex-col flex w-1/4 flex-wrap mt-auto' >
+    <div className='flex-1 flex-col flex flex-wrap mt-auto' >
       <OverallRatingPlaceholder />
       <Header product={product} currentStyle={currentStyle}/>
       <StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />

@@ -34,6 +34,7 @@ const App = ({initialProduct}) => {
     // handles clicks on new products
 
     productID = productID || 37311
+    //console.log(productID)
 
     axios.get(`http://localhost:3000/products/${productID}`)
       .then(res => {

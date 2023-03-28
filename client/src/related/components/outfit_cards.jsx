@@ -34,7 +34,7 @@ const OutfitCard = ({product, reviews}) => {
     if(localStorage.getItem('fits')) {
       fits = JSON.parse(localStorage.getItem('fits'));
     }
-    console.log(fits)
+
     if(fits.length !== 0) {
       fits.forEach(fit => {
         if(fit.id === item.id) {

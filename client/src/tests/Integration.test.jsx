@@ -29,5 +29,26 @@ test('if App is rendering', () => {
 })
 
 test('clicking on "bright future sunglasses" button should update the selected product to bright future sunglasses in all components', () => {
+  const store = setupStore()
+  render(
+    <Provider store={store}>
+      <App product={testObjects.product1}/>
+    </Provider>
+  )
 
+  /// findning sunglasses item
+  const sunglassesItem = screen.getByText('Bright Future Sunglasses');
+  fireEvent.click(sunglassesItem)
+
+  const overviewComponent = screen.getByTestId('overview');
+  expect(overviewComponent.toHaveTextContent('Bright Future Sunglasses'))
+
+  const ratingsComponent = screen.getByTestId('ratings')
+  expect(ratingsComponent.toHaveTextContent('Bright Future Sunglasses'))
+
+  const relatedComponent = screen.getByTestId('related-outfit')
+  expect(relatedComponent.toHaveTextContent('Bright Future Sunglasses'))
+
+  const qAndAComponent = screen.getByTestId('q-and-a')
+  expect(qAndAComponent).toHaveTextContent('Bright Future Sunglasses')
 })

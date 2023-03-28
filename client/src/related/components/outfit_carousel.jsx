@@ -8,7 +8,7 @@ const OutfitCarousel = ({product, reviews}) => {
   return (
     <div>
       <h3 className='font-semibold'>Your Outfit</h3>
-      <div className="carousel carousel-center max-w-lg p-3 space-x-4 rounded-box ">
+      <div className="carousel carousel-end max-w-2xl p-4 space-x-4">
         <OutfitCard product={product} reviews = {reviews}/>
 
       </div>

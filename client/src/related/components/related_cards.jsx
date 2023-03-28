@@ -14,7 +14,7 @@ const RelatedCard = ({product, updateProduct}) => {
 
 
 
-    let fetchingRelatedProducts = () => axios.get(`http://localhost:3000/products/${product.id}/related`)
+    let fetchingRelatedProducts = () => axios.get(`/products/${product.id}/related`)
     .then(response => {
       let relatedIds = response.data;
 
@@ -122,7 +122,7 @@ const RelatedCard = ({product, updateProduct}) => {
 
     const cards = relatedItems.map((card, i) =>
 
-      <div id = {`${card.id}-${i}`} onClick={cardClick} key={card.id} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
+      <div data-testid = {card.id} id = {`${card.id}`}  onClick={cardClick} key={card.id} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
 
           <div id = {card.id} className="relative h-64 w-52">
 

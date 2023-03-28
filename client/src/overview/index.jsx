@@ -189,7 +189,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
   ]
 
   return (
-    <div id="overview" onMouseOver={onMouseOver}>
+    <div data-testid="overview" onMouseOver={onMouseOver}>
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
       <FullScreenModal

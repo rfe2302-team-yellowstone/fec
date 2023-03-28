@@ -1,7 +1,6 @@
 import { current } from '@reduxjs/toolkit'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import ExpandButton from './ExpandButton.jsx'
 import NavigationButtons from './NavigationButtons.jsx'
 import PanAndZoomImage from './PanAndZoomImage.jsx'
 

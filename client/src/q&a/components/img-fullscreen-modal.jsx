@@ -7,7 +7,7 @@ const ImgFullscreenModal = ({isModalOpen, setIsModalOpen, fullscreenImageURL}) =
   }
 
   return (
-    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`}>
+    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`} role='dialog' aria-modal='true'>
       <div className='modal-box'>
         <img src={fullscreenImageURL}/>
         <div className="modal-action">

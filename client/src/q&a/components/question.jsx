@@ -54,7 +54,7 @@ export default function Question ({question, productName}) {
       <div className='flex mb-2'>
         <span className='w-8/12'>
           <span className='text-xl font-bold'>Q: </span>
-          <span className='text-lg ml-4'>{question.question_body}</span>
+          <span className='text-lg ml-4 font-semibold'>{question.question_body}</span>
         </span>
         <span className='ml-auto'>
           <span>Helpful? </span>
@@ -68,7 +68,7 @@ export default function Question ({question, productName}) {
         <AnswersList answers={answers}/>
       </div>
       {allAnswers.length === answers.length
-        ? <button className='btn btn-xs btn-ghost btn-disabled'>NO MORE ANSWERS</button>
+        ? <button className='btn btn-xs btn-ghost btn-disabled ml-9'>NO MORE ANSWERS</button>
         : <button className='btn btn-xs btn-ghost ml-9' onClick={handleLoadMoreAnswersClick}>LOAD MORE ANSWERS</button>
       }
       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>

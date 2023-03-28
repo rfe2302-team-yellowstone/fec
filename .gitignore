@@ -3,7 +3,7 @@ node_modules
 *.DS_Store
 client/dist/bundle.js
 config.js
-node_modules/
 client/dist/bundle.js.map
 client/dist/output.css
 client/src/app.jsx
+coverage

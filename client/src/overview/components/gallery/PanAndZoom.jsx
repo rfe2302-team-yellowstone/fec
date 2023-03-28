@@ -1,9 +1,9 @@
 // https://jkettmann.com/jr-to-sr-refactoring-react-pan-and-zoom-image-component
 
 import React, { useEffect, useRef, useState } from 'react';
-import './PanAndZoomImage.css';
 
-const PanAndZoomImage = ({ src }) => {
+
+const PanAndZoomImage = ({ src, i }) => {
   const [isPanning, setPanning] = useState(false);
   const [image, setImage] = useState();
   const [position, setPosition] = useState({
@@ -15,6 +15,9 @@ const PanAndZoomImage = ({ src }) => {
   });
 
   const containerRef = useRef();
+
+  console.log('container ref:', containerRef)
+  console.log('window:', window)
 
   const onLoad = (e) => {
     setImage({
@@ -76,18 +79,20 @@ const PanAndZoomImage = ({ src }) => {
 
   return (
     <div
-      className="PanAndZoomImage-container h-[90vh]"
+      className="overflow-hidden h-[90vh]"
       ref={containerRef}
       onMouseDown={onMouseDown}
       onWheel={onWheel}
     >
       <div
+        id={`fs-slide-img-${i}`}
         style={{
           transform: `translate(${position.x}px, ${position.y}px) scale(${position.z})`,
         }}
       >
         <img
-          className="PanAndZoomImage-image rounded-sm"
+          id={`fs-slide-img-img${i}`}
+          className="min-w-full min-h-full rounded-sm"
           alt="floorplan"
           src={src}
           onLoad={onLoad}

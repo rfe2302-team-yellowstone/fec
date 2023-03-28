@@ -10,6 +10,7 @@ import ProductDetails from './components/productDetails/ProductDetails.jsx'
 // import FullScreenModalTwo from './components/gallery/FullScreenModalTwo.jsx';
 import FullScreenModalThree from './components/gallery/FullScreenModalThree.jsx';
 
+
 const LOCAL_SERVER = 'http://localhost:3000'
 
 export default function Overview({product, handleSearch, onMouseOver}) {
@@ -50,14 +51,6 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     let sizes = {}
     let skus = style.skus;
 
-    // try {
-    //   skus = style.skus;
-    // }
-    // catch {
-    //   console.log('no styles available')
-    //   return;
-    // }
-
 
     Object.keys(skus).forEach((sku) => {
       if (+skus[sku]['quantity'] > 0) {
@@ -86,6 +79,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
     // Set the image ID of the index that was given
     const imageID = `${prefix}slide-img-${index}`
+    console.log('imageID: ', imageID)
 
     // Just return if it's the same image and we're not in fullscreen mode
     if ((index === currentIndex) && (prefix !== 'fs-')) {
@@ -94,6 +88,8 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
     // Get elements from DOM
     const imageElement = document.getElementById(imageID);
+
+    console.log('image element', imageElement)
     const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
 
     // Get the position of the clicked image relative to the viewport
@@ -116,6 +112,20 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
   }
 
+  const handleNavigationOnClick = (event) => {
+    event.preventDefault()
+
+    let idPrefix = fullScreenMode ? 'fs-' : 'n-'
+
+    if (event.target.id.indexOf('next-button') >= 0) {
+      console.log(idPrefix, ' + ', currentIndex)
+      changeImage(currentIndex + 1, idPrefix)
+    } else {
+      console.log(idPrefix, ' - ', currentIndex)
+      changeImage(currentIndex - 1, idPrefix)
+    }
+  }
+
 
 
   const quickLinks = [
@@ -135,6 +145,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
         setFullScreenMode={setFullScreenMode}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
+        handleNavigationOnClick={handleNavigationOnClick}
         // currentIndex={currentIndex}
         // setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
@@ -149,6 +160,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
           changeImage={changeImage}
+          handleNavigationOnClick={handleNavigationOnClick}
         />
 
         <ProductInfo

@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import ImageViewer from './ImageViewer.jsx'
+import NavigationButtons from './NavigationButtons.jsx';
 import PanAndZoomImage from './PanAndZoom.jsx'
 //import './zzmagStyles.css'
 
 
 
-export default function FullScreenModalThree ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
+export default function FullScreenModalThree ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
 
   //const [showModal, setShowModal] = React.useState(false);
@@ -57,6 +58,7 @@ export default function FullScreenModalThree ({currentStyle, fullScreenMode, set
 
                 </div> */}
 
+
                 <div id='fs-close-button' className="flex justify-end rounded-b">
                   <button
                     className="text-slate-800 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -67,6 +69,12 @@ export default function FullScreenModalThree ({currentStyle, fullScreenMode, set
                   </button>
 
                 </div>
+                <NavigationButtons
+                  i={currentIndex}
+                  idPrefix={idPrefix}
+                  handleNavigationOnClick={handleNavigationOnClick}
+                  photosLength={currentStyle.photos.length}
+                />
                 {/*body*/}
                 {/* <img src={currentStyle.photos[0].url}></img> */}
                 {/* <div id='map' className='grid justify-center ' >
@@ -75,14 +83,19 @@ export default function FullScreenModalThree ({currentStyle, fullScreenMode, set
 
                   <div id="small"></div>
                   <div id="mag"></div> */}
+
+
                 <div className='cursor-move z-40'>
                   <PanAndZoomImage
-                    src={currentStyle.photos[1].url}
+                    src={currentStyle.photos[currentIndex].url}
+                    i={currentIndex}
 
                   />
                   {/* <img src={'https://www.bbc.co.uk/london/travel/downloads/tube_map.gif'}></img> */}
 
                 </div>
+
+
 
               </div>
             </div>

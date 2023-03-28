@@ -5,7 +5,7 @@ import IconCarousel from './IconCarousel.jsx'
 // import FullScreenModal from './FullScreenModal.jsx'
 import FullScreenModalTwo from './FullScreenModalTwo.jsx'
 
-export default function Gallery ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage}) {
+export default function Gallery ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, handleNavigationOnClick}) {
 
   const prefix='n-'
 
@@ -33,6 +33,7 @@ export default function Gallery ({currentStyle, fullScreenMode, setFullScreenMod
         setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
         idPrefix={'n-'}
+        handleNavigationOnClick={handleNavigationOnClick}
 
       />
 

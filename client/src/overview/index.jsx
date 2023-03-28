@@ -6,9 +6,7 @@ import Announcements from './components/announcements/Announcements.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
 import ProductDetails from './components/productDetails/ProductDetails.jsx'
-//import FullScreenModal from './components/gallery/FullScreenModal.jsx';
-// import FullScreenModalTwo from './components/gallery/FullScreenModalTwo.jsx';
-import FullScreenModalThree from './components/gallery/FullScreenModalThree.jsx';
+import FullScreenModal from './components/gallery/FullScreenModal.jsx';
 
 
 const LOCAL_SERVER = 'http://localhost:3000'
@@ -139,7 +137,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     <div id="overview" onMouseOver={onMouseOver}>
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
-      <FullScreenModalThree
+      <FullScreenModal
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
         setFullScreenMode={setFullScreenMode}

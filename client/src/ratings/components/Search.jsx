@@ -17,7 +17,7 @@ const Search = ({ reviews, setReviews, allReviews }) => {
     }
     if (searchInput.trim().length >= 3 && allReviews.length > 0) {
       const searchResult = allReviews.filter(review => {
-        return review.summary.includes(searchInput)
+        return review.summary.includes(searchInput) || review.reviewer_name.includes(searchInput) || review.body.includes(searchInput)
       })
       setReviews(searchResult)
     }

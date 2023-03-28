@@ -10,7 +10,7 @@ export default function ImageViewer ({currentStyle, fullScreenMode, setFullScree
 
     <div
       id={`${idPrefix}image-viewer-carousel`}
-      className={`carousel items-center ${fullScreenMode ? 'h-[95%]' : 'w-full lg:w-[660px]'}`}
+      className={`carousel items-center ${fullScreenMode ? 'h-[95%]' : 'w-full xl:w-[660px]'}`}
     >
       {
         currentStyle.photos.map((photo, i) => {

@@ -8,7 +8,7 @@ export default function Gallery ({currentStyle, fullScreenMode, setFullScreenMod
   const prefix='n-'
 
   return (
-    <div className='w-full xl:w-1/2 grid justify-items-center items-center'>
+    <div className='w-full xl:w-2/3 grid justify-items-center items-center'>
 
       <ImageViewer
         currentStyle={currentStyle}

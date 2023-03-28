@@ -37,8 +37,8 @@ const Search = ({ reviews, setReviews, allReviews }) => {
   };
 
   useEffect(() => {
-    console.log(searchInput.length, 'SEARCHINPUT')
-    console.log(reviews, 'REVIEWS')
+    // console.log(searchInput.length, 'SEARCHINPUT')
+    // console.log(reviews, 'REVIEWS')
     handleSearch(searchInput, allReviews)
   }, [searchInput])
 

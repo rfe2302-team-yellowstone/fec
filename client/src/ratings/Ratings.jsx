@@ -39,9 +39,9 @@ useEffect(() => {
   })
 }, [])
 
-useEffect(() => {
-  console.log(reviews)
-}, [reviews])
+// useEffect(() => {
+//   console.log(reviews)
+// }, [reviews])
 
 return (
   <div onMouseOver={onMouseOver}>

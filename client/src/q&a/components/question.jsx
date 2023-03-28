@@ -68,7 +68,7 @@ export default function Question ({question, productName}) {
         <AnswersList answers={answers}/>
       </div>
       {allAnswers.length === answers.length
-        ? <button className='btn btn-xs btn-ghost btn-disabled'>NO MORE ANSWERS</button>
+        ? <button className='btn btn-xs btn-ghost btn-disabled ml-9'>NO MORE ANSWERS</button>
         : <button className='btn btn-xs btn-ghost ml-9' onClick={handleLoadMoreAnswersClick}>LOAD MORE ANSWERS</button>
       }
       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>

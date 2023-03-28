@@ -16,14 +16,14 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
         setHelpfulCount(helpfulCount + 1);
       })
       .catch(err => {
-        console.log('unable to mark Answer as helpful, error:', err);
+        // console.log('unable to mark Answer as helpful, error:', err);
       })
   }
 
   const handleReportClick = e => {
     axios.put(`http://localhost:3000/qa/answers/${answer.answer_id}/report`)
       .catch(err => {
-        console.log('unable to report answer, error:', err);
+        // console.log('unable to report answer, error:', err);
       })
   }
 
@@ -39,7 +39,7 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
         <span className='text-sm text-gray-600'>by {answer.answerer_name}, {answer.date.slice(0, 10)}</span>
         <span className='text-sm'> | Helpful? </span>
         <button className='btn btn-xs btn-ghost -m-2 mr-0.5 underline' onClick={handleHelpfulClick}>Yes</button>
-        <span className='text-sm'>({helpfulCount}) | </span>
+        <span className='text-sm' data-testid='helpful-count'>({helpfulCount}) | </span>
         <button className='btn btn-xs btn-ghost underline' onClick={handleReportClick}>Report</button>
       </div>
     </li>

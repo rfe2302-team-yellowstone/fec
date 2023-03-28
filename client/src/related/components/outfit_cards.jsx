@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 const OutfitCard = ({product, reviews}) => {
-  let fits = JSON.parse(localStorage.getItem('fits'));
+  let fits = JSON.parse(localStorage.getItem('fits')) || [];
 
   const [outfitItems, setOutfitItems] = useState(fits);
   //const [rating, setRating] = useState(0)

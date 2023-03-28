@@ -31,7 +31,7 @@ export default function QAndA ({product, onMouseOver}) {
         setQuestions(response.data.results.slice(0, 2));
         setAllQuestions(response.data.results);
       })
-  }, []);
+  }, [product]);
 
   return (
     <section className='flex flex-col items-center my-4' onMouseOver={onMouseOver}>

@@ -30,7 +30,7 @@ describe('Question Form Modal', () => {
     expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
   })
 
-  test('submits the input values when submit button is clicked', async () => {
+  test('submits the input values when submit button is clicked and POST request successful', async () => {
     const isModalOpen = false;
     const setIsModalOpen = jest.fn();
     const productId = 37311;
@@ -57,11 +57,89 @@ describe('Question Form Modal', () => {
 
     fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'Does this fit?'}});
     fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
-    fireEvent.change(screen.getByLabelText('Your email', {target: {value: 'test@example.com'}}));
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
     fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
 
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      questionBody: 'Does this fit?',
+      nickname: 'testperson123',
+      email: 'test@example.com'
+    })
+
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/qa/questions');
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+        body: 'Does this fit?',
+        name: 'testperson123',
+        email: 'test@example.com',
+        product_id: 37311
+      });
+    });
+  })
+
+  test('closes the modal when user clicks on X button', () => {
+    const isModalOpen = false;
+    const setIsModalOpen = jest.fn();
+    const productId = 37311;
+    const productName = 'Camo Onesie';
+
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
+
+      return (
+        <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
+      );
+    }
+
+    render(<TestComponent />);
+
+    fireEvent.click(screen.getByText('X'));
+
+    expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
+  })
+
+  test('submits the input values when submit button is clicked and POST request unsuccessful', async () => {
+    const isModalOpen = false;
+    const setIsModalOpen = jest.fn();
+    const productId = 37311;
+    const productName = 'Camo Onesie';
+
+    axios.post.mockRejectedValue({
+      data: {},
+      status: 400,
+      statusText: 'OK',
+      headers: {},
+      config: {},
+      request: {}
+    })
+
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
+
+      return (
+        <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
+      );
+    }
+
+    render(<TestComponent />);
+
+    fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'Does this fit?'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      questionBody: 'Does this fit?',
+      nickname: 'testperson123',
+      email: 'test@example.com'
+    })
+
+    await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+        body: 'Does this fit?',
+        name: 'testperson123',
+        email: 'test@example.com',
+        product_id: 37311
+      });
     });
   })
 

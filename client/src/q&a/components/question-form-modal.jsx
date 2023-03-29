@@ -89,7 +89,7 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
       <div className='modal-box'>
         <h3 className='text-3xl'>Ask Your Question</h3>
         <h4 className='text-lg mb-2'>About the {productName}</h4>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid='answer-form'>
           <div className="form-control w-full">
             <label className="label" id='question-body-label'>
               <span className="label-text">Your Question</span>

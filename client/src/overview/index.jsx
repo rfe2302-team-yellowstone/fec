@@ -20,6 +20,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
   const [sizes, setSizes] = useState({})
   const [fullScreenMode, setFullScreenMode] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0) // index position of image currently showing
+  const [rating, setRating] = useState(0)
 
 
 
@@ -38,6 +39,42 @@ export default function Overview({product, handleSearch, onMouseOver}) {
         console.log(error)
       })
   }, [product])
+
+
+
+  // Retrieve ratings and calculate overall rating
+  useEffect(() => {
+    axios.get(`/reviews/meta?product_id=${product.id}`)
+      .then(response => {
+        let allRatings = response.data.ratings
+        let rating = calculateRating(allRatings)
+        setRating(rating)
+        // setReviews(allRatings)
+
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+
+  const calculateRating = (ratings) => {
+    let total = 0
+    let numberOfRatings = 0
+
+    Object.keys(ratings).forEach((rating) => {
+      total +=  (+rating * ratings[rating]) // number of stars * number of ratings
+      numberOfRatings += +ratings[rating]
+    })
+
+    let totalRating = total / numberOfRatings
+
+    totalRating = totalRating.toFixed(2)
+
+    return totalRating
+  }
+
 
 
   // Update images, reset quantity and sizes, when a new style is selected
@@ -180,6 +217,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
         />
 
         <ProductInfo
+          rating={rating}
           product={product}
           styles={styles}
           currentStyle={currentStyle}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import OverallRatingPlaceholder from './OverallRatingPlaceholder.jsx'
+import Rating from './Rating.jsx'
 import Header from './Header.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating}) {
 
   // Test style:
   // style ID: 221064
@@ -52,7 +52,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
   return (
     <div className='flex-col flex flex-wrap mt-auto' >
-      <OverallRatingPlaceholder />
+      <Rating rating={rating}/>
       <Header product={product} currentStyle={currentStyle}/>
       <StyleSelector
         styles={styles}

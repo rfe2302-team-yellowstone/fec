@@ -5,12 +5,28 @@ export default function QuantitySelector ({sizes, currentSize, handleQuantityCha
 
   return (
 
-    <div id='overview-quantity-selector' className={`dropdown dropdown-bottom flex flex-nowrap flex-col items-center `}>
+    <div
+      id='overview-quantity-selector'
+      className={`dropdown dropdown-bottom flex flex-nowrap flex-col items-center `}
+      >
+
       <p>Quantity</p>
-      <button tabIndex={0} disabled={(currentSize === 'Select Size')} className='btn m-1 w-36' onClick={e => e.preventDefault()}>
+      <button
+        tabIndex={0}
+        disabled={(currentSize === 'Select Size')}
+        className='btn m-1 w-36'
+        onClick={e => e.preventDefault()}
+        data-testid="quantity-selector"
+      >
         {currentQuantity}
 
-        <ul name="size" tabIndex={0} style={{display:'inline'}} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto overflow-x-hidden max-h-[250px]">
+        <ul
+          name="size"
+          tabIndex={0}
+          style={{display:'inline'}}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto overflow-x-hidden max-h-[250px]"
+          aria-label='quantity'
+        >
         {
           // Create a quick range from 0 to the max
           [...Array(quantityMax).keys()].map((i) => {

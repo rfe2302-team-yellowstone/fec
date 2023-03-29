@@ -37,12 +37,24 @@ export default function SizeSelector ({sizes, currentSize, handleSizeChange}) {
       <label tabIndex={0} className="btn m-1 w-36">
         {currentSize}
 
-        <ul name="size" tabIndex={0} style={{display:'inline'}} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto overflow-x-hidden max-h-[250px]">
+        <ul
+          name="size"
+          data-testid='size'
+          aria-label='size'
+          tabIndex={0}
+          style={{display:'inline'}}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto overflow-x-hidden max-h-[250px]"
+        >
         {
           sizeSelections.map((size, i) => {
             return (
-                <li key={i} onClick={handleSizeChange} className="text-slate-800">
-                  <a>
+                <li
+                  key={i}
+                  onClick={handleSizeChange}
+                  className="text-slate-800"
+
+                >
+                  <a data-testid={`size-${i}`}>
                       {size}
                   </a>
                 </li>

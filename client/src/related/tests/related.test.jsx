@@ -63,8 +63,23 @@ test('should add current item to outfit when clicking Add button',  ()=> {
   }, 2000)
 
 })
-//test('should open modal with clicking star button')
-// test('should set product detail page to ')
 
+test('should open modal with clicking star button', ()=>{
+  const updateProduct = jest.fn();
+  render(<RelatedCarousel product={testProduct} updateProduct = {updateProduct}/>)
+
+  // const compModal = screen.getByTestId('comModal');
+  //   expect(compModal).toBeInTheDocument();
+
+  setTimeout(()=>{
+    const setOpenModal = jest.fn();
+    const modalButton = screen.getByTestId(`37311-CMB`);
+    fireEvent.click(modalButton);
+
+    expect(setOpenModal).toBeCalled();
+
+  }, 2000)
+
+})
 
 })

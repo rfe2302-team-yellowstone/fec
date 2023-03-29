@@ -36,7 +36,7 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
 
 
   return (
-    <div className={`modal ${openModal ? 'modal-open': ''}`}>
+    <div data-testid="comModal" className={`modal ${openModal ? 'modal-open': ''}`}>
         <div className="modal-box relative cursor-pointer" htmlFor="">
         <button onClick={modalHandler} htmlFor="my-modal-4" className="btn btn-sm btn-circle absolute right-2 top-2">✕</button>
           <h3 className="text-lg font-bold">Features!</h3>
@@ -55,9 +55,9 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
                {features.filter(feature => feature.value !==null).map((feature, index) => {
                 return (
                 <tr key={index}>
-                  <th>{feature.productName === product.name ? <input type="checkbox" checked="checked" className="checkbox" /> : null}</th>
+                  <th>{feature.productName === product.name ? <input type="checkbox" checked="checked" className="checkbox" readOnly/> : null}</th>
                   <th>{feature.feature + ':' + feature.value}</th>
-                  <th>{feature.productName === comparedProduct.name ? <input type="checkbox" checked="checked" className="checkbox" />:null}</th>
+                  <th>{feature.productName === comparedProduct.name ? <input type="checkbox" checked="checked" className="checkbox" readOnly/>:null}</th>
                 </tr>
                 )
               })}

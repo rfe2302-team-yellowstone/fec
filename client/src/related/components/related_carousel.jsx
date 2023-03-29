@@ -8,7 +8,7 @@ const RelatedCarousel = ({product, updateProduct}) => {
 
 
   const directionArrowsHandler = (event) =>{
-    console.log(event.target)
+
     let direction = event.target.id
     const carouselNode = carouselRef.current;
 

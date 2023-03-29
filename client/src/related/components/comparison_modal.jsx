@@ -10,7 +10,7 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
     feature.productName = product.name;
   });
 
-  const [features, setFeatures] = useState(initialProductFeatures)
+  const [features, setFeatures] = useState([])
 
   const modalHandler = () => {
     setOpenModal(!openModal)

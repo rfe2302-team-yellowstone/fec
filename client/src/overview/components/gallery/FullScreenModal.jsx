@@ -28,6 +28,14 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
     }
   }
 
+  const onCloseClick = (event) => {
+    event.preventDefault()
+
+    setFullScreenMode(false)
+    setIndex(currentIndex)
+  }
+
+
   useEffect(() => {
     setIndex(currentIndex)
   }, [currentIndex] )
@@ -44,7 +52,7 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
 
       {/* Actual window of modal */}
       {fullScreenMode ? (
-        <div className='grid'>
+        <div className='grid transition-all duration-500'>
           {/* Translucent Background */}
           <div id='fs-translucent-background'
             className="opacity-25 fixed inset-0 z-40 bg-black"
@@ -61,7 +69,7 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
             <div id='fs-white-window' className="relative max-w-none max-h-none h-[95%] w-[95%] justify-self-center">
 
               {/* Content */}
-              <div id='fs-content' className="flex flex-col justify-end border-0 rounded-lg shadow-lg relative  bg-white outline-none focus:outline-none h-95% p-[20px]">
+              <div id='fs-image-viewer-carousel' className="flex flex-col justify-end border-0 rounded-lg shadow-lg relative  bg-white outline-none focus:outline-none h-95% p-[20px]">
 
                 {/*Close Button*/}
                 {/* <div id='fs-close-button' className="basis-[10%]  z-10 rounded-b background-transparent transform translate-y-1 right-10 top-1">
@@ -80,7 +88,7 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
                   <button
                     className="text-slate-800 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setFullScreenMode(false)}
+                    onClick={onCloseClick}
                   >
                     Close
                   </button>

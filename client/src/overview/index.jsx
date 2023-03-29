@@ -45,7 +45,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     event.preventDefault()
 
     // Get the index of the style that was selected
-    let styleIndex = +event.target.getAttribute('i')
+    let styleIndex = +event.target.getAttribute('data-index')
 
     // Reset style and sizes (which resets quantity as well through a useEffect hook)
     setCurrentStyle(styles[styleIndex])
@@ -105,6 +105,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     const imageElement = document.getElementById(imageID);
 
     console.log('image element', imageElement)
+
     const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
 
     // Get the position of the clicked image relative to the viewport

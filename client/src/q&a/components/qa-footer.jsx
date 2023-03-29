@@ -12,12 +12,12 @@ const QAndAFooter = ({productId, productName, allQuestions, setQuestions, questi
   }
 
   return (
-    <footer className='my-2 w-[60rem]'>
+    <footer className='my-2 w-10/12'>
       {allQuestions.length === questions.length
         ? <button className='btn' disabled>NO MORE QUESTIONS</button>
         : <button className='btn mx-4' onClick={handleMoreQuestionsClick}>MORE QUESTIONS</button>
       }
-      <button className='btn mx-4' onClick={handleAddAQuestionClick}>ADD A QUESTION</button>
+      <button className='btn btn-primary mx-4' onClick={handleAddAQuestionClick}>ADD A QUESTION</button>
       <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
     </footer>
   )

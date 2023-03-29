@@ -50,7 +50,7 @@ export default function Question ({question, productName}) {
   }
 
   return (
-    <li className='w-[60rem] border p-2 border-gray-200 rounded-lg shadow-sm'>
+    <li className='border p-2 border-gray-200 rounded-lg shadow-sm'>
       <div className='flex mb-2'>
         <span className='w-8/12'>
           <span className='text-xl font-bold'>Q: </span>

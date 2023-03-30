@@ -11,7 +11,7 @@ const ReviewTile = ({review}) => {
   }
 
   const handleHelpfulClick = e => {
-    axios.put(`http://localhost:3000/reviews/${review.review_id}/helpful`)
+    axios.put(`/reviews/${review.review_id}/helpful`)
       .then(() => {
         setHelpfulCount(helpfulCount + 1);
       })
@@ -21,7 +21,7 @@ const ReviewTile = ({review}) => {
   }
 
   const handleReportClick = e => {
-    axios.put(`http://localhost:3000/reviews/${review.review_id}/report`)
+    axios.put(`/reviews/${review.review_id}/report`)
     .then(() => {
       console.log('Successfully reported review')
     })

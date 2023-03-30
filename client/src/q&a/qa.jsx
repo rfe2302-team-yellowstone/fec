@@ -21,7 +21,7 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
   // console.log('initial product:', product);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/qa/questions', {
+    axios.get('/qa/questions', {
       params: {
         'product_id': product.id,
         'count': 1000

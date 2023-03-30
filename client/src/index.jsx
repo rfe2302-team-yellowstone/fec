@@ -10,7 +10,7 @@ const root = createRoot(
 );
 
 
-axios.get('http://localhost:3000/products/37311')
+axios.get('/products/37311')
   .then(response => {
     root.render(
       <Provider store={store}>

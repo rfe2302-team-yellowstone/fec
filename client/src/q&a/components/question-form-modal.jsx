@@ -13,7 +13,7 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
     setIsModalOpen(!isModalOpen);
   }
   const postValues = e => { // custom callback to run after form validates on submit
-    axios.post(`http://localhost:3000/qa/questions`, {
+    axios.post(`/qa/questions`, {
       product_id: productId,
       body: values.questionBody,
       name: values.nickname,

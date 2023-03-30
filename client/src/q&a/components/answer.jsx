@@ -11,7 +11,7 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
   }
 
   const handleHelpfulClick = e => {
-    axios.put(`http://localhost:3000/qa/answers/${answer.answer_id}/helpful`)
+    axios.put(`/qa/answers/${answer.answer_id}/helpful`)
       .then(response => {
         setHelpfulCount(helpfulCount + 1);
       })
@@ -21,7 +21,7 @@ export default function Answer ({answer, setIsModalOpen, isModalOpen, setFullscr
   }
 
   const handleReportClick = e => {
-    axios.put(`http://localhost:3000/qa/answers/${answer.answer_id}/report`)
+    axios.put(`/qa/answers/${answer.answer_id}/report`)
       .catch(err => {
         // console.log('unable to report answer, error:', err);
       })

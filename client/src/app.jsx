@@ -60,7 +60,7 @@ const App = ({initialProduct}) => {
     productID = productID || 37311
     //console.log(productID)
 
-    axios.get(`http://localhost:3000/products/${productID}`)
+    axios.get(`/products/${productID}`)
       .then(res => {
         let data = res.data
 

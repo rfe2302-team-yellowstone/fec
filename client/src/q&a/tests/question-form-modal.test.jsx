@@ -145,8 +145,11 @@ describe('Question Form Modal', () => {
 
     render(<TestComponent />);
 
+    fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'test'}});
     fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
     fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
     fireEvent.change(screen.getByLabelText('Your email'), {target: {value: ''}});
     fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
 
@@ -169,5 +172,47 @@ describe('Question Form Modal', () => {
       });
     });
   })
+
+  test('shows form validation errors when user doesn\'nt input correct email', async () => {
+    const isModalOpen = false;
+    const setIsModalOpen = jest.fn();
+    const productId = 37311;
+    const productName = 'Camo Onesie';
+
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
+
+      return (
+        <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
+      );
+    }
+
+    render(<TestComponent />);
+
+    fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test'}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+
+    expect(screen.getByTestId('question-form')).toHaveFormValues({
+      questionBody: 'test',
+      nickname: 'test',
+      email: 'test'
+    })
+
+    expect(screen.getByTestId('question-body-bottom-label')).not.toHaveTextContent('Required');
+    expect(screen.getByTestId('nickname-bottom-label')).not.toHaveTextContent('Required');
+    expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Enter a valid email address.');
+
+    await waitFor(() => {
+      expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+        body: '',
+        name: '',
+        email: '',
+        product_id: 37311
+      });
+    });
+  })
+
 
 })

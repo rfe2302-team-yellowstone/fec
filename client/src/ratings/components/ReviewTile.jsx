@@ -65,7 +65,7 @@ const ReviewTile = ({review}) => {
       <div>
       <div className = "relative top-0 left-0 flex items-center w-4 h-4">
         <div className="flex flex-row space-x-1">
-        {[...Array(5)].map((_, i) => (
+        {/* {[...Array(5)].map((_, i) => (
           <svg
           key={i}
           // width="20"
@@ -76,7 +76,56 @@ const ReviewTile = ({review}) => {
           >
           <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z"/>
           </svg>
-        ))}
+        ))} */}
+        {[...Array(5)].map((_, i) => {
+  const rating = review.rating;
+  const integerPart = Math.floor(rating);
+  let starSvg;
+
+  if (i < integerPart) {
+    starSvg = (
+      <svg
+        key={i}
+        className="w-4 h-4 fill-current text-yellow-500"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+      </svg>
+    );
+  } else if (i === integerPart && rating - integerPart >= 0.28 && rating - integerPart <= 0.75) {
+    starSvg = (
+      <svg
+        key={i}
+        className="w-4 h-4 fill-current text-yellow-500"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+        <path
+          d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z"
+          clipPath="url(#half-star)"
+        />
+        <defs>
+          <clipPath id="half-star">
+            <rect x="0" y="0" width={`${(rating - integerPart) * 20}px`} height="20" />
+          </clipPath>
+        </defs>
+      </svg>
+    );
+  } else {
+    starSvg = (
+      <svg
+        key={i}
+        className="w-4 h-4 fill-current text-gray-300"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+      </svg>
+    );
+  }
+
+  return starSvg;
+})}
+
         </div>
       </div>
       </div>

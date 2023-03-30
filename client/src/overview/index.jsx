@@ -6,11 +6,12 @@ import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
 import ProductDetails from './components/productDetails/ProductDetails.jsx'
 import FullScreenModal from './components/gallery/FullScreenModal.jsx';
+import SectionHeader from './components/header/SectionHeader.jsx';
 
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview({product, handleSearch, onMouseOver}) {
+export default function Overview({product, handleSearch, onMouseOver, headerHeight}) {
 
    //product: 37325 - has sales prices
 
@@ -178,8 +179,8 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
 
   return (
-    <div id="overview" onMouseOver={onMouseOver}>
-
+    <div onMouseOver={onMouseOver}>
+      <SectionHeader caption='Overview' idName={'overview'} headerHeight={headerHeight + 28} />
       <Announcements />
       <FullScreenModal
         currentStyle={currentStyle}

@@ -28,7 +28,20 @@ const App = ({initialProduct}) => {
     'Ratings':'#ratings',
     'Q&A':'#qa',
   }
+  const [headerHeight, setHeaderHeight] = useState(0)
 
+  const calculateHeaderHeight = () => {
+
+    const headerElement = document.getElementById('header');
+
+    // Get dimensions of element
+    const headerRect = headerElement.getBoundingClientRect();
+
+    const headerHt = headerRect.height
+
+    setHeaderHeight(-1 * headerHt.toFixed(3))
+
+  }
 
   useEffect(() => {
     window.addEventListener('click', e => {
@@ -79,10 +92,10 @@ const App = ({initialProduct}) => {
   return (
     <div>
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
-      <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
-      <Overview cart={cart} product={product} onMouseOver={e => dispatch(trackModule('overview'))}/>
-      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct}/>
-      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))}/>
+      <Header quickLinks={quickLinks} handleSearch={handleSearch} calculateHeaderHeight={calculateHeaderHeight}/>
+      <Overview cart={cart} product={product} onMouseOver={e => dispatch(trackModule('overview'))} headerHeight={headerHeight}/>
+      <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct} headerHeight={headerHeight}/>
+      <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))} headerHeight={headerHeight}/>
       <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>
     </div>
   )

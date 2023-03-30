@@ -107,24 +107,24 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
       <div className='modal-box'>
         <h3 className='text-3xl'>Submit Your Answer</h3>
         <h4 className='text-lg mb-2'>{productName}: {questionBody}</h4>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid='answer-form'>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='answer-body-label'>
               <span className="label-text">Your Answer</span>
             </label>
             <textarea id='answer-body' name='answerBody' placeholder='Type your answer here.' className='textarea textarea-bordered w-full'
-            onChange={handleChange}>
+            onChange={handleChange} aria-labelledby='answer-body-label'>
             </textarea>
             <label className="label">
               {errors.answerBody && <span className='label-text-alt text-red-500'>{errors.answerBody}</span>}
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='nickname-label'>
               <span className="label-text">Your Nickname</span>
             </label>
             <input type="text" id='nickname' name='nickname' placeholder='Example: jack543!' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='nickname-label'
             />
             <label className="label">
               {errors.nickname ?
@@ -134,11 +134,11 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='email-label'>
               <span className="label-text">Your email</span>
             </label>
             <input type="text" id='nickname' name='email' placeholder='Example: john.smith@example.com' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='email-label'
             />
             <label className="label">
               {errors.email ?

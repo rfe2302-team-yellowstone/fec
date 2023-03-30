@@ -103,7 +103,7 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(postValues, validate, defaultErrors);
 
   return (
-    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`}>
+    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`} role='dialog' aria-modal='true' data-testid='answer-form-modal'>
       <div className='modal-box'>
         <h3 className='text-3xl'>Submit Your Answer</h3>
         <h4 className='text-lg mb-2'>{productName}: {questionBody}</h4>

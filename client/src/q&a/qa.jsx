@@ -34,7 +34,7 @@ export default function QAndA ({product, onMouseOver}) {
   }, [product]);
 
   return (
-    <section data-testid="qa" className='flex flex-col items-center my-4' onMouseOver={onMouseOver}>
+    <section className='flex flex-col items-center my-4' onMouseOver={onMouseOver}>
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>

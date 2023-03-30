@@ -5,7 +5,7 @@ const router = require('./routes.js').router
 const cors = require('cors')
 
 const app = express();
-let port = process.env.PORT || 3001;
+let port = process.env.PORT || 3000;
 
 const morgan = require('morgan')
 

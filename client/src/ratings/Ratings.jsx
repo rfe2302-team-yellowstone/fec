@@ -38,7 +38,7 @@ useEffect(() => {
   .catch(error => {
     console.log(error)
   })
-}, [])
+}, [product])
 
 // useEffect(() => {
 //   console.log(reviews)

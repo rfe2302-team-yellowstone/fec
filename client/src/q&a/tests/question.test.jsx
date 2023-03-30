@@ -109,7 +109,7 @@ describe('Question', () => {
     expect(screen.getByRole('list')).toBeInTheDocument();
 
     await waitFor(() => {
-      expect(axios.get).toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.question_id}/answers`, {
+      expect(axios.get).toHaveBeenCalledWith(`/qa/questions/${question.question_id}/answers`, {
         params: {
           'count': 100
         }
@@ -135,7 +135,7 @@ describe('Question', () => {
 
     expect(screen.getByRole('list')).toBeInTheDocument();
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.question_id}/helpful`)
+      expect(axios.put).toHaveBeenCalledWith(`/qa/questions/${question.question_id}/helpful`)
     })
     expect(helpfulSpan).toHaveTextContent('(46) |');
   })
@@ -150,7 +150,7 @@ describe('Question', () => {
     fireEvent.click(screen.getByRole('button', {name: 'Yes'}));
 
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.question_id}/helpful`)
+      expect(axios.put).toHaveBeenCalledWith(`/qa/questions/${question.question_id}/helpful`)
     })
     expect(helpfulSpan).toHaveTextContent('(45) |');
   })

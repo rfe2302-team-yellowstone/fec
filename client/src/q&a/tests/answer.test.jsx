@@ -45,7 +45,7 @@ describe('Answer', () => {
     fireEvent.click(yesButton);
 
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/answers/${testAnswer.answer_id}/helpful`);
+      expect(axios.put).toHaveBeenCalledWith(`/qa/answers/${testAnswer.answer_id}/helpful`);
       expect(screen.getByTestId('helpful-count')).toHaveTextContent(`(${testAnswer.helpfulness + 1}) |`);
     })
   })
@@ -64,7 +64,7 @@ describe('Answer', () => {
     fireEvent.click(yesButton);
 
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/answers/${testAnswer.answer_id}/helpful`);
+      expect(axios.put).toHaveBeenCalledWith(`/qa/answers/${testAnswer.answer_id}/helpful`);
       expect(screen.getByTestId('helpful-count')).toHaveTextContent(`(${testAnswer.helpfulness}) |`);
     })
   })
@@ -90,7 +90,7 @@ describe('Answer', () => {
     fireEvent.click(yesButton);
 
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/answers/${testAnswer.answer_id}/report`);
+      expect(axios.put).toHaveBeenCalledWith(`/qa/answers/${testAnswer.answer_id}/report`);
     })
   })
 
@@ -108,7 +108,7 @@ describe('Answer', () => {
     fireEvent.click(yesButton);
 
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(`http://localhost:3000/qa/answers/${testAnswer.answer_id}/report`);
+      expect(axios.put).toHaveBeenCalledWith(`/qa/answers/${testAnswer.answer_id}/report`);
     })
   })
 

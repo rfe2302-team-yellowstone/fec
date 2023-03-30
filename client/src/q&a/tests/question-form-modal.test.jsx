@@ -67,7 +67,7 @@ describe('Question Form Modal', () => {
     })
 
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+      expect(axios.post).toHaveBeenCalledWith('/qa/questions', {
         body: 'Does this fit?',
         name: 'testperson123',
         email: 'test@example.com',
@@ -164,7 +164,7 @@ describe('Question Form Modal', () => {
     expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Required');
 
     await waitFor(() => {
-      expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+      expect(axios.post).not.toHaveBeenCalledWith('/qa/questions', {
         body: '',
         name: '',
         email: '',
@@ -205,7 +205,7 @@ describe('Question Form Modal', () => {
     expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Enter a valid email address.');
 
     await waitFor(() => {
-      expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+      expect(axios.post).not.toHaveBeenCalledWith('/qa/questions', {
         body: '',
         name: '',
         email: '',

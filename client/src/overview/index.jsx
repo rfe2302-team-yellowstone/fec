@@ -28,7 +28,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
 
   // Get initial Styles (and size) information
   useEffect(() => {
-    axios.get(`http://localhost:3000/products/${product.id}/styles`)
+    axios.get(`/products/${product.id}/styles`)
       .then(res => {
         // console.log('Styles: ', res.data.results)
         setStyles(res.data.results)

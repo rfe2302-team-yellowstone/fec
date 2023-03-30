@@ -26,7 +26,7 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
     setImageURL('');
   }
   const postValues = e => { // custom callback to run after form validates on submit
-    axios.post(`http://localhost:3000/qa/questions/${questionId}/answers`, {
+    axios.post(`/qa/questions/${questionId}/answers`, {
       question_id: questionId,
       body: values.answerBody,
       name: values.nickname,

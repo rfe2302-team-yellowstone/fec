@@ -21,7 +21,7 @@ export default function Question ({question, productName}) {
   // )
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/qa/questions/${question.question_id}/answers`, {
+    axios.get(`/qa/questions/${question.question_id}/answers`, {
       params: {
         'count': 100
       }

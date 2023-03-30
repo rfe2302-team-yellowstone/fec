@@ -102,8 +102,6 @@ test('should perform appropriate action when previous and next buttons are press
     console.log(relatedCarousel.scrollLeft)
     expect(relatedCarousel.scrollLeft).not.toHaveValue(0)
 
-
-
   })
 
 })

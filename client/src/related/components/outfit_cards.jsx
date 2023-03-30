@@ -110,7 +110,7 @@ localStorage.setItem('fits', JSON.stringify(fits));
   };
 
   const cards = outfitItems.map((card, index) =>
-    <div data-testid={`${card.id}-YO`} id = {`${card.id}`} key={`${card.id} - ${card.id}`} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
+    <div data-testid={`${card.id}-YO`} id = {`${card.id}`} key={`${card.id} - ${index}`} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
         <div className="relative h-64 w-52">
 
             <img

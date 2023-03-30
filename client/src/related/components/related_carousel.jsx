@@ -10,20 +10,20 @@ const RelatedCarousel = ({product, updateProduct}) => {
   const directionArrowsHandler = (event) =>{
 
     let direction = event.target.id
-    console.log(carouselRef, 'inside direction handler')
+    //console.log(carouselRef, 'inside direction handler')
     const carouselNode = carouselRef.current;
 
 
     if(direction === 'prev') {
 
       carouselNode.scrollLeft -= (carouselNode.clientWidth)/3;
-      console.log(carouselNode.scrollLeft)
+      // console.log(carouselNode.scrollLeft)
     } else if( direction === 'next') {
 
       carouselNode.scrollLeft += (carouselNode.clientWidth)/3;
-      console.log(carouselNode.scrollLeft)
+      //console.log(carouselNode.scrollLeft)
     }
-    console.log(carouselNode.scrollLeft)
+    //console.log(carouselNode.scrollLeft)
   };
   // const myDiv = document.getElementById("riCarousel");
   // console.log(myDiv)

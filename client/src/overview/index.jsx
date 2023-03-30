@@ -6,8 +6,8 @@ import Announcements from './components/announcements/Announcements.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
 import ProductDetails from './components/productDetails/ProductDetails.jsx'
-//import FullScreenModal from './components/gallery/FullScreenModal.jsx';
-import FullScreenModalTwo from './components/gallery/FullScreenModalTwo.jsx';
+import FullScreenModal from './components/gallery/FullScreenModal.jsx';
+
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
@@ -20,6 +20,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
   const [sizes, setSizes] = useState({})
   const [fullScreenMode, setFullScreenMode] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0) // index position of image currently showing
+  const [rating, setRating] = useState(0)
 
 
 
@@ -41,21 +42,66 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
 
 
+  // Retrieve ratings and calculate overall rating
+  useEffect(() => {
+    axios.get(`/reviews/meta?product_id=${product.id}`)
+      .then(response => {
+        let allRatings = response.data.ratings
+        let rating = calculateRating(allRatings)
+        setRating(rating)
+        // setReviews(allRatings)
+
+
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [])
+
+
+  const calculateRating = (ratings) => {
+    let total = 0
+    let numberOfRatings = 0
+
+    Object.keys(ratings).forEach((rating) => {
+      total +=  (+rating * ratings[rating]) // number of stars * number of ratings
+      numberOfRatings += +ratings[rating]
+    })
+
+    let totalRating = total / numberOfRatings
+
+    totalRating = totalRating.toFixed(2)
+
+    return totalRating
+  }
+
+
+
+  // Update images, reset quantity and sizes, when a new style is selected
+  const handleStyleChange = (event) => {
+    event.preventDefault()
+
+    // Get the index of the style that was selected
+    let styleIndex = +event.target.getAttribute('data-index')
+
+    // Reset style and sizes (which resets quantity as well through a useEffect hook)
+    setCurrentStyle(styles[styleIndex])
+    getSizesFromStyle(styles[styleIndex])
+
+    // Reset carousels to first image
+    setCurrentIndex(0)
+    changeImage(0, 'n-')
+
+  }
+
+
+
   // Function to map style skus into sizes and quantities
   // Creates an array of tuples (size and quantity). Only stores if available.
   const getSizesFromStyle = (style) => {
 
-
     let sizes = {}
     let skus = style.skus;
-
-    // try {
-    //   skus = style.skus;
-    // }
-    // catch {
-    //   console.log('no styles available')
-    //   return;
-    // }
 
 
     Object.keys(skus).forEach((sku) => {
@@ -73,7 +119,7 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     setSizes(sizes)
   }
 
-  // Given an index position, calculate image to show in carousel
+  // Given an index position, calculate where to scroll to in the carousel
   const changeImage = (index, prefix) => {
 
     prefix = prefix || ''
@@ -83,26 +129,30 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     console.log('next index: ', index)
 
 
-    // Set the ID of the clicked image
+    // Set the image ID of the index that was given
     const imageID = `${prefix}slide-img-${index}`
+    console.log('imageID: ', imageID)
 
-    // Just return if same image
+    // Just return if it's the same image and we're not in fullscreen mode
     if ((index === currentIndex) && (prefix !== 'fs-')) {
       return;
     }
 
     // Get elements from DOM
     const imageElement = document.getElementById(imageID);
+
+    console.log('image element', imageElement)
+
     const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
 
     // Get the position of the clicked image relative to the viewport
     const containerRect = containerElement.getBoundingClientRect();
     const imageRect = imageElement.getBoundingClientRect();
 
-    // Width of each image div
+    // Width of each image div (each card is the same size)
     let width = imageRect.width
 
-    // Calculate distance you need to scroll from left
+    // Calculate distance you need to scroll from left side of screen
     //  - Current container's x position + (width of image div  *  nextIndex)
     let scrollLeft = containerRect.x + width * index
 
@@ -113,6 +163,20 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     // Finally set the new index
     setCurrentIndex(index)
 
+  }
+
+  const handleNavigationOnClick = (event) => {
+    event.preventDefault()
+
+    let idPrefix = fullScreenMode ? 'fs-' : 'n-'
+
+    if (event.target.id.indexOf('next-button') >= 0) {
+      console.log(idPrefix, ' + ', currentIndex)
+      changeImage(currentIndex + 1, idPrefix)
+    } else {
+      console.log(idPrefix, ' - ', currentIndex)
+      changeImage(currentIndex - 1, idPrefix)
+    }
   }
 
 
@@ -128,12 +192,13 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     <div id="overview" onMouseOver={onMouseOver}>
       <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
       <Announcements />
-      <FullScreenModalTwo
+      <FullScreenModal
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
         setFullScreenMode={setFullScreenMode}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
+        handleNavigationOnClick={handleNavigationOnClick}
         // currentIndex={currentIndex}
         // setCurrentIndex={setCurrentIndex}
         changeImage={changeImage}
@@ -148,14 +213,17 @@ export default function Overview({product, handleSearch, onMouseOver}) {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
           changeImage={changeImage}
+          handleNavigationOnClick={handleNavigationOnClick}
         />
 
         <ProductInfo
+          rating={rating}
           product={product}
           styles={styles}
           currentStyle={currentStyle}
           sizes={sizes}
           setCurrentStyle={setCurrentStyle}
+          handleStyleChange={handleStyleChange}
         />
       </div>
       <ProductDetails product={product} />

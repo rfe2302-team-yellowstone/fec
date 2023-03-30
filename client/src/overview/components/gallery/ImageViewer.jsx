@@ -1,7 +1,7 @@
 import React from 'react'
 import ImageViewerItem from './ImageViewerItem.jsx'
 
-export default function ImageViewer ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix}) {
+export default function ImageViewer ({currentStyle, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
 
   return (
@@ -10,7 +10,7 @@ export default function ImageViewer ({currentStyle, fullScreenMode, setFullScree
 
     <div
       id={`${idPrefix}image-viewer-carousel`}
-      className={`carousel items-center ${(idPrefix === 'fs-') ? 'h-[95%]' : 'w-full lg:w-[660px]'}`}
+      className={`carousel items-center ${fullScreenMode ? 'h-[95%]' : 'w-full xl:w-[660px]'}`}
     >
       {
         currentStyle.photos.map((photo, i) => {
@@ -25,6 +25,7 @@ export default function ImageViewer ({currentStyle, fullScreenMode, setFullScree
               setCurrentIndex={setCurrentIndex}
               changeImage={changeImage}
               idPrefix={idPrefix}
+              handleNavigationOnClick={handleNavigationOnClick}
             />
           )
         })

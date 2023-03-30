@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --config=jest.config.js",
     "test:coverage": "jest --config=jest.config.js --coverage",
+    "test:overview": "jest --testPathPattern=client/src/overview/tests",
     "react-dev": "webpack --mode development --watch",
     "tailwind-dev": "npx tailwindcss -i ./client/src/input.css -o ./client/dist/output.css --watch",
     "server-dev": "npx nodemon server/index.js"
@@ -75,6 +76,7 @@
     "react-redux": "^8.0.5",
     "react-star-ratings": "^2.3.0",
     "redux": "^4.2.1",
-    "tailwind-scrollbar": "^3.0.0"
+    "tailwind-scrollbar": "^3.0.0",
+    "timeago-react": "^3.0.6"
   }
 }

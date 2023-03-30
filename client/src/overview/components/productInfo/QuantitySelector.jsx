@@ -2,24 +2,39 @@ import React from 'react'
 
 export default function QuantitySelector ({sizes, currentSize, handleQuantityChange, currentQuantity, quantityMax}) {
 
-  // console.log('current max: ', quantityMax)
 
   return (
 
-    <div id='overview-quantity-selector' className="dropdown dropdown-bottom flex flex-col items-center ">
+    <div
+      id='overview-quantity-selector'
+      className={`dropdown dropdown-bottom flex flex-nowrap flex-col items-center `}
+      >
+
       <p>Quantity</p>
-      <label tabIndex={0} className="btn m-1 w-36 ">
+      <button
+        tabIndex={0}
+        disabled={(currentSize === 'Select Size')}
+        className='btn m-1 w-36'
+        onClick={e => e.preventDefault()}
+        data-testid="quantity-selector"
+      >
         {currentQuantity}
 
-        <ul name="size" tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto h-48">
+        <ul
+          name="size"
+          tabIndex={0}
+          style={{display:'inline'}}
+          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box overflow-y-auto overflow-x-hidden max-h-[250px]"
+          aria-label='quantity'
+        >
         {
           // Create a quick range from 0 to the max
           [...Array(quantityMax).keys()].map((i) => {
-            return (<li key={i} onClick={handleQuantityChange} className="text-slate-800"><a>{i + 1}</a></li>)
+            return (<li key={i} onClick={handleQuantityChange} className="text-slate-800 flex-none "><a>{i + 1}</a></li>)
           })
         }
       </ul>
-      </label>
+      </button>
 
     </div>
 

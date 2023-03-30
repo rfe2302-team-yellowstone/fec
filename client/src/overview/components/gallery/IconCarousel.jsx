@@ -22,7 +22,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
 
     (Object.keys(currentStyle).length > 0) &&
 
-    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box mt-4 transition duration-500 hover:overflow-visible hover:scale-105 hover:space-x-2">
+    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box mt-6 transition duration-500 hover:overflow-visible hover:scale-105 hover:space-x-2 ml-12 mr-12">
       {
         currentStyle.photos.map((photo, i) => {
           return (
@@ -32,6 +32,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
               photos={currentStyle.photos}
               handleIconClick={handleIconClick}
               idPrefix={idPrefix}
+              currentIndex={currentIndex}
 
               />
 

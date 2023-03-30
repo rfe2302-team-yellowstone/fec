@@ -1,13 +1,13 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import OverallRatingPlaceholder from './OverallRatingPlaceholder.jsx'
+import Rating from './Rating.jsx'
 import Header from './Header.jsx'
 import StyleSelector from './StyleSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating}) {
 
   // Test style:
   // style ID: 221064
@@ -18,10 +18,15 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   // console.log('current style: ', currentStyle)
 
 
-  const [currentSize, setCurrentSize] = useState('Select size')
+  const [currentSize, setCurrentSize] = useState('Select Size')
   const [currentQuantity, setCurrentQuantity] = useState('-')
   const [quantityMax, setQuantityMax] = useState('-')
 
+  // Reset size and quantity when styles or sizes change
+  useEffect(() => {
+    setCurrentSize('Select Size')
+    setCurrentQuantity('-')
+  }, [currentStyle])
 
   let handleSizeChange = (event) => {
     event.preventDefault()
@@ -30,6 +35,9 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
     // Set new quantity max
     setQuantityMax(sizes[event.target.innerHTML])
+
+    // Set current quantity to 1
+    setCurrentQuantity(1)
   }
 
   const handleQuantityChange = (event) => {
@@ -41,11 +49,17 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
 
 
 
+
   return (
-    <div className='flex-1 flex-col flex w-1/4 flex-wrap mt-auto' >
-      <OverallRatingPlaceholder />
+    <div className='flex-col flex flex-wrap justify-start mt-0.5' >
+      <Rating rating={rating}/>
       <Header product={product} currentStyle={currentStyle}/>
-      <StyleSelector styles={styles} currentStyle={currentStyle} setCurrentStyle={setCurrentStyle} />
+      <StyleSelector
+        styles={styles}
+        currentStyle={currentStyle}
+        setCurrentStyle={setCurrentStyle}
+        handleStyleChange={handleStyleChange}
+      />
 
       <form className='flex justify-around space-x-4 mt-4'>
         <SizeSelector
@@ -59,6 +73,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
         <QuantitySelector
           sizes={sizes}
           currentQuantity={currentQuantity}
+          currentSize={currentSize}
           handleQuantityChange={handleQuantityChange}
           quantityMax={quantityMax}
         />

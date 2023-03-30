@@ -1,8 +1,8 @@
 module.exports = {
   testEnvironment: 'jest-environment-jsdom',
-  transform: {
-    "^.+\\.svg$": "<rootDir>/fileTransformer.js",
+  "transform": {
+    "^.+\\.svg$": "<rootDir>/svgTransform.js",
     "^.+\\.(js|jsx)$": "babel-jest"
-  },
-  transformIgnorePatterns: ['<rootDir>/node_modules/(?!(react)/)']
+ },
+ transformIgnorePatterns: ['<rootDir>/node_modules/(?!(axios)/)']
 };

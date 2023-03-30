@@ -6,22 +6,12 @@ import OutfitCarousel from "./components/outfit_carousel.jsx"
 
 
 const Related = ({product, onMouseOver, updateProduct}) => {
-  const [reviews, setReviews] = useState([]);
-
-  let getRating = ()=>{
-    axios.get(`/reviews?product_id=${product.id}`)
-    .then(res => setReviews(res.data.results))
-    .catch(err => console.log('Error in API call:', err))
-  };
-
-  useEffect(()=>{
-    getRating();
-  }, [])
 
   return (
-  <div className ="grid grid-col-1 grid-row-2 place-items-center">
+    //"grid grid-col-1 grid-row-1 gap 4 place-items-center"
+  <div data-testid="related" className ="grid grid-col-1 grid-row-1 gap 4 place-items-center">
     <RelatedCarousel  product = {product} updateProduct={updateProduct}/>
-    <OutfitCarousel product = {product} reviews = {reviews}/>
+    <OutfitCarousel product = {product} />
   </div>
   )
 

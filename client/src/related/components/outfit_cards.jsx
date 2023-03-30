@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import axios from 'axios';
 
 
-const OutfitCard = ({product, reviews}) => {
+const OutfitCard = ({product}) => {
   let fits = JSON.parse(localStorage.getItem('fits')) || [];
 
   const [outfitItems, setOutfitItems] = useState(fits);
-  //const [rating, setRating] = useState(0)
+
 
   //Detailed
   let getProductInfo =
@@ -110,7 +110,7 @@ localStorage.setItem('fits', JSON.stringify(fits));
   };
 
   const cards = outfitItems.map((card, index) =>
-    <div id = {`${card.id}-${index}`} key={card.id} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
+    <div data-testid={`${card.id}-YO`} id = {`${card.id}`} key={`${card.id} - ${index}`} className="carousel-item grid grid-col-1 aspect-ratio-3/2  gap-10 border-2 rounded border-black">
         <div className="relative h-64 w-52">
 
             <img
@@ -201,7 +201,7 @@ localStorage.setItem('fits', JSON.stringify(fits));
       <div className="body p-2">
         <div className="card-body">
           <h2 className="card-title">Add to Outfit!</h2>
-          <button onClick={fetchingOutfitInformation} className="btn btn-lg">+</button>
+          <button data-testid = 'add to outfit' onClick={fetchingOutfitInformation} className="btn btn-lg">+</button>
         </div>
       </div>
     </div>

@@ -8,7 +8,8 @@ import OutfitCarousel from "./components/outfit_carousel.jsx"
 const Related = ({product, onMouseOver, updateProduct}) => {
 
   return (
-  <div data-testid="related" className ="grid grid-col-1 grid-row-2 place-items-center">
+    //"grid grid-col-1 grid-row-1 gap 4 place-items-center"
+  <div data-testid="related" className ="grid grid-col-1 grid-row-1 gap 4 place-items-center">
     <RelatedCarousel  product = {product} updateProduct={updateProduct}/>
     <OutfitCarousel product = {product} />
   </div>

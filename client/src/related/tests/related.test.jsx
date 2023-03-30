@@ -32,6 +32,16 @@ describe('Related', ()=>{
   };
   const relatedItemsID = [37311, 37312, 37314, 37315, 37318];
 
+test('should render at least one card', ()=>{
+  const updateProduct = jest.fn();
+  render(<RelatedCards product={testProduct} updateProduct={updateProduct}/>)
+
+  setTimeout(()=>{
+    const relatedCardElement1 = screen.getByTestId("37311")
+    expect(relatedCardElement1).toBeInTheDocument()
+  }, 2000)
+})
+
 
 test('should render all related carousel items', () =>{
   const updateProduct = jest.fn();
@@ -66,10 +76,7 @@ test('should add current item to outfit when clicking Add button',  ()=> {
 
 test('should open modal with clicking star button', ()=>{
   const updateProduct = jest.fn();
-  render(<RelatedCarousel product={testProduct} updateProduct = {updateProduct}/>)
-
-  // const compModal = screen.getByTestId('comModal');
-  //   expect(compModal).toBeInTheDocument();
+  render(<RelatedCards product={testProduct} updateProduct = {updateProduct}/>)
 
   setTimeout(()=>{
     const setOpenModal = jest.fn();
@@ -79,6 +86,25 @@ test('should open modal with clicking star button', ()=>{
     expect(setOpenModal).toBeCalled();
 
   }, 2000)
+
+})
+
+test('should perform appropriate action when previous and next buttons are pressed', () => {
+  const updateProduct = jest.fn();
+  render(<Related product = {testProduct} updateProduct={updateProduct} />)
+
+  setTimeout(()=>{
+    const directionArrowsHandler = jest.fn();
+    const relatedCarousel = screen.getByRole('related item display', {name: 'carousel'})
+    const nextButton = screen.getByRole('button', {name: 'slide forward'});
+
+    fireEvent.click(nextButton)
+    console.log(relatedCarousel.scrollLeft)
+    expect(relatedCarousel.scrollLeft).not.toHaveValue(0)
+
+
+
+  })
 
 })
 

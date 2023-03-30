@@ -36,190 +36,167 @@ describe('Answer Form Modal', () => {
     expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
   })
 
-  // test('submits the input values when submit button is clicked and POST request successful', async () => {
-  //   const isModalOpen = false;
-  //   const setIsModalOpen = jest.fn();
-  //   const productId = 37311;
-  //   const productName = 'Camo Onesie';
+  test('submits the input values when submit button is clicked and POST request successful', async () => {
+    const productId = 37311;
+    const productName = 'Camo Onesie';
 
-  //   axios.post.mockResolvedValue({
-  //     data: {},
-  //     status: 201,
-  //     statusText: 'OK',
-  //     headers: {},
-  //     config: {},
-  //     request: {}
-  //   })
+    axios.post.mockResolvedValue({
+      data: {},
+      status: 201,
+      statusText: 'OK',
+      headers: {},
+      config: {},
+      request: {}
+    })
 
-  //   const TestComponent = () => {
-  //     const [isModalOpen, setIsModalOpen] = useState(true);
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
 
-  //     return (
-  //       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
-  //     );
-  //   }
+      return (
+        <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
+      );
+    }
 
-  //   render(<TestComponent />);
+    render(<TestComponent />);
 
-  //   fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'Maybe?'}});
-  //   fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
-  //   fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
-  //   fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+    fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'Maybe?'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Answer'}));
 
-  //   expect(screen.getByTestId('question-form')).toHaveFormValues({
-  //     body: 'Maybe?',
-  //     name: 'testperson123',
-  //     email: 'test@example.com',
-  //   })
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      answerBody: 'Maybe?',
+      nickname: 'testperson123',
+      email: 'test@example.com',
+    })
 
-  //   await waitFor(() => {
-  //     expect(axios.post).toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.questionId}/answers`, {
-  //       question_id: question.questionId,
-  //       body: 'Maybe?',
-  //       name: 'testperson123',
-  //       email: 'test@example.com',
-  //       photos: []
-  //     });
-  //   });
-  // })
+    await waitFor(() => {
+      expect(axios.post).toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.questionId}/answers`, {
+        question_id: question.questionId,
+        body: 'Maybe?',
+        name: 'testperson123',
+        email: 'test@example.com',
+        photos: []
+      });
+    });
+  })
 
-  // test('closes the modal when user clicks on X button', () => {
-  //   const isModalOpen = false;
-  //   const setIsModalOpen = jest.fn();
-  //   const productId = 37311;
-  //   const productName = 'Camo Onesie';
+  test('closes the modal when user clicks on X button', () => {
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
 
-  //   const TestComponent = () => {
-  //     const [isModalOpen, setIsModalOpen] = useState(true);
+      return (
+        <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
+      );
+    }
 
-  //     return (
-  //       <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
-  //     );
-  //   }
+    render(<TestComponent />);
 
-  //   render(<TestComponent />);
+    fireEvent.click(screen.getByText('X'));
 
-  //   fireEvent.click(screen.getByText('X'));
+    expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
+  })
 
-  //   expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
-  // })
+  test('submits the input values when submit button is clicked and POST request unsuccessful', async () => {
+    axios.post.mockRejectedValue(new Error('unable to send answer to server'));
 
-  // test('submits the input values when submit button is clicked and POST request unsuccessful', async () => {
-  //   const isModalOpen = false;
-  //   const setIsModalOpen = jest.fn();
-  //   const productId = 37311;
-  //   const productName = 'Camo Onesie';
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
 
-  //   axios.post.mockRejectedValue(new Error('unable to send question to server'));
+      return (
+        <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
+      );
+    }
 
-  //   const TestComponent = () => {
-  //     const [isModalOpen, setIsModalOpen] = useState(true);
+    render(<TestComponent />);
 
-  //     return (
-  //       <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
-  //     );
-  //   }
+    fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'Maybe?'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Answer'}));
 
-  //   render(<TestComponent />);
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      answerBody: 'Maybe?',
+      nickname: 'testperson123',
+      email: 'test@example.com'
+    })
 
-  //   fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'Does this fit?'}});
-  //   fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'testperson123'}});
-  //   fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
-  //   fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+    await expect(axios.post).rejects.toThrow('unable to send answer to server');
+  })
 
-  //   expect(screen.getByTestId('question-form')).toHaveFormValues({
-  //     questionBody: 'Does this fit?',
-  //     nickname: 'testperson123',
-  //     email: 'test@example.com'
-  //   })
+  test('shows form validation errors when user doesn\'nt input any values', async () => {
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
 
-  //   await expect(axios.post).rejects.toThrow('unable to send question to server');
-  // })
+      return (
+        <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
+      );
+    }
 
-  // test('shows form validation errors when user doesn\'nt input any values', async () => {
-  //   const isModalOpen = false;
-  //   const setIsModalOpen = jest.fn();
-  //   const productId = 37311;
-  //   const productName = 'Camo Onesie';
+    render(<TestComponent />);
 
-  //   const TestComponent = () => {
-  //     const [isModalOpen, setIsModalOpen] = useState(true);
+    fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: ''}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Answer'}));
 
-  //     return (
-  //       <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
-  //     );
-  //   }
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      answerBody: '',
+      nickname: '',
+      email: ''
+    })
 
-  //   render(<TestComponent />);
+    expect(screen.getByTestId('answer-body-bottom-label')).toHaveTextContent('Required');
+    expect(screen.getByTestId('nickname-bottom-label')).toHaveTextContent('Required');
+    expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Required');
 
-  //   fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'test'}});
-  //   fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: ''}});
-  //   fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
-  //   fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: ''}});
-  //   fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
-  //   fireEvent.change(screen.getByLabelText('Your email'), {target: {value: ''}});
-  //   fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+    await waitFor(() => {
+      expect(axios.post).not.toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.questionId}/answers`, {
+        body: '',
+        name: '',
+        email: '',
+        product_id: 37311
+      });
+    });
+  })
 
-  //   expect(screen.getByTestId('question-form')).toHaveFormValues({
-  //     questionBody: '',
-  //     nickname: '',
-  //     email: ''
-  //   })
+  test('shows form validation errors when user doesn\'nt input correct email', async () => {
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
 
-  //   expect(screen.getByTestId('question-body-bottom-label')).toHaveTextContent('Required');
-  //   expect(screen.getByTestId('nickname-bottom-label')).toHaveTextContent('Required');
-  //   expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Required');
+      return (
+        <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
+      );
+    }
 
-  //   await waitFor(() => {
-  //     expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
-  //       body: '',
-  //       name: '',
-  //       email: '',
-  //       product_id: 37311
-  //     });
-  //   });
-  // })
+    render(<TestComponent />);
 
-  // test('shows form validation errors when user doesn\'nt input correct email', async () => {
-  //   const isModalOpen = false;
-  //   const setIsModalOpen = jest.fn();
-  //   const productId = 37311;
-  //   const productName = 'Camo Onesie';
+    fireEvent.change(screen.getByLabelText('Your Answer'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test'}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Answer'}));
 
-  //   const TestComponent = () => {
-  //     const [isModalOpen, setIsModalOpen] = useState(true);
+    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+      answerBody: 'test',
+      nickname: 'test',
+      email: 'test'
+    })
 
-  //     return (
-  //       <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
-  //     );
-  //   }
+    expect(screen.getByTestId('answer-body-bottom-label')).not.toHaveTextContent('Required');
+    expect(screen.getByTestId('nickname-bottom-label')).not.toHaveTextContent('Required');
+    expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Enter a valid email address.');
 
-  //   render(<TestComponent />);
-
-  //   fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: 'test'}});
-  //   fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: 'test'}});
-  //   fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test'}});
-  //   fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
-
-  //   expect(screen.getByTestId('question-form')).toHaveFormValues({
-  //     questionBody: 'test',
-  //     nickname: 'test',
-  //     email: 'test'
-  //   })
-
-  //   expect(screen.getByTestId('question-body-bottom-label')).not.toHaveTextContent('Required');
-  //   expect(screen.getByTestId('nickname-bottom-label')).not.toHaveTextContent('Required');
-  //   expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Enter a valid email address.');
-
-  //   await waitFor(() => {
-  //     expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
-  //       body: '',
-  //       name: '',
-  //       email: '',
-  //       product_id: 37311
-  //     });
-  //   });
-  // })
-
-
+    await waitFor(() => {
+      expect(axios.post).not.toHaveBeenCalledWith(`http://localhost:3000/qa/questions/${question.questionId}/answers`, {
+        question_id: question.questionId,
+        body: '',
+        name: '',
+        email: '',
+        photos: []
+      });
+    });
+  })
 })

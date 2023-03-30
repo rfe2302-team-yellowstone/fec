@@ -17,14 +17,6 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
   const handleExit = (e) => {
     setIsModalOpen(!isModalOpen);
   }
-  const handleAddImageURL = e => {
-    e.preventDefault();
-    if (imageURLs.length === 4) {
-      setImageLimitReached(true);
-    }
-    setImageURLs([...imageURLs, imageURL]);
-    setImageURL('');
-  }
   const postValues = e => { // custom callback to run after form validates on submit
     axios.post(`/qa/questions/${questionId}/answers`, {
       question_id: questionId,
@@ -93,9 +85,6 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
           setErrors(clearError);
         }
         break;
-      case 'images':
-        console.log(value, 'images');
-        break;
       default:
         break;
     }
@@ -115,7 +104,7 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
             <textarea id='answer-body' name='answerBody' placeholder='Type your answer here.' className='textarea textarea-bordered w-full'
             onChange={handleChange} aria-labelledby='answer-body-label'>
             </textarea>
-            <label className="label">
+            <label className="label" data-testid='answer-body-bottom-label'>
               {errors.answerBody && <span className='label-text-alt text-red-500'>{errors.answerBody}</span>}
             </label>
           </div>
@@ -126,7 +115,7 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
             <input type="text" id='nickname' name='nickname' placeholder='Example: jack543!' className="input input-bordered w-full"
               onChange={handleChange} aria-labelledby='nickname-label'
             />
-            <label className="label">
+            <label className="label" data-testid='nickname-bottom-label'>
               {errors.nickname ?
                 <span className='label-text-alt text-red-500'>{errors.nickname}</span>
                 : <span className="label-text-alt">For privacy reasons, do not use your full name or email address</span>
@@ -140,41 +129,15 @@ export function AnswerFormModal ({isModalOpen, setIsModalOpen, productId, produc
             <input type="text" id='nickname' name='email' placeholder='Example: john.smith@example.com' className="input input-bordered w-full"
               onChange={handleChange} aria-labelledby='email-label'
             />
-            <label className="label">
+            <label className="label" data-testid='email-bottom-label'>
               {errors.email ?
                 <span className='label-text-alt text-red-500'>{errors.email}</span>
                 : <span className="label-text-alt">For authentication reasons, you will not be emailed</span>
               }
             </label>
           </div>
-          {/* <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Your image URLs</span>
-            </label>
-            <div className="input-group">
-              <input type="text" placeholder="Enter image URL" name='imageURL' className="input input-bordered w-full" onChange={e => setImageURL(e.target.value)} value={imageURL}/>
-              {!imageLimitReached && <button className="btn btn-square" onClick={handleAddImageURL}>Add</button>}
-            </div>
-            <label className="label">
-              <span className="label-text-alt">Up to 5 images allowed.</span>
-            </label>
-            <div className='flex'>
-              {imageURLs.map(image => {
-                return <img key={image} src={image} alt='answer image' className='w-20 border border-solid border-stone-500'/>
-              })}
-            </div>
-          </div> */}
           <UploadWidget imageURLs={imageURLs} setImageURLs={setImageURLs}/>
-          {/* <div className="form-control w-full">
-            <label className="label">
-              <span className="label-text">Cloudinary Upload</span>
-            </label>
-            <input type="file" className="file-input file-input-bordered w-full" onChange={handleAddImage} multiple/>
-            <label className="label">
-              <span className="label-text-alt">Error label</span>
-            </label>
-          </div> */}
-          <input type='submit' value='Submit Question' className='btn btn-primary mt-4'/>
+          <input type='submit' value='Submit Answer' className='btn btn-primary mt-4'/>
         </form>
         <div className="modal-action">
           <label className="btn btn-sm btn-circle absolute right-2 top-2" onClick={handleExit}>X</label>

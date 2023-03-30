@@ -34,7 +34,7 @@ export default function Question ({question, productName}) {
   }, []);
 
   const handleHelpfulClick = e => {
-    axios.put(`http://localhost:3000/qa/questions/${question.question_id}/helpful`)
+    axios.put(`/qa/questions/${question.question_id}/helpful`)
       .then(response => {
         setHelpfulCount(helpfulCount + 1);
       })

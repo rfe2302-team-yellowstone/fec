@@ -56,7 +56,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }, [product])
 
 
   const calculateRating = (ratings) => {

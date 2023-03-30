@@ -11,7 +11,6 @@ export default function Announcements () {
     axios.get('https://www.geysertimes.org/api/v5/entries_latest/2')
       .then((res) => {
         let eruption = res.data.entries[0]
-        console.log(Date('eruption time', eruption.time))
         setLastEruption(Date(eruption.time))
       })
       .catch(err => console.log(err))

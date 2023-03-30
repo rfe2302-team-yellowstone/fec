@@ -60,7 +60,7 @@ describe('Question Form Modal', () => {
     fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
     fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
 
-    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+    expect(screen.getByTestId('question-form')).toHaveFormValues({
       questionBody: 'Does this fit?',
       nickname: 'testperson123',
       email: 'test@example.com'
@@ -103,14 +103,7 @@ describe('Question Form Modal', () => {
     const productId = 37311;
     const productName = 'Camo Onesie';
 
-    axios.post.mockRejectedValue({
-      data: {},
-      status: 400,
-      statusText: 'OK',
-      headers: {},
-      config: {},
-      request: {}
-    })
+    axios.post.mockRejectedValue(new Error('unable to send question to server'));
 
     const TestComponent = () => {
       const [isModalOpen, setIsModalOpen] = useState(true);
@@ -127,17 +120,51 @@ describe('Question Form Modal', () => {
     fireEvent.change(screen.getByLabelText('Your email'), {target: {value: 'test@example.com'}});
     fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
 
-    expect(screen.getByTestId('answer-form')).toHaveFormValues({
+    expect(screen.getByTestId('question-form')).toHaveFormValues({
       questionBody: 'Does this fit?',
       nickname: 'testperson123',
       email: 'test@example.com'
     })
 
+    await expect(axios.post).rejects.toThrow('unable to send question to server');
+  })
+
+  test('shows form validation errors when user doesn\'nt input any values', async () => {
+    const isModalOpen = false;
+    const setIsModalOpen = jest.fn();
+    const productId = 37311;
+    const productName = 'Camo Onesie';
+
+    const TestComponent = () => {
+      const [isModalOpen, setIsModalOpen] = useState(true);
+
+      return (
+        <QuestionFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
+      );
+    }
+
+    render(<TestComponent />);
+
+    fireEvent.change(screen.getByLabelText('Your Question'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your Nickname'), {target: {value: ''}});
+    fireEvent.change(screen.getByLabelText('Your email'), {target: {value: ''}});
+    fireEvent.click(screen.getByRole('button', {name: 'Submit Question'}));
+
+    expect(screen.getByTestId('question-form')).toHaveFormValues({
+      questionBody: '',
+      nickname: '',
+      email: ''
+    })
+
+    expect(screen.getByTestId('question-body-bottom-label')).toHaveTextContent('Required');
+    expect(screen.getByTestId('nickname-bottom-label')).toHaveTextContent('Required');
+    expect(screen.getByTestId('email-bottom-label')).toHaveTextContent('Required');
+
     await waitFor(() => {
-      expect(axios.post).toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
-        body: 'Does this fit?',
-        name: 'testperson123',
-        email: 'test@example.com',
+      expect(axios.post).not.toHaveBeenCalledWith('http://localhost:3000/qa/questions', {
+        body: '',
+        name: '',
+        email: '',
         product_id: 37311
       });
     });

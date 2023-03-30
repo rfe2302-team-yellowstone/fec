@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import Header from './components/header/Header.jsx'
 import Announcements from './components/announcements/Announcements.jsx'
 import Gallery from './components/gallery/Gallery.jsx'
 import ProductInfo from './components/productInfo/ProductInfo.jsx'
@@ -123,15 +122,15 @@ export default function Overview({product, handleSearch, onMouseOver}) {
   const changeImage = (index, prefix) => {
 
     prefix = prefix || ''
-    console.log('\n\n ----------')
-    console.log('prefix: ', prefix)
-    console.log('current index: ', currentIndex)
-    console.log('next index: ', index)
+    // console.log('\n\n ----------')
+    // console.log('prefix: ', prefix)
+    // console.log('current index: ', currentIndex)
+    // console.log('next index: ', index)
 
 
     // Set the image ID of the index that was given
     const imageID = `${prefix}slide-img-${index}`
-    console.log('imageID: ', imageID)
+    // console.log('imageID: ', imageID)
 
     // Just return if it's the same image and we're not in fullscreen mode
     if ((index === currentIndex) && (prefix !== 'fs-')) {
@@ -140,8 +139,6 @@ export default function Overview({product, handleSearch, onMouseOver}) {
 
     // Get elements from DOM
     const imageElement = document.getElementById(imageID);
-
-    console.log('image element', imageElement)
 
     const containerElement = document.getElementById(`${prefix}image-viewer-carousel`);
 
@@ -171,26 +168,18 @@ export default function Overview({product, handleSearch, onMouseOver}) {
     let idPrefix = fullScreenMode ? 'fs-' : 'n-'
 
     if (event.target.id.indexOf('next-button') >= 0) {
-      console.log(idPrefix, ' + ', currentIndex)
       changeImage(currentIndex + 1, idPrefix)
     } else {
-      console.log(idPrefix, ' - ', currentIndex)
       changeImage(currentIndex - 1, idPrefix)
     }
   }
 
 
 
-  const quickLinks = [
-    'Overview',
-    'Related Items',
-    'Ratings',
-    'Q&A'
-  ]
 
   return (
-    <div onMouseOver={onMouseOver}>
-      <Header quickLinks={quickLinks} handleSearch={handleSearch}/>
+    <div id="overview" onMouseOver={onMouseOver}>
+
       <Announcements />
       <FullScreenModal
         currentStyle={currentStyle}

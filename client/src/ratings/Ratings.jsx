@@ -6,12 +6,13 @@ import Reviews from "./components/Reviews.jsx";
 import NewReview from "./components/NewReview.jsx"
 import RatingBreakdown from "./components/RatingBreakdown.jsx"
 import ProductBreakdown from "./components/ProductBreakdown.jsx"
+import SectionHeader from "../overview/components/header/SectionHeader.jsx";
 import Search from './components/Search.jsx'
 
 
 // require("dotenv").config();
 
-const Ratings = ({product, onMouseOver}) => {
+const Ratings = ({product, onMouseOver, headerHeight}) => {
 
   // const [loading, setLoading] = useState(false)
   const [reviews, setReviews] = useState([])
@@ -45,6 +46,7 @@ useEffect(() => {
 
 return (
   <div onMouseOver={onMouseOver}>
+    <SectionHeader caption='Ratings & Reviews' idName={'ratings'} headerHeight={headerHeight} />
     <div className="grid grid-cols-3 gap-4">
       <div className="col-span-1 pl-4">
         <div className="pb-4">

@@ -4,12 +4,13 @@ import axios from 'axios';
 import QAndAHeader from './components/qa-header.jsx';
 import QuestionsList from './components/questions-list.jsx';
 import QAndAFooter from './components/qa-footer.jsx';
+import SectionHeader from '../overview/components/header/SectionHeader.jsx';
 import {useSelector, useDispatch } from 'react-redux';
 import { trackClick } from '../features/click-tracker/clickTrackerSlice';
 import { trackModule } from '../features/module-tracker/moduleTrackerSlice';
 import PropTypes from 'prop-types';
 
-export default function QAndA ({product, onMouseOver}) {
+export default function QAndA ({product, onMouseOver, headerHeight}) {
   const [questions, setQuestions] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
   const clicks = useSelector(state => state.clickTracker)
@@ -35,6 +36,7 @@ export default function QAndA ({product, onMouseOver}) {
 
   return (
     <section className='flex flex-col items-center my-4' onMouseOver={onMouseOver}>
+      <SectionHeader caption='Q&A' idName={'qa'} headerHeight={headerHeight} />
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>

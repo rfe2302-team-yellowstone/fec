@@ -2,9 +2,10 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const router = require('./routes.js').router
+const cors = require('cors')
 
 const app = express();
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 
 const morgan = require('morgan')
 
@@ -12,6 +13,7 @@ const morgan = require('morgan')
 app.use(express.static(path.join(__dirname, "/../client/dist")));
 app.use(express.json())
 app.use(morgan('tiny'))
+app.use(cors())
 
 app.use('/', router)
 

@@ -9,7 +9,7 @@ export default function AnswersList ({answers}) {
   const [fullscreenImageURL, setFullscreenImgURL] = useState('')
 
   return (
-    <ul className='ml-4 h-40 overflow-y-auto'>
+    <ul className='ml-4 h-40 overflow-y-auto w-11/12'>
       {answers.map(answer => {
         return <Answer key={answer.answer_id} answer={answer} setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} setFullscreenImgURL={setFullscreenImgURL}/>
       })}

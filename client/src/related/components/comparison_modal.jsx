@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import ReactDOM from "react-dom";
 
-
-
 const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, comparedProduct}) =>{
+
   let initialProductFeatures = product.features;
 
   initialProductFeatures.forEach(feature => {
@@ -69,6 +68,8 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
 
   )
 };
+
+
 
 export default ComparisonModal;
 

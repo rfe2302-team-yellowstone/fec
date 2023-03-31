@@ -20,11 +20,12 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
       email: values.email
     })
       .then(response => {
-        console.log('successfully posted question to server')
+        // console.log('successfully posted question to server')
         setIsModalOpen(!isModalOpen);
       })
       .catch(err => {
-        console.log('unable to send question to server, error:', err);
+        // console.log('unable to send question to server, error:', err);
+        // throw Error('unable to send question to server')
       })
   }
   const validate = (e, name, value) => { //custom validator based off our form inputs, passed to useForm custom hook
@@ -85,30 +86,30 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
   const { handleChange, handleSubmit, values, errors, setErrors } = useForm(postValues, validate, defaultErrors);
 
   return (
-    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`}>
+    <div className={`modal modal-bottom sm:modal-middle ${isModalOpen ? 'modal-open' : ''}`} role='dialog' aria-modal='true'>
       <div className='modal-box'>
         <h3 className='text-3xl'>Ask Your Question</h3>
         <h4 className='text-lg mb-2'>About the {productName}</h4>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} data-testid='question-form'>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='question-body-label'>
               <span className="label-text">Your Question</span>
             </label>
             <textarea id='question-body' name='questionBody' placeholder='Example: Is this machine washable?' className='textarea textarea-bordered w-full'
-            onChange={handleChange}>
+            onChange={handleChange} aria-labelledby='question-body-label' >
             </textarea>
-            <label className="label">
+            <label className="label" data-testid='question-body-bottom-label'>
               {errors.questionBody && <span className='label-text-alt text-red-500'>{errors.questionBody}</span>}
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='nickname-label'>
               <span className="label-text">Your Nickname</span>
             </label>
             <input type="text" id='nickname' name='nickname' placeholder='Example: jackson11!' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='nickname-label'
             />
-            <label className="label">
+            <label className="label" data-testid='nickname-bottom-label'>
               {errors.nickname ?
                 <span className='label-text-alt text-red-500'>{errors.nickname}</span>
                 : <span className="label-text-alt">For privacy reasons, do not use your full name or email address</span>
@@ -116,13 +117,13 @@ export function QuestionFormModal ({isModalOpen, setIsModalOpen, productId, prod
             </label>
           </div>
           <div className="form-control w-full">
-            <label className="label">
+            <label className="label" id='email-label'>
               <span className="label-text">Your email</span>
             </label>
             <input type="text" id='nickname' name='email' placeholder='Example: john.smith@example.com' className="input input-bordered w-full"
-              onChange={handleChange}
+              onChange={handleChange} aria-labelledby='email-label'
             />
-            <label className="label">
+            <label className="label" data-testid='email-bottom-label'>
               {errors.email ?
                 <span className='label-text-alt text-red-500'>{errors.email}</span>
                 : <span className="label-text-alt">For authentication reasons, you will not be emailed</span>

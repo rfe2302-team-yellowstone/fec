@@ -18,7 +18,6 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
   const dispatch = useDispatch();
   const ModuleRef = useRef(module);
   ModuleRef.current = module;
-  // console.log('initial product:', product);
 
   useEffect(() => {
     axios.get('/qa/questions', {
@@ -36,7 +35,7 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
 
   return (
     <section className='flex flex-col items-center my-4' onMouseOver={onMouseOver}>
-      <SectionHeader caption='Q&A' idName={'qa'} headerHeight={headerHeight} />
+      <SectionHeader caption='' idName={'qa'} headerHeight={headerHeight} />
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>

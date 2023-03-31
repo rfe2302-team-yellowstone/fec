@@ -4,9 +4,17 @@ export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix,
   return (
 
 
-      <a href={'#'/*`#slide${i}`*/} onClick={handleIconClick} id={`${idPrefix}slide-icon-a${i}`} className={`carousel-item h-max-s transition duration-500 hover:scale-125`} >
-        {/* <img src="/images/stock/photo-1565098772267-60af42b81ef2.jpg" className="rounded-box" /> */}
-        <img src={photos[i].thumbnail_url} className={`h-24 s:h-16 rounded-s hover:drop-shadow-[0_12px_12px_rgba(0,0,0,0.25)] ${(currentIndex === i) && 'border-b-[6px] border-tahiti-100'}`} id={`${idPrefix}slide-icon-${i}`}/>
+      <a href={'#'/*`#slide${i}`*/}
+        onClick={handleIconClick}
+        id={`${idPrefix}slide-icon-a${i}`}
+        // className={`carousel-item h-max-s transition duration-500 hover:scale-125`}
+        className='inline-block pr-1 cursor-pointer hover:scale-105 ease-in-out duration-300 hover:overflow-y-visible'
+        >
+        <img
+          src={photos[i].thumbnail_url}
+          id={`${idPrefix}slide-icon-${i}`}
+          className={`h-24 s:h-16 rounded-s hover:drop-shadow-[0_12px_12px_rgba(0,0,0,0.25)] ${(currentIndex === i) && 'border-b-[6px] border-tahiti-100'}`}
+          />
 
       </a>
 

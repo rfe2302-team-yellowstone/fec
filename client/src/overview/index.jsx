@@ -182,7 +182,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
   return (
     <div onMouseOver={onMouseOver}>
       <SectionHeader caption='Overview' idName={'overview'} headerHeight={headerHeight + 28} />
-      <Announcements />
+      {/* <Announcements /> */}
       <FullScreenModal
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}

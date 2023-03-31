@@ -1,8 +1,10 @@
 import React from 'react'
+import OldFaithfulLastEruption from '../announcements/OldFaithfulLastEruption.jsx'
 export default function Search ({handleSearch}) {
 
   return (
     <div className="flex gap-2">
+      <OldFaithfulLastEruption />
       <div className="flex-1 justify-self-end form-control">
         <input type="text" placeholder="Search" className="input input-bordered" onKeyDown={handleSearch}/>
       </div>

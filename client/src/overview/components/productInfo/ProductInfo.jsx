@@ -9,7 +9,7 @@ import Actions from './Actions.jsx'
 import AlertError from './AlertError.jsx'
 import AlertSuccessMessage from './AlertSuccessMessage.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating, cartLength, setCartLength}) {
 
   // Test style:
   // style ID: 221064
@@ -56,10 +56,6 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   const handleAddToCartSubmit = (event) => {
     event.preventDefault()
 
-    console.log('add to cart!')
-    console.log(currentSize)
-    console.log(currentQuantity)
-
     // If size or quantity haven't been selected yet...
     if ((currentSize === 'Select Size') || (currentQuantity === '-')) {
       setShowError(true)
@@ -68,8 +64,11 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
       setShowSuccessMessage(true)
       setShowError(false)
 
+      // Simple incrementer for cart
+      setCartLength(cartLength + 1)
+
       // Set timer to hide added to cart after 5 seconds
-      setTimeout(setShowSuccessMessage.bind(null, false), 8000)
+      setTimeout(setShowSuccessMessage.bind(null, false), 5000)
     }
 
   }

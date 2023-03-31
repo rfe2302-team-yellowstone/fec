@@ -11,7 +11,7 @@ import SectionHeader from './components/header/SectionHeader.jsx';
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview({product, handleSearch, onMouseOver, headerHeight}) {
+export default function Overview({cartLength, setCartLength, product, handleSearch, onMouseOver, headerHeight}) {
 
    //product: 37325 - has sales prices
 
@@ -215,6 +215,8 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
           sizes={sizes}
           setCurrentStyle={setCurrentStyle}
           handleStyleChange={handleStyleChange}
+          cartLength={cartLength}
+          setCartLength={setCartLength}
         />
       </div>
       <ProductDetails product={product} />

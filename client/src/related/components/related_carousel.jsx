@@ -19,7 +19,7 @@ const RelatedCarousel = ({product, updateProduct}) => {
 
     if(direction === 'prev') {
       carouselNode.scrollLeft -= (carouselNode.clientWidth)/3;
-      console.log(carouselNode.scrollLeft, 'PREV BUTTON')
+      //console.log(carouselNode.scrollLeft, 'PREV BUTTON')
 
       if(!rightState) {
         setRightState(true)
@@ -32,10 +32,10 @@ const RelatedCarousel = ({product, updateProduct}) => {
     } else if( direction === 'next') {
 
       let maxScroll = (carouselNode.scrollWidth - carouselNode.clientWidth);
-      console.log(maxScroll)
+      //console.log(maxScroll)
       setLeftState(true)
       carouselNode.scrollLeft += (carouselNode.clientWidth)/3;
-      console.log(carouselNode.scrollLeft, 'NEXT BUTTON')
+      //console.log(carouselNode.scrollLeft, 'NEXT BUTTON')
       setRightScroll(carouselNode.scrollLeft)
 
       if(carouselNode.scrollLeft >= maxScroll) {

@@ -31,6 +31,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
     axios.get(`/products/${product.id}/styles`)
       .then(res => {
         // console.log('Styles: ', res.data.results)
+        setCurrentIndex(0)
         setStyles(res.data.results)
         setCurrentStyle(res.data.results[0])
         getSizesFromStyle(res.data.results[0])

@@ -109,11 +109,59 @@ const RatingBreakdown = ({reviews, setReviews, metaData, product}) => {
 
   return (
     <div>
-      <div className="overflow-hidden bg-white rounded shadow-md text-slate-500 shadow-slate-200">
+      <div className="overflow-hidden shadow-md text-slate-500 shadow-slate-200">
         <div className="p-6"></div>
         <div className="flex flex-col items-center gap-2">
           <h4 className="font-bold text-slate-700">Ratings & Reviews</h4>
           <span className="flex items-center gap-4 text-sm rounded text-slate-500">
+          {/* {[...Array(5)].map((_, i) => {
+  const integerPart = Math.floor(rating);
+  let starSvg;
+
+  if (i < integerPart) {
+    starSvg = (
+      <svg
+        key={i}
+        className="w-4 h-4 fill-current text-yellow-500"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+      </svg>
+    );
+  } else if (i === integerPart && rating - integerPart >= 0.5 && rating - integerPart <= 0.99) {
+  starSvg = (
+    <svg
+      key={i}
+      className="w-4 h-4 fill-current text-yellow-500"
+      viewBox="0 0 20 20"
+    >
+      <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+      <clipPath id="half-star">
+        <rect x="0" y="0" width="10" height="20" fill="gray" />
+        <rect x="0" y="0" width={Math.floor((rating - integerPart) * 20)} height="20" fill="yellow" />
+        <rect x={Math.floor((rating - integerPart) * 20)} y="0" width={Math.floor((1 - (rating - integerPart)) * 20)} height="20" fill="gray" />
+      </clipPath>
+      <path
+        d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z"
+        clipPath="url(#half-star)"
+      />
+    </svg>
+  );
+}
+ else {
+    starSvg = (
+      <svg
+        key={i}
+        className="w-4 h-4 fill-current text-gray-300"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
+      </svg>
+    );
+  }
+
+  return starSvg;
+})} */}
             <span
             className="flex gap-1 text-amber-400"
 

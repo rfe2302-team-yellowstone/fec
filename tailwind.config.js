@@ -37,7 +37,16 @@ module.exports = {
   ],
   daisyui: {
     styled: true,
-    themes: true,
+    themes: [
+      {
+        light: {
+          ...require("daisyui/src/colors/themes")["[data-theme=light]"],
+          primary: "#005F73",
+          secondary: "#E9D8A6",
+          accent: "#CA6702"
+        }
+      }
+    ],
     base: true,
     utils: true,
     logs: true,

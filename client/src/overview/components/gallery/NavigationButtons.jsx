@@ -35,6 +35,6 @@ export default function NavigationButtons ({i, idPrefix, handleNavigationOnClick
       (i !== (photosLength -1)) && <a href={`#`} id={`${idPrefix}next-button`}className="btn btn-circle" onClick={handleNavigationOnClick}>❯</a>
     }
 
-  </div>
+    </div>
   )
 }

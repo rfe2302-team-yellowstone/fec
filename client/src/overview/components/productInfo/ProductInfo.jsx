@@ -6,8 +6,10 @@ import StyleSelector from './StyleSelector.jsx'
 import QuantitySelector from './QuantitySelector.jsx'
 import SizeSelector from './SizeSelector.jsx'
 import Actions from './Actions.jsx'
+import AlertError from './AlertError.jsx'
+import AlertSuccessMessage from './AlertSuccessMessage.jsx'
 
-export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating}) {
+export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating, cartLength, setCartLength}) {
 
   // Test style:
   // style ID: 221064
@@ -17,7 +19,8 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   // console.log('Product id: ', product.id)
   // console.log('current style: ', currentStyle)
 
-
+  const [showError, setShowError] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const [currentSize, setCurrentSize] = useState('Select Size')
   const [currentQuantity, setCurrentQuantity] = useState('-')
   const [quantityMax, setQuantityMax] = useState('-')
@@ -26,7 +29,9 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   useEffect(() => {
     setCurrentSize('Select Size')
     setCurrentQuantity('-')
+    setShowError(false)
   }, [currentStyle])
+
 
   let handleSizeChange = (event) => {
     event.preventDefault()
@@ -48,10 +53,33 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   }
 
 
+  const handleAddToCartSubmit = (event) => {
+    event.preventDefault()
+
+    // If size or quantity haven't been selected yet...
+    if ((currentSize === 'Select Size') || (currentQuantity === '-')) {
+      setShowError(true)
+      setShowSuccessMessage(false)
+    } else {
+      setShowSuccessMessage(true)
+      setShowError(false)
+
+      // Simple incrementer for cart
+      setCartLength(cartLength + 1)
+
+      // Set timer to hide added to cart after 5 seconds
+      setTimeout(setShowSuccessMessage.bind(null, false), 5000)
+    }
+
+  }
+
+
 
 
   return (
-    <div className='flex-col flex flex-wrap justify-start mt-0.5' >
+    <div  >
+      <AlertSuccessMessage show={showSuccessMessage}/>
+      <div className='flex-col flex flex-wrap justify-start mt-0.5'>
       <Rating rating={rating}/>
       <Header product={product} currentStyle={currentStyle}/>
       <StyleSelector
@@ -60,6 +88,8 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
         setCurrentStyle={setCurrentStyle}
         handleStyleChange={handleStyleChange}
       />
+
+      <AlertError show={showError}/>
 
       <form className='flex justify-around space-x-4 mt-4'>
         <SizeSelector
@@ -78,8 +108,13 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
           quantityMax={quantityMax}
         />
 
-        <Actions />
-      </form>
+
+        <Actions handleAddToCartSubmit={handleAddToCartSubmit}/>
+        </form>
+        </div>
+
+
+
 
     </div>
   )

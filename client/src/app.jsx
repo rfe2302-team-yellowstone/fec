@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import Related from "./related/related_outfit.jsx"
 import Overview from "./overview/index.jsx"
@@ -14,6 +14,7 @@ const App = ({initialProduct}) => {
 // test
 
   const [cart, setCart] = useState([])
+  const [cartLength, setCartLength] = useState(0)
   const [product, setProduct] = useState(initialProduct)
   const dispatch = useDispatch();
   const module = useSelector(state => state.moduleTracker);
@@ -88,12 +89,11 @@ const App = ({initialProduct}) => {
   }
 
 
-
-  return (
+    return (
     <div>
       {/* <h1 className="text-3xl font-bold mb-40"> Hello, World!</h1> */}
-      <Header quickLinks={quickLinks} handleSearch={handleSearch} calculateHeaderHeight={calculateHeaderHeight}/>
-      <Overview cart={cart} product={product} onMouseOver={e => dispatch(trackModule('overview'))} headerHeight={headerHeight}/>
+      <Header quickLinks={quickLinks} handleSearch={handleSearch} calculateHeaderHeight={calculateHeaderHeight} cartLength={cartLength}/>
+      <Overview cartLength={cartLength} setCartLength={setCartLength} product={product} onMouseOver={e => dispatch(trackModule('overview'))} headerHeight={headerHeight}/>
       <Related product={product} onMouseOver={e => dispatch(trackModule('related'))} updateProduct={updateProduct} headerHeight={headerHeight}/>
       <Ratings product={product} onMouseOver={e => dispatch(trackModule('ratings'))} headerHeight={headerHeight}/>
       <QAndA product={product} onMouseOver={e => dispatch(trackModule('qa'))}/>

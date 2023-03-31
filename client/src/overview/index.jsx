@@ -11,7 +11,7 @@ import SectionHeader from './components/header/SectionHeader.jsx';
 
 const LOCAL_SERVER = 'http://localhost:3000'
 
-export default function Overview({product, handleSearch, onMouseOver, headerHeight}) {
+export default function Overview({cartLength, setCartLength, product, handleSearch, onMouseOver, headerHeight}) {
 
    //product: 37325 - has sales prices
 
@@ -31,6 +31,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
     axios.get(`/products/${product.id}/styles`)
       .then(res => {
         // console.log('Styles: ', res.data.results)
+        setCurrentIndex(0)
         setStyles(res.data.results)
         setCurrentStyle(res.data.results[0])
         getSizesFromStyle(res.data.results[0])
@@ -56,7 +57,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
       .catch(error => {
         console.log(error)
       })
-  }, [])
+  }, [product])
 
 
   const calculateRating = (ratings) => {
@@ -181,7 +182,7 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
   return (
     <div onMouseOver={onMouseOver}>
       <SectionHeader caption='Overview' idName={'overview'} headerHeight={headerHeight + 28} />
-      <Announcements />
+      {/* <Announcements /> */}
       <FullScreenModal
         currentStyle={currentStyle}
         fullScreenMode={fullScreenMode}
@@ -214,6 +215,8 @@ export default function Overview({product, handleSearch, onMouseOver, headerHeig
           sizes={sizes}
           setCurrentStyle={setCurrentStyle}
           handleStyleChange={handleStyleChange}
+          cartLength={cartLength}
+          setCartLength={setCartLength}
         />
       </div>
       <ProductDetails product={product} />

@@ -10,10 +10,14 @@ const Related = ({product, onMouseOver, updateProduct, headerHeight}) => {
 
   return (
     //"grid grid-col-1 grid-row-1 gap 4 place-items-center"
+    //onMouseOver={onMouseOver}
+    <div >
+    <SectionHeader caption='' idName={'related-items'} headerHeight={headerHeight} />
   <div data-testid="related" className ="grid grid-col-1 grid-row-1 gap 4 place-items-center">
-    <SectionHeader caption='Related Items' idName={'related-items'} headerHeight={headerHeight} />
+
     <RelatedCarousel  product = {product} updateProduct={updateProduct}/>
     <OutfitCarousel product = {product} />
+  </div>
   </div>
   )
 

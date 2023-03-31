@@ -69,7 +69,7 @@ const ProductBreakdown = ({ reviews, metaData }) => {
       <div className="flex flex-col items-center">
 
         <div className="relative w-full h-3 bg-gray-300 rounded-lg overflow-hidden">
-          <div className="absolute top-0 left-0 h-full bg-green-500" style={{width: `${percentage}%`}}></div>
+          <div className="absolute top-0 left-0 h-full" style={{width: `${percentage}%`, backgroundColor: '#BB3E03'}}></div>
           {/* <div className="absolute top-0 left-0 h-full bg-gray-400" style={{width: `${100 - percentage}%`}}></div> */}
           <div className="absolute top-0 left-0 transform -translate-x-1/2 -translate-y-full" style={{left: `{${percentage}%}`}}>
             ▲

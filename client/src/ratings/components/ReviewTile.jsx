@@ -92,7 +92,7 @@ const ReviewTile = ({review}) => {
         <path d="M10 1L13.09 6.14L19 7.64L14.63 12.34L15.82 18L10 15.09L4.18 18L5.37 12.34L1 7.64L6.91 6.14L10 1z" />
       </svg>
     );
-  } else if (i === integerPart && rating - integerPart >= 0.28 && rating - integerPart <= 0.75) {
+  } else if (i === integerPart && rating - integerPart >= 0.5 && rating - integerPart <= 0.99) {
     starSvg = (
       <svg
         key={i}
@@ -106,7 +106,7 @@ const ReviewTile = ({review}) => {
         />
         <defs>
           <clipPath id="half-star">
-            <rect x="0" y="0" width={`${(rating - integerPart) * 20}px`} height="20" />
+            <rect x="0" y="0" width="10" height="20" />
           </clipPath>
         </defs>
       </svg>
@@ -125,6 +125,7 @@ const ReviewTile = ({review}) => {
 
   return starSvg;
 })}
+
 
         </div>
       </div>

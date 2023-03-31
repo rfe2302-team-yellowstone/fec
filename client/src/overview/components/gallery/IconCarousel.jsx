@@ -47,7 +47,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
   return (
 
     (Object.keys(currentStyle).length > 0) &&
-    <div  className='relative flex items-center justify-center'>
+    <div  className='relative grid items-center justify-items-center hover:overflow-y-visible hover:scale-110 mt-4'>
 
         {/* <MdChevronLeft className='opacity-50 cursor-pointer hover:opacity-100' onMouseOver={slideLeft}  size={40} /> */}
         {/* <div className={`${(idPrefix === 'fs-') ? 'z-50' : 'z-10'} absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2`}> */}
@@ -62,7 +62,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
         } */}
         <div
           id={`carousel-prev`}
-          className="z-0 bg-transparent border-transparent h-24 s:h-16 w-[5%] text-transparent relative cursor-pointer left-[5%] self-center"
+          className="z-0 bg-transparent border-transparent h-24 s:h-16 w-[5%] text-transparent absolute cursor-pointer left-[5%] self-center hover:overflow-y-visible"
           onMouseOver={slideLeft}>
             ❯
         </div>
@@ -72,7 +72,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
         <div
           id='slider'
           // ref={scrollRef}
-          className='w-[85%] h-full overflow-x-scroll hover:overflow-y-visible scroll whitespace-nowrap scroll-smooth rounded-box mt-6 scrollbar-hide ' //
+          className='w-[85%] h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth rounded-box scrollbar-hide space-x-1 bg-transparent transition duration-500  hover:space-x-2 ' //
         >
 {/*
     <div className="carousel carousel-center space-x-1 bg-transparent rounded-box mt-6 transition duration-500 hover:overflow-visible hover:object-cover hover:scale-105 hover:space-x-2 ml-12 mr-12 object-scale-down"> */}
@@ -95,7 +95,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
       {/* // Next button */}
       <div
         id={`carousel-next`}
-        className="z-0 bg-transparent border-transparent h-24 s:h-16 w-[5%] text-transparent relative cursor-pointer right-[5%] self-center"
+        className="z-0 bg-transparent border-transparent h-24 s:h-16 w-[5%] text-transparent absolute cursor-pointer right-[5%] self-center"
         onMouseOver={slideRight}>
           ❯
 

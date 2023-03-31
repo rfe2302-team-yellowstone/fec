@@ -8,7 +8,7 @@ export default function IconCarouselItem ({photos, i, handleIconClick, idPrefix,
         onClick={handleIconClick}
         id={`${idPrefix}slide-icon-a${i}`}
         // className={`carousel-item h-max-s transition duration-500 hover:scale-125`}
-        className='inline-block pr-1 cursor-pointer hover:scale-105 ease-in-out duration-300 hover:overflow-y-visible'
+        className='inline-block pr-1 cursor-pointer hover:scale-110 ease-in-out duration-300 hover:overflow-y-visible'
         >
         <img
           src={photos[i].thumbnail_url}

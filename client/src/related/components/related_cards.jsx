@@ -50,9 +50,9 @@ const RelatedCard = ({product, updateProduct}) => {
 
 
         for(let i = 0; i < productStyle.length; i++) {
-          if(productStyle[i]=== undefined) {
-            continue;
-          }
+          // if(productStyle[i]=== undefined) {
+          //   continue;
+          // }
           let photoObj = {};
           photoObj['id'] = productStyle[i].product_id;
           let resultObj = productStyle[i].results;
@@ -71,9 +71,9 @@ const RelatedCard = ({product, updateProduct}) => {
         productInfo.forEach(producto =>{
 
           for(let i = 0; i < productPhoto.length; i++) {
-            if(productStyle[i]=== undefined) {
-              continue;
-            }
+            // if(productStyle[i]=== undefined) {
+            //   continue;
+            // }
             if(producto.id == productPhoto[i].id) {
               producto['thumbnail_url'] = productPhoto[i].thumbnail_url;
               producto['url'] = productPhoto[i].url;
@@ -160,7 +160,7 @@ const RelatedCard = ({product, updateProduct}) => {
             </button>
           </div>
             <div id = {card.id} className="body p-2">
-              <p id = {card.id} className="text-sm">{card.category}</p>
+              <p id = {card.id} className="font-semibold text-sm">{card.category}</p>
               <p id = {card.id} className= 'text-md'>{card.name}</p>
               <p id = {card.id} className= 'text-sm'>{'$' + card.default_price}</p>
               <OverallRatingPlaceholder rating = {card.rating} />

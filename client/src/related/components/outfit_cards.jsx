@@ -133,7 +133,7 @@ localStorage.setItem('fits', JSON.stringify(fits));
             </button>
         </div>
         <div id = {card.id} className="body p-2">
-              <p id = {card.id} className="text-sm">{card.category}</p>
+              <p id = {card.id} className="font-semibold text-sm">{card.category}</p>
               <p id = {card.id} className= 'text-md'>{card.name}</p>
               <p id = {card.id} className= 'text-sm'>{'$' + card.default_price}</p>
               <OverallRatingPlaceholder rating={card.rating} />

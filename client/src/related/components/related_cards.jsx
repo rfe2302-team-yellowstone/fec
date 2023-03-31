@@ -11,11 +11,11 @@ const RelatedCard = ({product, updateProduct}) => {
     const [relatedItems, setRelatedItems] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [comparedProduct, setComparedProduct] = useState('');
-    const [baseProduct, setBaseProduct] = useState(product)
+    //const [baseProduct, setBaseProduct] = useState(product)
 
 
 
-    let fetchingRelatedProducts = (baseProduct) => axios.get(`/products/${baseProduct.id}/related`)
+    let fetchingRelatedProducts = () => axios.get(`/products/${product.id}/related`)
     .then(response => {
       let relatedIds = response.data;
 
@@ -138,13 +138,13 @@ const RelatedCard = ({product, updateProduct}) => {
 
     }
 
-    useEffect(() => {
-      setBaseProduct(product)
-    },[product]);
+    // useEffect(() => {
+    //   setBaseProduct(product)
+    // },[product]);
 
     useEffect(()=>{
-      fetchingRelatedProducts(baseProduct);
-    }, [baseProduct])
+      fetchingRelatedProducts();
+    }, [product])
 
     const cards = relatedItems.map((card, i) =>
 
@@ -174,7 +174,7 @@ const RelatedCard = ({product, updateProduct}) => {
 
 
     return (
-      <>{cards} <Comparison openModal={openModal} setOpenModal={setOpenModal} product={baseProduct} relatedItems = {relatedItems} comparedProduct={comparedProduct}/> </>
+      <>{cards} <Comparison openModal={openModal} setOpenModal={setOpenModal} product={product} relatedItems = {relatedItems} comparedProduct={comparedProduct}/> </>
     )
 
 

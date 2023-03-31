@@ -10,9 +10,12 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
   const handleIconClick = (event) => {
     event.preventDefault();
 
-    // Get the index of the clicked image
+    // Get the index of the clicked image from end of id
     const iconID = event.target.id;
-    const nextIndex = +iconID[iconID.length-1]
+
+    console.log('iconClick!', +iconID.split('-icon-')[1])
+
+    const nextIndex = +iconID.split('-icon-')[1]
 
     changeImage(nextIndex, idPrefix)
   }

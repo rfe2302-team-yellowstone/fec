@@ -7,7 +7,7 @@ import PanAndZoomImage from './PanAndZoomImage.jsx'
 export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScreenMode, currentIndex, setCurrentIndex, changeImage, idPrefix, handleNavigationOnClick}) {
 
 
-
+  const [showNavButtons, setShowNavButtons] = useState(false)
 
   const handleImageClick = (event) => {
     event.preventDefault()
@@ -28,6 +28,8 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
     <div
       id={`${idPrefix}slide-img-${i}`}
       className={`carousel-item relative w-full h-fit grid justify-items-center items-center ${fullScreenMode ? '' : 'cursor-zoom-in'}`}
+      onMouseEnter={() => setShowNavButtons(true)}
+      onMouseLeave={() => setShowNavButtons(false)}
 
     >
       {/* Actual image */}
@@ -49,12 +51,13 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
         />
       }
 
-      <NavigationButtons
+      {showNavButtons &&
+        <NavigationButtons
         i={i}
         idPrefix={idPrefix}
         handleNavigationOnClick={handleNavigationOnClick}
         photosLength={photos.length}
-      />
+      />}
 
     </div>
   )

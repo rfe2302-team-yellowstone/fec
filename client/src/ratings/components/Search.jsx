@@ -47,7 +47,7 @@ const Search = ({ reviews, setReviews, allReviews }) => {
       <div className="flex space-x-1">
         <input
           type="text"
-          className="block w-full px-4 py- bg-white border rounded-full focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
+          className="block w-full px-4 py-2 bg-white border focus:border-orange-400 focus:ring-orange-300 focus:outline-none focus:ring focus:ring-opacity-40"
           style={{
             "--focus-border-color": "#BB3E03",
             "--focus-ring-color": "#E9D8A6",
@@ -56,7 +56,7 @@ const Search = ({ reviews, setReviews, allReviews }) => {
           value={searchInput}
           onChange={handleChange}
         />
-        <button className="px-4 rounded-full" onClick={handleClick} style={{backgroundColor: '#9B2226', color: '#E9D8A6'}}>
+        <button className="btn btn-square px-4" onClick={handleClick} style={{backgroundColor: '#9B2226', color: '#E9D8A6'}}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-5 h-5"

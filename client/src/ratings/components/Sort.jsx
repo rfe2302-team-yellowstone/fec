@@ -52,11 +52,16 @@ const Sort = ({reviews, setReviews, order, setOrder}) => {
     relevanceSorter()
   }, [])
 
+  const defaultPreventer = (e) => {
+    e.preventDefault()
+  }
+
   return (
-    <div className="inline-flex bg-white border rounded-md">
+    <div className="relative inline-flex border rounded-md z-50">
       <a
       href="#"
       className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"
+      onClick={defaultPreventer}
       >
       {sortBy}
       </a>
@@ -83,7 +88,7 @@ const Sort = ({reviews, setReviews, order, setOrder}) => {
         </button>
 
 { menu ? (
-        <div className="absolute right-25 z-10 w-56 origin-top-right bg-white border border-gray-100 rounded-md shadow-lg">
+        <div className="absolute w-56 origin-top-right bg-white border border-gray-100 rounded-md shadow-lg">
           <div className="p-2 right-10">
             <a
             href="#"

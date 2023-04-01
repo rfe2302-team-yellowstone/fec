@@ -11,7 +11,7 @@ import ProductInfo from '../components/productInfo/ProductInfo.jsx';
 import StyleSelector from '../components/productInfo/StyleSelector.jsx';
 import SizeSelector from '../components/productInfo/SizeSelector.jsx';
 import QuantitySelector from '../components/productInfo/QuantitySelector.jsx';
-import OverallRatingPlaceholder from '../components/productInfo/OverallRatingPlaceholder.jsx';
+import Rating from '../components/productInfo/Rating.jsx';
 import Actions from '../components/productInfo/Actions.jsx';
 
 import testObjects from './testObjects.js'

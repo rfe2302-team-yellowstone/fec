@@ -9,8 +9,6 @@ import SectionHeader from '../overview/components/header/SectionHeader.jsx';
 const Related = ({product, onMouseOver, updateProduct, headerHeight}) => {
 
   return (
-    //"grid grid-col-1 grid-row-1 gap 4 place-items-center"
-    //onMouseOver={onMouseOver}
     <div >
     <SectionHeader caption='' idName={'related-items'} headerHeight={headerHeight} />
   <div data-testid="related" className ="grid grid-col-1 grid-row-1 gap 4 place-items-center">

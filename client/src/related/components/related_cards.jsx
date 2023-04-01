@@ -11,8 +11,6 @@ const RelatedCard = ({product, updateProduct}) => {
     const [relatedItems, setRelatedItems] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [comparedProduct, setComparedProduct] = useState('');
-    //const [baseProduct, setBaseProduct] = useState(product)
-
 
 
     let fetchingRelatedProducts = () => axios.get(`/products/${product.id}/related`)
@@ -137,10 +135,6 @@ const RelatedCard = ({product, updateProduct}) => {
       }
 
     }
-
-    // useEffect(() => {
-    //   setBaseProduct(product)
-    // },[product]);
 
     useEffect(()=>{
       fetchingRelatedProducts();

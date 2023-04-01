@@ -110,7 +110,6 @@ localStorage.setItem('fits', JSON.stringify(fits));
     })
     .catch(err => console.log(err));
 
-  // useEffect( ()=>{fetchingOutfitInformation()}, [product])
 
 
   const removeHandler = (event) => {

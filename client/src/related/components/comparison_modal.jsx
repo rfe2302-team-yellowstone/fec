@@ -26,7 +26,8 @@ const ComparisonModal = ({openModal, setOpenModal, product, relatedItems, compar
         feature.productName = comparedProduct.name;
       });
       combiningFeatures= combiningFeatures.concat(cpFeatures);
-
+      //Bug found on APR 1, 2023 - need to only have one feature, currently
+      //currently duplicating features
       setFeatures(combiningFeatures);
     }
 

@@ -1,7 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import Search from './Search.jsx'
-import LogoDropdown from './LogoDropdown.jsx'
 
 export default function SectionHeader ({caption, idName, headerHeight}) {
 

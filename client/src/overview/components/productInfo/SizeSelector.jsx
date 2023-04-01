@@ -3,9 +3,6 @@ import { useState, useEffect } from 'react'
 
 export default function SizeSelector ({sizes, currentSize, handleSizeChange}) {
 
-  // console.log('Sizes: ', sizes)
-  // console.log('current size: ', currentSize)
-
   // Create a separate state variable to handle if sizes are in XS, S, M, L, XL
   // or in numeric sizes (7, 7.5, 8, 8.5, etc.)
   const [sizeSelections, setSizeSelections] = useState([])

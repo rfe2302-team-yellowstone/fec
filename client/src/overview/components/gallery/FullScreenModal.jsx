@@ -42,15 +42,8 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
 
   return (
     <>
-      {/* <button
-        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setFullScreenMode(true)}
-      >
-        Open large modal
-      </button> */}
 
-      {/* Actual window of modal */}
+      {/* Full window of modal */}
       {fullScreenMode ? (
         <div className='grid transition-all duration-500'>
           {/* Translucent Background */}
@@ -71,19 +64,6 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
               {/* Content */}
               <div id='fs-image-viewer-carousel' className="flex flex-col justify-end border-0 rounded-lg shadow-lg relative  bg-white outline-none focus:outline-none h-95% p-[20px]">
 
-                {/*Close Button*/}
-                {/* <div id='fs-close-button' className="basis-[10%]  z-10 rounded-b background-transparent transform translate-y-1 right-10 top-1">
-                  <button
-                    className="background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setFullScreenMode(false)}
-                  >
-                    Close
-                  </button>
-
-                </div> */}
-
-
                 <div id='fs-close-button' className="flex justify-end rounded-b">
                   <button
                     className="text-slate-800 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -100,27 +80,16 @@ export default function FullScreenModal ({currentStyle, fullScreenMode, setFullS
                   handleNavigationOnClick={handleFSNavigationOnClick}
                   photosLength={currentStyle.photos.length}
                 />
-                {/*body*/}
-                {/* <img src={currentStyle.photos[0].url}></img> */}
-                {/* <div id='map' className='grid justify-center ' >
-                <div.
-                <img src={'https://www.bbc.co.uk/london/travel/downloads/tube_map.gif'}></img>
-
-                  <div id="small"></div>
-                  <div id="mag"></div> */}
 
 
-                <div className='cursor-move z-40'>
+                <div id='fs-image-container' className='cursor-move z-40'>
                   <PanAndZoomImage
                     src={currentStyle.photos[index].url}
                     i={index}
 
                   />
-                  {/* <img src={'https://www.bbc.co.uk/london/travel/downloads/tube_map.gif'}></img> */}
 
                 </div>
-
-
 
               </div>
             </div>

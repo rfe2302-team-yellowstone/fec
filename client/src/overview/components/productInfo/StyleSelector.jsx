@@ -3,8 +3,6 @@ import StyleSelectorItem from './StyleSelectorItem.jsx'
 
 export default function StyleSelector ({styles, currentStyle, setCurrentStyle, handleStyleChange}) {
 
-  // console.log('styleselect', styles)
-  // console.log('styleselect', currentStyle)
 
   return (
     <div className='mt-4 mb-4'>

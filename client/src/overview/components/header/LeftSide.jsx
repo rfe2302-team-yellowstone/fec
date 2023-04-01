@@ -1,5 +1,5 @@
 import React from 'react'
-export default function Logo ({quickLinks}) {
+export default function LeftSide ({quickLinks}) {
 
   return (
     <>

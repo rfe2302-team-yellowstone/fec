@@ -32,7 +32,7 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
       onMouseLeave={() => setShowNavButtons(false)}
 
     >
-      {/* Actual image */}
+
       { /* Regular image */
         (!fullScreenMode) &&
         <img

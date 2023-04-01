@@ -11,13 +11,9 @@ import AlertSuccessMessage from './AlertSuccessMessage.jsx'
 
 export default function ProductInfo ({product, styles, currentStyle, sizes, setCurrentStyle, handleStyleChange, rating, cartLength, setCartLength}) {
 
-  // Test style:
+  // Test style with sales price:
   // style ID: 221064
   // product ID: 37325
-
-  // console.log('Product Info: ', product)
-  // console.log('Product id: ', product.id)
-  // console.log('current style: ', currentStyle)
 
   const [showError, setShowError] = useState(false)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
@@ -33,6 +29,7 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
   }, [currentStyle])
 
 
+
   let handleSizeChange = (event) => {
     event.preventDefault()
     setCurrentSize(event.target.innerHTML)
@@ -44,6 +41,8 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
     // Set current quantity to 1
     setCurrentQuantity(1)
   }
+
+
 
   const handleQuantityChange = (event) => {
     event.preventDefault()
@@ -61,13 +60,13 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
       setShowError(true)
       setShowSuccessMessage(false)
     } else {
-      setShowSuccessMessage(true)
       setShowError(false)
+      setShowSuccessMessage(true)
 
       // Simple incrementer for cart
       setCartLength(cartLength + 1)
 
-      // Set timer to hide added to cart after 5 seconds
+      // Set timer to hide added success message after 5 seconds
       setTimeout(setShowSuccessMessage.bind(null, false), 5000)
     }
 
@@ -80,41 +79,39 @@ export default function ProductInfo ({product, styles, currentStyle, sizes, setC
     <div  >
       <AlertSuccessMessage show={showSuccessMessage}/>
       <div className='flex-col flex flex-wrap justify-start mt-0.5'>
-      <Rating rating={rating}/>
-      <Header product={product} currentStyle={currentStyle}/>
-      <StyleSelector
-        styles={styles}
-        currentStyle={currentStyle}
-        setCurrentStyle={setCurrentStyle}
-        handleStyleChange={handleStyleChange}
-      />
 
-      <AlertError show={showError}/>
-
-      <form className='flex justify-around space-x-4 mt-4'>
-        <SizeSelector
-          sizes={sizes}
-          currentSize={currentSize}
-          setCurrentSize={setCurrentSize}
-          handleSizeChange={handleSizeChange}
+        <Rating rating={rating}/>
+        <Header product={product} currentStyle={currentStyle}/>
+        <StyleSelector
+          styles={styles}
+          currentStyle={currentStyle}
+          setCurrentStyle={setCurrentStyle}
+          handleStyleChange={handleStyleChange}
         />
 
+        <AlertError show={showError}/>
 
-        <QuantitySelector
-          sizes={sizes}
-          currentQuantity={currentQuantity}
-          currentSize={currentSize}
-          handleQuantityChange={handleQuantityChange}
-          quantityMax={quantityMax}
-        />
+        <form className='flex justify-around space-x-4 mt-4'>
+          <SizeSelector
+            sizes={sizes}
+            currentSize={currentSize}
+            setCurrentSize={setCurrentSize}
+            handleSizeChange={handleSizeChange}
+          />
 
 
-        <Actions handleAddToCartSubmit={handleAddToCartSubmit}/>
+          <QuantitySelector
+            sizes={sizes}
+            currentQuantity={currentQuantity}
+            currentSize={currentSize}
+            handleQuantityChange={handleQuantityChange}
+            quantityMax={quantityMax}
+          />
+
+
+          <Actions handleAddToCartSubmit={handleAddToCartSubmit}/>
         </form>
-        </div>
-
-
-
+      </div>
 
     </div>
   )

@@ -57,7 +57,7 @@ const Sort = ({reviews, setReviews, order, setOrder}) => {
   }
 
   return (
-    <div className="relative inline-flex border rounded-md z-50">
+    <div className="relative inline-flex border rounded-md z-10">
       <a
       href="#"
       className="px-4 py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-50 rounded-l-md"

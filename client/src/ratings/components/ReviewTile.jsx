@@ -63,7 +63,7 @@ const ReviewTile = ({review}) => {
       {/* <img src={review.photos.length > 0 ? review.photos[0].url : 'https://hpr.com/wp-content/uploads/2021/08/LP_generic_beautifulstate.jpg'} alt="Review Photo" className="w-full h-full object-cover rounded-full" style={{maxWidth: '200px', maxHeight: '200px'}}></img> */}
       </div>
       <div>
-      <div className = "relative top-0 left-0 flex items-center w-4 h-4 z-0">
+      <div className = "relative top-0 left-0 flex items-center w-4 h-4">
         <div className="flex flex-row space-x-1">
         {[...Array(5)].map((_, i) => (
           <svg

@@ -23,9 +23,9 @@ const Reviews = ({product, reviews, setReviews}) => {
 
   return (
     <div>
-    <div className="overflow-y-scroll max-h-screen scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100">
+    <div className="overflow-y-scroll max-h-screen scrollbar scrollbar-thumb-gray-900 scrollbar-track-gray-100 bg-white opacity-100">
         <div className="mb-4">
-        <div className="sticky top-0 z-1">
+        <div className="sticky top-0 z-10 bg-white" >
           <Sort reviews={reviews} setReviews={setReviews} order={order} setOrder={setOrder}></Sort>
           </div>
           {Array.isArray(order) && order.slice(0, maxReviews).map(review => (

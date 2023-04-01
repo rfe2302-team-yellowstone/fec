@@ -13,8 +13,6 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
     // Get the index of the clicked image from end of id
     const iconID = event.target.id;
 
-    console.log('iconClick!', +iconID.split('-icon-')[1])
-
     const nextIndex = +iconID.split('-icon-')[1]
 
     changeImage(nextIndex, idPrefix)
@@ -75,10 +73,9 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
         <div
           id='slider'
           // ref={scrollRef}
-          className='w-[85%] h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth rounded-box scrollbar-hide space-x-1 bg-transparent transition duration-500  hover:space-x-2 ' //
+          className='w-[85%] h-full flex flex-row overflow-x-scroll scroll whitespace-nowrap scroll-smooth rounded-box scrollbar-hide space-x-1 bg-transparent transition duration-500  hover:space-x-2 ' //
         >
-{/*
-    <div className="carousel carousel-center space-x-1 bg-transparent rounded-box mt-6 transition duration-500 hover:overflow-visible hover:object-cover hover:scale-105 hover:space-x-2 ml-12 mr-12 object-scale-down"> */}
+
       {
         currentStyle.photos.map((photo, i) => {
           return (
@@ -104,7 +101,7 @@ export default function IconCarousel ({currentStyle, currentIndex, setCurrentInd
 
       </div>
 
-      {/* <MdChevronRight className='opacity-50 cursor-pointer hover:opacity-100' onPointerOver={slideRight} size={40} /> */}
+
 
     </div>
 

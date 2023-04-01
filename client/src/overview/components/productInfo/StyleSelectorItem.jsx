@@ -2,8 +2,6 @@ import React from 'react'
 
 export default function StyleSelectorItem ({i, style, currentStyle, setCurrentStyle, handleStyleChange}) {
 
-  // console.log('styleselectitem', style)
-  // console.log('styleselectitemid', style.style_id)
   return (
     <button
       aria-pressed={(currentStyle.name === style.name)}

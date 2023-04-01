@@ -1,9 +1,8 @@
 import React from 'react'
 import { useLayoutEffect, useState } from 'react'
-import OldFaithfulLastEruption from '../announcements/OldFaithfulLastEruption.jsx'
-export default function Search({ handleSearch, cartLength }) {
+import OldFaithfulLastEruption from './OldFaithfulLastEruption.jsx'
 
-
+export default function RightSide ({ handleSearch, cartLength }) {
 
   return (
     <div className="flex gap-2">
@@ -25,17 +24,7 @@ export default function Search({ handleSearch, cartLength }) {
           {/* <div className="grid w-32 h-32 bg-base-300 place-items-center">content</div> */}
         </div>
 
-        {/* <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-          <li>
-            <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
-            </a>
-          </li>
-          <li><a>Settings</a></li>
-          <li><a>Logout</a></li>
-        </ul> */}
-      {/* </div> */}
+
     </div>
   )
 }

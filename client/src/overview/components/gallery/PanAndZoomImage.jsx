@@ -1,4 +1,4 @@
-// https://jkettmann.com/jr-to-sr-refactoring-react-pan-and-zoom-image-component
+// Credit: https://jkettmann.com/jr-to-sr-refactoring-react-pan-and-zoom-image-component
 
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -16,8 +16,6 @@ const PanAndZoomImage = ({ src, i }) => {
 
   const containerRef = useRef();
 
-  // console.log('container ref:', containerRef)
-  // console.log('window:', window)
 
   const onLoad = (e) => {
     setImage({

@@ -32,11 +32,12 @@ export default function ImageViewerItem ({photos, i, fullScreenMode, setFullScre
       onMouseLeave={() => setShowNavButtons(false)}
 
     >
-      {/* Actual image */}
+
       { /* Regular image */
         (!fullScreenMode) &&
         <img
           id={`${idPrefix}slide-img-img${i}`}
+          aria-label={`${idPrefix}slide-img-img${i}`}
           src={photos[i].url}
           className={`w-4/6 self-center rounded-box ${fullScreenMode ? '' : ''}`}
           onClick={handleImageClick}

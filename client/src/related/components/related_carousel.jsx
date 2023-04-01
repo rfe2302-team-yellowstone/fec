@@ -13,17 +13,15 @@ const RelatedCarousel = ({product, updateProduct}) => {
   const directionArrowsHandler = (event) =>{
 
     let direction = event.target.id
-    //console.log(carouselRef, 'inside direction handler')
     const carouselNode = carouselRef.current;
 
 
     if(direction === 'prev') {
       carouselNode.scrollLeft -= (carouselNode.clientWidth)/3;
-      //console.log(carouselNode.scrollLeft, 'PREV BUTTON')
-
       if(!rightState) {
         setRightState(true)
       }
+
       if(carouselNode.scrollLeft === 0 ) {
         setLeftState(undefined)
       }
@@ -32,12 +30,9 @@ const RelatedCarousel = ({product, updateProduct}) => {
     } else if( direction === 'next') {
 
       let maxScroll = (carouselNode.scrollWidth - carouselNode.clientWidth);
-      //console.log(maxScroll)
       setLeftState(true)
       carouselNode.scrollLeft += (carouselNode.clientWidth)/3;
-      //console.log(carouselNode.scrollLeft, 'NEXT BUTTON')
       setRightScroll(carouselNode.scrollLeft)
-
       if(carouselNode.scrollLeft >= maxScroll) {
         setRightState(false)
       }
@@ -49,7 +44,6 @@ const RelatedCarousel = ({product, updateProduct}) => {
 
   useEffect(()=>{
     carouselRef.current.scrollTo({left:0});
-    // carouselRef.current.scrollLeft(0)
     setLeftState(undefined)
     setRightState(true)
   }, [product])

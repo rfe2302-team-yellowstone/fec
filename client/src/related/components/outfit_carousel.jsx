@@ -11,35 +11,15 @@ const OutfitCarousel = ({product}) => {
   const directionArrowsHandler = (event) =>{
 
     let direction = event.target.id
-    //console.log(carouselRef, 'inside direction handler')
-    const carouselNode = carouselRef.current;
 
+    const carouselNode = carouselRef.current;
 
     if(direction === 'prev') {
       carouselNode.scrollLeft -= (carouselNode.clientWidth)/3;
-      // console.log(carouselNode.scrollLeft, 'PREV BUTTON')
-
-      // if(!rightState) {
-      //   setRightState(true)
-      // }
-      // if(carouselNode.scrollLeft === 0 ) {
-      //   setLeftState(undefined)
-      // }
-
 
     } else if( direction === 'next') {
-
-      // let maxScroll = (carouselNode.scrollWidth - carouselNode.clientWidth);
-      // console.log(maxScroll)
       setLeftState(true)
       carouselNode.scrollLeft += (carouselNode.clientWidth)/3;
-
-
-      // if(carouselNode.scrollLeft >= maxScroll) {
-      //   setRightState(false)
-      // }
-
-
     }
 
   };

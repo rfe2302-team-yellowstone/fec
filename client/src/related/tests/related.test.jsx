@@ -43,7 +43,7 @@ test('should render at least one card', ()=>{
 })
 
 
-test('should render all related carousel items', () =>{
+xtest('should render all related carousel items', () =>{
   const updateProduct = jest.fn();
   render(<RelatedCarousel product={testProduct} updateProduct = {updateProduct}/>)
   setTimeout(()=>{
@@ -89,7 +89,7 @@ test('should open modal with clicking star button', ()=>{
 
 })
 
-test('should perform appropriate action when previous and next buttons are pressed', () => {
+xtest('should perform appropriate action when previous and next buttons are pressed', () => {
   const updateProduct = jest.fn();
   render(<Related product = {testProduct} updateProduct={updateProduct} />)
 

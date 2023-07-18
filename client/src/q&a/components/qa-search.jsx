@@ -14,13 +14,13 @@ const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setT
       })
       setQuestions(searchResult);
     }
-  }
+  };
 
   const debouncedSearch = useRef(debounce(search, 500)).current;
 
   const handleSearchChange = e => {
     setQuery(e.target.value);
-  }
+  };
 
   useEffect(() => {
     debouncedSearch(query, allQuestions);
@@ -37,7 +37,7 @@ const QAndASearch = ({questions, setQuestions, allQuestions, tempQuestions, setT
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
 
 export default QAndASearch;

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 export default function QAndA ({product, onMouseOver, headerHeight}) {
   const [questions, setQuestions] = useState([]);
   const [allQuestions, setAllQuestions] = useState([]);
-  const clicks = useSelector(state => state.clickTracker)
+  const clicks = useSelector(state => state.clickTracker);
   let module = useSelector(state => state.moduleTracker);
   const dispatch = useDispatch();
   const ModuleRef = useRef(module);
@@ -27,7 +27,6 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
       }
     })
       .then(response => {
-        // console.log('successfully retrieved questions from Atelier Questions API:', response.data.results)
         setQuestions(response.data.results.slice(0, 2));
         setAllQuestions(response.data.results);
       })
@@ -39,29 +38,10 @@ export default function QAndA ({product, onMouseOver, headerHeight}) {
       <QAndAHeader questions={questions} setQuestions={setQuestions} allQuestions={allQuestions}/>
       <QuestionsList questions={questions} productName={product.name}/>
       <QAndAFooter productId={product.id} productName={product.name} allQuestions={allQuestions} setQuestions={setQuestions} questions={questions}/>
-      {/* <div>
-        <button
-          aria-label="Increment value"
-          onClick={(e) => {
-            dispatch(trackClick({
-              elementClicked: e.target.outerHTML,
-              timeOfClick: (new Date()).toString(),
-              moduleClicked: "q&a"
-            }))
-          }
-          }
-        >
-          Test Click
-        </button>
-        <span>Our Clicks: {JSON.stringify(clicks)}</span>
-        <button onClick={e => dispatch(trackModule('qa'))}>CHange Module</button>
-        <div>Current module: {module}</div>
-      </div> */}
-      {/* Uncomment the div above to see Redux in action for DOM element onClick metadata tracking! */}
     </section>
-  )
-}
+  );
+};
 
 QAndA.propTypes = {
   product: PropTypes.object.isRequired
-}
+};

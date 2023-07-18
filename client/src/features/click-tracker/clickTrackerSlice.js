@@ -12,7 +12,7 @@ export const clickTrackerSlice = createSlice({
       }
     }
   }
-})
+});
 
 export const { trackClick } = clickTrackerSlice.actions;
 export default clickTrackerSlice.reducer;

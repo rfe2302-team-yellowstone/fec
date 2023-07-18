@@ -16,7 +16,7 @@ describe('Answer Form Modal', () => {
     "asker_name": "tester",
     "question_helpfulness": 45,
     "reported": false
-  }
+  };
   const productName = 'Camo Onesie';
 
 
@@ -27,14 +27,14 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
     fireEvent.click(screen.getByText('X'));
 
     expect(screen.getByRole('dialog')).not.toHaveClass('modal-open');
-  })
+  });
 
   test('submits the input values when submit button is clicked and POST request successful', async () => {
     const productId = 37311;
@@ -47,7 +47,7 @@ describe('Answer Form Modal', () => {
       headers: {},
       config: {},
       request: {}
-    })
+    });
 
     const TestComponent = () => {
       const [isModalOpen, setIsModalOpen] = useState(true);
@@ -55,7 +55,7 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} productId={productId} productName={productName}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
@@ -68,7 +68,7 @@ describe('Answer Form Modal', () => {
       answerBody: 'Maybe?',
       nickname: 'testperson123',
       email: 'test@example.com',
-    })
+    });
 
     await waitFor(() => {
       expect(axios.post).toHaveBeenCalledWith(`/qa/questions/${question.questionId}/answers`, {
@@ -88,7 +88,7 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
@@ -106,7 +106,7 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
@@ -119,7 +119,7 @@ describe('Answer Form Modal', () => {
       answerBody: 'Maybe?',
       nickname: 'testperson123',
       email: 'test@example.com'
-    })
+    });
 
     await expect(axios.post).rejects.toThrow('unable to send answer to server');
   })
@@ -131,7 +131,7 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
@@ -147,7 +147,7 @@ describe('Answer Form Modal', () => {
       answerBody: '',
       nickname: '',
       email: ''
-    })
+    });
 
     expect(screen.getByTestId('answer-body-bottom-label')).toHaveTextContent('Required');
     expect(screen.getByTestId('nickname-bottom-label')).toHaveTextContent('Required');
@@ -161,7 +161,7 @@ describe('Answer Form Modal', () => {
         product_id: 37311
       });
     });
-  })
+  });
 
   test('shows form validation errors when user doesn\'nt input correct email', async () => {
     const TestComponent = () => {
@@ -170,7 +170,7 @@ describe('Answer Form Modal', () => {
       return (
         <AnswerFormModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen} questionId={question.question_id} productName={productName} questionBody={question.question_body}/>
       );
-    }
+    };
 
     render(<TestComponent />);
 
@@ -183,7 +183,7 @@ describe('Answer Form Modal', () => {
       answerBody: 'test',
       nickname: 'test',
       email: 'test'
-    })
+    });
 
     expect(screen.getByTestId('answer-body-bottom-label')).not.toHaveTextContent('Required');
     expect(screen.getByTestId('nickname-bottom-label')).not.toHaveTextContent('Required');
@@ -198,5 +198,5 @@ describe('Answer Form Modal', () => {
         photos: []
       });
     });
-  })
-})
+  });
+});

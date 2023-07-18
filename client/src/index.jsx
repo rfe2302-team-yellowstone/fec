@@ -1,14 +1,13 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 import App from './app.jsx';
-import axios from 'axios'
+import axios from 'axios';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 
 const root = createRoot(
   document.getElementById('root')
 );
-
 
 axios.get('/products/37311')
   .then(response => {
@@ -20,7 +19,4 @@ axios.get('/products/37311')
   })
   .catch(error => {
     console.log(error)
-  })
-
-
-// root.render(<App />);
+  });
